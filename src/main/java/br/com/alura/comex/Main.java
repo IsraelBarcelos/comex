@@ -4,15 +4,13 @@ import br.com.alura.services.ProcessadorDeCsv;
 import br.com.alura.services.RelatorioFinal;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.URISyntaxException;
-import java.text.NumberFormat;
 import java.util.*;
 
 public class Main {
 
   public static void main(String[] args) {
-    ProcessadorDeCsv listas = new ProcessadorDeCsv();
+    ProcessadorDeCsv listas = new ProcessadorDeCsv("pedidos.csv");
     try {
       listas.execute();
     } catch (IOException e) {

@@ -13,10 +13,15 @@ import java.util.Scanner;
 
 public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
 
+  private String path;
   private ArrayList<Pedido> pedidos = new ArrayList<>();
 
+  public ProcessadorDeCsv(String path) {
+    this.path = path;
+  }
+
   public void execute() throws IOException, URISyntaxException {
-    URL recursoCSV = ClassLoader.getSystemResource("pedidos.csv");
+    URL recursoCSV = ClassLoader.getSystemResource(this.path);
     Path caminhoDoArquivo = Path.of(recursoCSV.toURI());
 
     Scanner leitorDeLinhas = new Scanner(caminhoDoArquivo);
