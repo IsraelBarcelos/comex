@@ -5,58 +5,87 @@ import java.time.LocalDate;
 
 public class Pedido {
 
-    private String categoria;
-    private String produto;
-    private String cliente;
+  private String categoria;
+  private String produto;
+  private String cliente;
 
-    private BigDecimal preco;
-    private int quantidade;
+  private BigDecimal preco;
+  private int quantidade;
 
-    private LocalDate data;
+  private LocalDate data;
 
-    public Pedido(String categoria, String produto, String cliente, BigDecimal preco, int quantidade, LocalDate data) {
-        this.categoria = categoria;
-        this.produto = produto;
-        this.cliente = cliente;
-        this.preco = preco;
-        this.quantidade = quantidade;
-        this.data = data;
-    }
+  public Pedido(
+    String categoria,
+    String produto,
+    String cliente,
+    BigDecimal preco,
+    int quantidade,
+    LocalDate data
+  ) {
+    this.categoria = categoria;
+    this.produto = produto;
+    this.cliente = cliente;
+    this.preco = preco;
+    this.quantidade = quantidade;
+    this.data = data;
+  }
 
-    public String getCategoria() {
-        return categoria;
-    }
+  public String getCategoria() {
+    return categoria;
+  }
 
-    public String getProduto() {
-        return produto;
-    }
+  public String getProduto() {
+    return produto;
+  }
 
-    public String getCliente() {
-        return cliente;
-    }
+  public String getCliente() {
+    return cliente;
+  }
 
-    public BigDecimal getPreco() {
-        return preco;
-    }
+  public BigDecimal getPreco() {
+    return preco;
+  }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
+  public int getQuantidade() {
+    return quantidade;
+  }
 
-    public LocalDate getData() {
-        return data;
-    }
+  public LocalDate getData() {
+    return data;
+  }
 
-    @Override
-    public String toString() {
-        return "Pedido{" +
-                "categoria='" + categoria + '\'' +
-                ", produto='" + produto + '\'' +
-                ", cliente='" + cliente + '\'' +
-                ", preco=" + preco +
-                ", quantidade=" + quantidade +
-                ", data=" + data +
-                '}';
-    }
+  public BigDecimal getValorTotal() {
+    return preco.multiply(new BigDecimal(quantidade));
+  }
 
+  public boolean isMaisBaratoQue(Pedido outroPedido) {
+    return this.getValorTotal().compareTo(outroPedido.getValorTotal()) < 0;
+  }
+
+  public boolean isMaisCaroQue(Pedido outroPedido) {
+    return this.getValorTotal().compareTo(outroPedido.getValorTotal()) > 0;
+  }
+
+  @Override
+  public String toString() {
+    return (
+      "Pedido{" +
+      "categoria='" +
+      categoria +
+      '\'' +
+      ", produto='" +
+      produto +
+      '\'' +
+      ", cliente='" +
+      cliente +
+      '\'' +
+      ", preco=" +
+      preco +
+      ", quantidade=" +
+      quantidade +
+      ", data=" +
+      data +
+      '}'
+    );
+  }
 }
