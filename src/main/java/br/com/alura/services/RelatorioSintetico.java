@@ -1,56 +1,85 @@
 package br.com.alura.services;
 
-import br.com.alura.comex.CategoriasProcessadas;
-import br.com.alura.comex.Pedido;
-import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
 public class RelatorioSintetico {
 
-  public RelatorioSintetico(
-    int totalDePedidosRealizados,
-    int totalDeProdutosVendidos,
-    int totalDeCategorias,
-    BigDecimal montanteDeVendas,
-    Pedido pedidoMaisBarato,
-    Pedido pedidoMaisCaro,
-    CategoriasProcessadas categoriasProcessadas
-  ) {
+  Fechamento fechamento;
+
+  public RelatorioSintetico(Fechamento fechamento) {
+    this.fechamento = fechamento;
+    this.imprimeTotalDePedidos();
+    this.imprimeTotalDeProdutosVendidos();
+    this.imprimeTotalDeCategorias();
+    this.imprimeTotalDeVendas();
+    this.imprimePedidoMaisBarato();
+    this.imprimeProdutoMaisCaro();
+  }
+
+  private void imprimeTotalDePedidos() {
     System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
     System.out.printf(
       "- TOTAL DE PEDIDOS REALIZADOS: %s\n",
-      totalDePedidosRealizados
+      this.fechamento.getTotalDePedidosRealizados()
     );
+  }
+
+  private void imprimeTotalDeProdutosVendidos() {
     System.out.printf(
       "- TOTAL DE PRODUTOS VENDIDOS: %s\n",
-      totalDeProdutosVendidos
+      fechamento.getTotalDeProdutosVendidos()
     );
-    System.out.printf("- TOTAL DE CATEGORIAS: %s\n", totalDeCategorias);
+  }
+
+  private void imprimeTotalDeCategorias() {
+    System.out.printf(
+      "- TOTAL DE CATEGORIAS: %s\n",
+      fechamento.getTotalDeCategorias()
+    );
+  }
+
+  private void imprimeTotalDeVendas() {
     System.out.printf(
       "- MONTANTE DE VENDAS: %s\n",
       NumberFormat
         .getCurrencyInstance(new Locale("pt", "BR"))
-        .format(montanteDeVendas.setScale(2, RoundingMode.HALF_DOWN))
+        .format(
+          fechamento.getMontanteDeVendas().setScale(2, RoundingMode.HALF_DOWN)
+        )
     );
+  }
+
+  private void imprimePedidoMaisBarato() {
     System.out.printf(
       "- PEDIDO MAIS BARATO: %s (%s)\n",
       NumberFormat
         .getCurrencyInstance(new Locale("pt", "BR"))
         .format(
-          pedidoMaisBarato.getValorTotal().setScale(2, RoundingMode.HALF_DOWN)
+          fechamento
+            .getPedidoMaisBarato()
+            .getValorTotal()
+            .setScale(2, RoundingMode.HALF_DOWN)
         ),
-      pedidoMaisBarato.getProduto()
+      fechamento.getPedidoMaisBarato().getProduto()
     );
+  }
+
+  private void imprimeProdutoMaisCaro() {
     System.out.printf(
       "- PEDIDO MAIS CARO: %s (%s)\n",
       NumberFormat
         .getCurrencyInstance(new Locale("pt", "BR"))
         .format(
-          pedidoMaisCaro.getValorTotal().setScale(2, RoundingMode.HALF_DOWN)
+          fechamento
+            .getPedidoMaisCaro()
+            .getValorTotal()
+            .setScale(2, RoundingMode.HALF_DOWN)
         ),
-      pedidoMaisCaro.getProduto()
+      fechamento.getPedidoMaisCaro().getProduto()
     );
   }
+
+  private void imprimeClientesFieis() {}
 }

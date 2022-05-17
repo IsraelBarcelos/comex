@@ -1,5 +1,7 @@
 package br.com.alura.services;
 
+import br.com.alura.comex.Cliente;
+import br.com.alura.comex.ClientesDoSistema;
 import br.com.alura.comex.Pedido;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -9,15 +11,18 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
 
 public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
 
   private String path;
   private ArrayList<Pedido> pedidos = new ArrayList<>();
+  private ClientesDoSistema clientesDoSistema;
 
   public ProcessadorDeCsv(String path) {
     this.path = path;
+    this.clientesDoSistema = new ClientesDoSistema();
   }
 
   public void execute() throws IOException, URISyntaxException {
@@ -42,6 +47,15 @@ public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
         DateTimeFormatter.ofPattern("dd/MM/yyyy")
       );
       String cliente = registro[5];
+
+      if (
+        clientesDoSistema
+          .getClientesDoSistema()
+          .stream()
+          .noneMatch(c -> c.getNome().equals(cliente))
+      ) {
+        clientesDoSistema.add(new Cliente(cliente));
+      }
 
       Pedido pedido = new Pedido(
         categoria,
