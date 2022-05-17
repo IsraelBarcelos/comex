@@ -17,4 +17,8 @@ public class CategoriasProcessadas {
   public void add(String categoria) {
     categorias.add(categoria);
   }
+
+  public int getTotalDeCategorias() {
+    return categorias.size();
+  }
 }

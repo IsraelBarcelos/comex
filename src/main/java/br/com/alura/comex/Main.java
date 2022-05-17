@@ -1,7 +1,7 @@
 package br.com.alura.comex;
 
 import br.com.alura.services.ProcessadorDeCsv;
-import br.com.alura.services.RelatorioFinal;
+import br.com.alura.services.RelatorioSintetico;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
@@ -30,40 +30,32 @@ public class Main {
     CategoriasProcessadas categoriasProcessadas = new CategoriasProcessadas();
     int totalDeCategorias = 0;
 
-    for (int i = 0; i < pedidos.size(); i++) {
-      Pedido pedidoAtual = pedidos.get(i);
+    pedidoMaisBarato =
+      pedidos.stream().min(Comparator.comparing(Pedido::getPreco)).get();
+    pedidoMaisCaro =
+      pedidos.stream().max(Comparator.comparing(Pedido::getPreco)).get();
 
-      if (pedidoAtual == null) {
-        break;
-      }
+    montanteDeVendas =
+      pedidos.stream().map(Pedido::getValorTotal).reduce(BigDecimal::add).get();
 
-      if (
-        pedidoMaisBarato == null ||
-        pedidoAtual.isMaisBaratoQue(pedidoMaisBarato)
-      ) {
-        pedidoMaisBarato = pedidoAtual;
-      }
+    totalDeProdutosVendidos =
+      pedidos.stream().map(Pedido::getQuantidade).reduce(Integer::sum).get();
 
-      if (pedidoMaisCaro == null || pedidoAtual.isMaisCaroQue(pedidoMaisCaro)) {
-        pedidoMaisCaro = pedidoAtual;
-      }
+    totalDePedidosRealizados = pedidos.size();
 
-      montanteDeVendas =
-        montanteDeVendas.add(
-          pedidoAtual
-            .getPreco()
-            .multiply(new BigDecimal(pedidoAtual.getQuantidade()))
-        );
-      totalDeProdutosVendidos += pedidoAtual.getQuantidade();
-      totalDePedidosRealizados++;
+    pedidos
+      .stream()
+      .forEach(
+        pedido -> {
+          if (!categoriasProcessadas.contains(pedido.getCategoria())) {
+            categoriasProcessadas.add(pedido.getCategoria());
+          }
+        }
+      );
 
-      if (!categoriasProcessadas.contains(pedidoAtual.getCategoria())) {
-        totalDeCategorias++;
-        categoriasProcessadas.add(pedidoAtual.getCategoria());
-      }
-    }
+    totalDeCategorias = categoriasProcessadas.getTotalDeCategorias();
 
-    new RelatorioFinal(
+    new RelatorioSintetico(
       totalDePedidosRealizados,
       totalDeProdutosVendidos,
       totalDeCategorias,
