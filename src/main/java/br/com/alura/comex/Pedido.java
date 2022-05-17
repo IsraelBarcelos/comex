@@ -7,7 +7,7 @@ public class Pedido {
 
   private String categoria;
   private String produto;
-  private String cliente;
+  private Cliente cliente;
 
   private BigDecimal preco;
   private int quantidade;
@@ -17,7 +17,7 @@ public class Pedido {
   public Pedido(
     String categoria,
     String produto,
-    String cliente,
+    Cliente cliente,
     BigDecimal preco,
     int quantidade,
     LocalDate data
@@ -38,8 +38,8 @@ public class Pedido {
     return produto;
   }
 
-  public String getCliente() {
-    return cliente;
+  public Cliente getCliente() {
+    return this.cliente;
   }
 
   public BigDecimal getPreco() {
