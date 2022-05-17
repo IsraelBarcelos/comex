@@ -7,7 +7,7 @@ public class Cliente {
 
   public Cliente(String nome) {
     this.nome = nome;
-    this.numeroDePedidos = 0;
+    this.numeroDePedidos = 1;
   }
 
   public String getNome() {

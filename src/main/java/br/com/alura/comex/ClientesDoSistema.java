@@ -7,6 +7,10 @@ public class ClientesDoSistema {
 
   private ArrayList<Cliente> clientes;
 
+  public ClientesDoSistema() {
+    this.clientes = new ArrayList<>();
+  }
+
   public void add(Cliente cliente) {
     clientes.add(cliente);
   }

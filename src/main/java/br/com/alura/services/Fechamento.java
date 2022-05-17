@@ -1,9 +1,12 @@
 package br.com.alura.services;
 
 import br.com.alura.comex.CategoriasProcessadas;
+import br.com.alura.comex.Cliente;
+import br.com.alura.comex.ClientesDoSistema;
 import br.com.alura.comex.Pedido;
 import br.com.alura.comex.PedidosDeUmFechamento;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Optional;
 
@@ -11,9 +14,14 @@ public class Fechamento {
 
   CategoriasProcessadas categoriasProcessadas = new CategoriasProcessadas();
   PedidosDeUmFechamento pedidosDeUmFechamento;
+  ClientesDoSistema clientesDoSistema;
 
-  public Fechamento(PedidosDeUmFechamento pedidosDeUmFechamento) {
+  public Fechamento(
+    PedidosDeUmFechamento pedidosDeUmFechamento,
+    ClientesDoSistema clientesDoSistema
+  ) {
     this.pedidosDeUmFechamento = pedidosDeUmFechamento;
+    this.clientesDoSistema = clientesDoSistema;
 
     verificaSeEstaNaCategoria();
 
@@ -76,5 +84,9 @@ public class Fechamento {
 
   public int getTotalDeCategorias() {
     return categoriasProcessadas.getTotalDeCategorias();
+  }
+
+  public Collection<Cliente> getClientesFieis() {
+    return this.clientesDoSistema.getClientesDoSistema();
   }
 }

@@ -11,7 +11,6 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Scanner;
 
 public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
@@ -19,6 +18,7 @@ public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
   private String path;
   private ArrayList<Pedido> pedidos = new ArrayList<>();
   private ClientesDoSistema clientesDoSistema;
+  private Cliente clientePlaceholder;
 
   public ProcessadorDeCsv(String path) {
     this.path = path;
@@ -33,7 +33,6 @@ public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
 
     leitorDeLinhas.nextLine();
 
-    int quantidadeDeRegistros = 0;
     while (leitorDeLinhas.hasNextLine()) {
       String linha = leitorDeLinhas.nextLine();
       String[] registro = linha.split(",");
@@ -54,24 +53,38 @@ public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
           .stream()
           .noneMatch(c -> c.getNome().equals(cliente))
       ) {
-        clientesDoSistema.add(new Cliente(cliente));
+        this.clientePlaceholder = new Cliente(cliente);
+        clientesDoSistema.add(this.clientePlaceholder);
+      } else {
+        clientePlaceholder =
+          clientesDoSistema
+            .getClientesDoSistema()
+            .stream()
+            .filter(c -> c.getNome().equals(cliente))
+            .findFirst()
+            .get();
+
+        clientePlaceholder.addPedido();
       }
 
       Pedido pedido = new Pedido(
         categoria,
         produto,
-        cliente,
+        clientePlaceholder,
         preco,
         quantidade,
         data
       );
       pedidos.add(pedido);
-
-      quantidadeDeRegistros++;
     }
+    leitorDeLinhas.close();
   }
 
   public ArrayList<Pedido> getPedidos() {
     return pedidos;
+  }
+
+  public ClientesDoSistema getClientesDoSistema() {
+    return clientesDoSistema;
   }
 }

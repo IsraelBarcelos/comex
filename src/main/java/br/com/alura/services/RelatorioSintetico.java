@@ -1,7 +1,9 @@
 package br.com.alura.services;
 
+import br.com.alura.comex.Cliente;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
+import java.util.Comparator;
 import java.util.Locale;
 
 public class RelatorioSintetico {
@@ -16,6 +18,7 @@ public class RelatorioSintetico {
     this.imprimeTotalDeVendas();
     this.imprimePedidoMaisBarato();
     this.imprimeProdutoMaisCaro();
+    this.imprimeClientesFieis();
   }
 
   private void imprimeTotalDePedidos() {
@@ -81,5 +84,19 @@ public class RelatorioSintetico {
     );
   }
 
-  private void imprimeClientesFieis() {}
+  private void imprimeClientesFieis() {
+    System.out.println("\n#### RELATÓRIO DE CLIENTES FIEIS\n");
+    fechamento
+      .getClientesFieis()
+      .stream()
+      .sorted(Comparator.comparing(Cliente::getNumeroDePedidos).reversed())
+      .forEach(
+        cliente -> {
+          System.out.println("NOME: " + cliente.getNome());
+          System.out.println(
+            "NÚMERO DE PEDIDOS: " + cliente.getNumeroDePedidos() + "\n"
+          );
+        }
+      );
+  }
 }

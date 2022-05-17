@@ -17,6 +17,9 @@ public class Main {
       e.printStackTrace();
     }
 
-    new Fechamento(new PedidosDeUmFechamento(listas.getPedidos()));
+    new Fechamento(
+      new PedidosDeUmFechamento(listas.getPedidos()),
+      listas.getClientesDoSistema()
+    );
   }
 }
