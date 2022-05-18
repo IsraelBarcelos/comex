@@ -1,6 +1,5 @@
 package br.com.alura.services;
 
-import br.com.alura.comex.CategoriasProcessadas;
 import br.com.alura.comex.Cliente;
 import br.com.alura.comex.Pedido;
 import java.math.BigDecimal;
@@ -71,7 +70,7 @@ public class RelatorioSintetico {
             .getValorTotal()
             .setScale(2, RoundingMode.HALF_DOWN)
         ),
-      fechamento.getPedidoMaisBarato().getProduto()
+      fechamento.getPedidoMaisBarato().getProduto().getNome()
     );
   }
 
@@ -86,7 +85,7 @@ public class RelatorioSintetico {
             .getValorTotal()
             .setScale(2, RoundingMode.HALF_DOWN)
         ),
-      fechamento.getPedidoMaisCaro().getProduto()
+      fechamento.getPedidoMaisCaro().getProduto().getNome()
     );
   }
 
@@ -115,7 +114,9 @@ public class RelatorioSintetico {
           long quantidadeVendida = fechamento.pedidosDeUmFechamento
             .getPedidos()
             .stream()
-            .filter(pedido -> pedido.getCategoria().equals(categoria))
+            .filter(
+              pedido -> pedido.getProduto().getCategoria().equals(categoria)
+            )
             .map(Pedido::getQuantidade)
             .reduce(Integer::sum)
             .get();
@@ -123,8 +124,12 @@ public class RelatorioSintetico {
           BigDecimal valorPorCategorias = fechamento.pedidosDeUmFechamento
             .getPedidos()
             .stream()
-            .filter(pedido -> pedido.getCategoria().equals(categoria))
-            .sorted(Comparator.comparing(Pedido::getCategoria))
+            .filter(
+              pedido -> pedido.getProduto().getCategoria().equals(categoria)
+            )
+            .sorted(
+              Comparator.comparing(pedido -> pedido.getProduto().getPreco())
+            )
             .map(Pedido::getValorTotal)
             .reduce(BigDecimal::add)
             .get();
@@ -141,12 +146,12 @@ public class RelatorioSintetico {
     this.fechamento.getProdutosMaisVendidoComSkips(3)
       .stream()
       .forEach(
-        produto -> {
+        pedido -> {
           System.out.println(
             "\nPRODUTO: " +
-            produto.getProduto() +
+            pedido.getProduto().getNome() +
             "\nQUANTIDADE: " +
-            produto.getQuantidade()
+            pedido.getQuantidade()
           );
         }
       );
@@ -156,5 +161,13 @@ public class RelatorioSintetico {
     System.out.println(
       "\n#### RELATÓRIO DE PRODUTOS MAIS CAROS DE CADA CATEGORIA"
     );
+
+    this.fechamento.getSortedCategoriasProcessadas()
+      .stream()
+      .forEach(
+        categoria -> {
+          System.out.println("\nCATEGORIA: " + categoria);
+        }
+      );
   }
 }

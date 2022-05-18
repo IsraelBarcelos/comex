@@ -33,7 +33,7 @@ public class Fechamento {
     Optional<Pedido> pedidoMaisBarato =
       this.pedidosDeUmFechamento.getPedidos()
         .stream()
-        .max(Comparator.comparing(Pedido::getPreco));
+        .max(Comparator.comparing(pedido -> pedido.getProduto().getPreco()));
     if (pedidoMaisBarato.isPresent()) return pedidoMaisBarato.get();
     throw new IllegalStateException("Não existe pedido mais caro");
   }
@@ -42,7 +42,7 @@ public class Fechamento {
     Optional<Pedido> pedidoMaisCaro =
       this.pedidosDeUmFechamento.getPedidos()
         .stream()
-        .max(Comparator.comparing(Pedido::getPreco));
+        .max(Comparator.comparing(pedido -> pedido.getProduto().getPreco()));
     if (pedidoMaisCaro.isPresent()) return pedidoMaisCaro.get();
     throw new IllegalStateException("Não existe pedido mais caro");
   }
@@ -78,9 +78,9 @@ public class Fechamento {
         pedido -> {
           if (
             !this.categoriasProcessadas.getCategorias()
-              .contains(pedido.getCategoria())
+              .contains(pedido.getProduto().getCategoria())
           ) {
-            this.categoriasProcessadas.add(pedido.getCategoria());
+            this.categoriasProcessadas.add(pedido.getProduto().getCategoria());
           }
         }
       );

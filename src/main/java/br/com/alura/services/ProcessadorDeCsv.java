@@ -3,6 +3,7 @@ package br.com.alura.services;
 import br.com.alura.comex.Cliente;
 import br.com.alura.comex.ClientesDoSistema;
 import br.com.alura.comex.Pedido;
+import br.com.alura.comex.Produto;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
@@ -82,10 +83,8 @@ public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
       }
 
       Pedido pedido = new Pedido(
-        categoria,
-        produto,
+        new Produto(produto, categoria, preco),
         clientePlaceholder,
-        preco,
         quantidade,
         data
       );

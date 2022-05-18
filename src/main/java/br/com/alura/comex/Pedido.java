@@ -5,45 +5,30 @@ import java.time.LocalDate;
 
 public class Pedido {
 
-  private String categoria;
-  private String produto;
+  private Produto produto;
   private Cliente cliente;
-
-  private BigDecimal preco;
   private int quantidade;
 
   private LocalDate data;
 
   public Pedido(
-    String categoria,
-    String produto,
+    Produto produto,
     Cliente cliente,
-    BigDecimal preco,
     int quantidade,
     LocalDate data
   ) {
-    this.categoria = categoria;
     this.produto = produto;
     this.cliente = cliente;
-    this.preco = preco;
     this.quantidade = quantidade;
     this.data = data;
   }
 
-  public String getCategoria() {
-    return categoria;
-  }
-
-  public String getProduto() {
-    return produto;
+  public Produto getProduto() {
+    return this.produto;
   }
 
   public Cliente getCliente() {
     return this.cliente;
-  }
-
-  public BigDecimal getPreco() {
-    return preco;
   }
 
   public int getQuantidade() {
@@ -55,7 +40,7 @@ public class Pedido {
   }
 
   public BigDecimal getValorTotal() {
-    return preco.multiply(new BigDecimal(quantidade));
+    return this.getProduto().getPreco().multiply(new BigDecimal(quantidade));
   }
 
   public boolean isMaisBaratoQue(Pedido outroPedido) {
@@ -71,16 +56,16 @@ public class Pedido {
     return (
       "Pedido{" +
       "categoria='" +
-      categoria +
+      this.getProduto().getCategoria() +
       '\'' +
       ", produto='" +
-      produto +
+      this.getProduto().getNome() +
       '\'' +
       ", cliente='" +
-      cliente +
+      this.cliente.getNome() +
       '\'' +
       ", preco=" +
-      preco +
+      this.getProduto().getPreco() +
       ", quantidade=" +
       quantidade +
       ", data=" +
