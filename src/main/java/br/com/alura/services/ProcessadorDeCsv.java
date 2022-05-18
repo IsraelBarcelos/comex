@@ -60,27 +60,10 @@ public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
         registro[4],
         DateTimeFormatter.ofPattern("dd/MM/yyyy")
       );
-      String cliente = registro[5];
+      String nomeDoCliente = registro[5];
 
-      if (
-        clientesDoSistema
-          .getClientesDoSistema()
-          .stream()
-          .noneMatch(c -> c.getNome().equals(cliente))
-      ) {
-        this.clientePlaceholder = new Cliente(cliente);
-        clientesDoSistema.add(this.clientePlaceholder);
-      } else {
-        clientePlaceholder =
-          clientesDoSistema
-            .getClientesDoSistema()
-            .stream()
-            .filter(c -> c.getNome().equals(cliente))
-            .findFirst()
-            .get();
-
-        clientePlaceholder.addPedido();
-      }
+      this.clientePlaceholder =
+        this.clientesDoSistema.adicionaNovoClienteOuRejeita(nomeDoCliente);
 
       Pedido pedido = new Pedido(
         new Produto(produto, categoria, preco),

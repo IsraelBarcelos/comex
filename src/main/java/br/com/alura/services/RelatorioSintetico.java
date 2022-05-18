@@ -22,8 +22,9 @@ public class RelatorioSintetico {
     this.imprimeProdutoMaisCaro();
     this.imprimeClientesFieis();
     this.imprimeVendasPorCategorias();
-    this.ImprimeProdutosMaisVendidoComLimit();
-    this.ImprimeProdutosMaisCarosDeCadaCategoria();
+    this.imprimeProdutosMaisVendidoComLimit();
+    this.imprimeProdutosMaisCarosDeCadaCategoria();
+    this.imprimeClientesMaisLucrativos();
   }
 
   private void imprimeTotalDePedidos() {
@@ -94,7 +95,7 @@ public class RelatorioSintetico {
     fechamento
       .getClientesFieis()
       .stream()
-      .sorted(Comparator.comparing(Cliente::getNumeroDePedidos).reversed())
+      .sorted(Comparator.comparing(Cliente::getNome))
       .forEach(
         cliente -> {
           System.out.println("NOME: " + cliente.getNome());
@@ -141,7 +142,7 @@ public class RelatorioSintetico {
       );
   }
 
-  private void ImprimeProdutosMaisVendidoComLimit() {
+  private void imprimeProdutosMaisVendidoComLimit() {
     System.out.println("\n#### RELATÓRIO DE PRODUTOS MAIS VENDIDOS");
     this.fechamento.getProdutosMaisVendidoComSkips(3)
       .stream()
@@ -157,7 +158,7 @@ public class RelatorioSintetico {
       );
   }
 
-  private void ImprimeProdutosMaisCarosDeCadaCategoria() { //Posso passar esses métodos para o Fechamento, para manter a responsabilidade da classe apenas de gerar o relatório (S)olid
+  private void imprimeProdutosMaisCarosDeCadaCategoria() { //Posso passar esses métodos para o Fechamento, para manter a responsabilidade da classe apenas de gerar o relatório (S)olid
     System.out.println(
       "\n#### RELATÓRIO DE PRODUTOS MAIS CAROS DE CADA CATEGORIA"
     );
@@ -182,6 +183,24 @@ public class RelatorioSintetico {
           );
           System.out.println(
             "PREÇO: R$ " + pedidoPlaceholder.getProduto().getPreco()
+          );
+        }
+      );
+  }
+
+  private void imprimeClientesMaisLucrativos() {
+    System.out.println("\n#### RELATÓRIO DE CLIENTES MAIS LUCRATIVOS");
+    this.fechamento.getClientesMaisLucrativos(2)
+      .stream()
+      .forEach(
+        cliente -> {
+          System.out.println(
+            "\nNOME: " +
+            cliente.getNome() +
+            "\nNÚMERO DE PEDIDOS: " +
+            cliente.getNumeroDePedidos() +
+            "\nMONTANTE GASTO: R$ " +
+            cliente.getTotalDeCompras()
           );
         }
       );

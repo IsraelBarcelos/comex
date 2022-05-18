@@ -33,7 +33,7 @@ public class Fechamento {
     Optional<Pedido> pedidoMaisBarato =
       this.pedidosDeUmFechamento.getPedidos()
         .stream()
-        .max(Comparator.comparing(pedido -> pedido.getProduto().getPreco()));
+        .min(Comparator.comparing(Pedido::getValorTotal));
     if (pedidoMaisBarato.isPresent()) return pedidoMaisBarato.get();
     throw new IllegalStateException("Não existe pedido mais caro");
   }
@@ -42,7 +42,7 @@ public class Fechamento {
     Optional<Pedido> pedidoMaisCaro =
       this.pedidosDeUmFechamento.getPedidos()
         .stream()
-        .max(Comparator.comparing(pedido -> pedido.getProduto().getPreco()));
+        .max(Comparator.comparing(Pedido::getValorTotal));
     if (pedidoMaisCaro.isPresent()) return pedidoMaisCaro.get();
     throw new IllegalStateException("Não existe pedido mais caro");
   }
@@ -114,6 +114,21 @@ public class Fechamento {
     return this.pedidosDeUmFechamento.getPedidos()
       .stream()
       .sorted(Comparator.comparing(Pedido::getQuantidade).reversed())
+      .toList();
+  }
+
+  public List<Cliente> getClientesMaisLucrativos(int limit) {
+    if (limit > 0) {
+      return this.clientesDoSistema.getClientesDoSistema()
+        .stream()
+        .sorted(Comparator.comparing(Cliente::getTotalDeCompras).reversed())
+        .limit(limit)
+        .toList();
+    }
+
+    return this.clientesDoSistema.getClientesDoSistema()
+      .stream()
+      .sorted(Comparator.comparing(Cliente::getTotalDeCompras).reversed())
       .toList();
   }
 }
