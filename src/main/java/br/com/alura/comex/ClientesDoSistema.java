@@ -18,4 +18,28 @@ public class ClientesDoSistema {
   public Collection<Cliente> getClientesDoSistema() {
     return this.clientes;
   }
+
+  public Cliente adicionaNovoClienteOuRejeita(String nomeDoCliente) {
+    Cliente clientePlaceholder;
+    if (
+      this.clientes.stream()
+        .noneMatch(
+          clienteDaLista -> clienteDaLista.getNome().equals(nomeDoCliente)
+        )
+    ) {
+      clientePlaceholder = new Cliente(nomeDoCliente);
+      this.clientes.add(clientePlaceholder);
+      return clientePlaceholder;
+    }
+
+    clientePlaceholder =
+      this.clientes.stream()
+        .filter(c -> c.getNome().equals(nomeDoCliente))
+        .findFirst()
+        .get();
+
+    clientePlaceholder.addPedido();
+
+    return clientePlaceholder;
+  }
 }

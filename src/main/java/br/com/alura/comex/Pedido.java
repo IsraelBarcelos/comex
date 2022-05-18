@@ -21,6 +21,7 @@ public class Pedido {
     this.cliente = cliente;
     this.quantidade = quantidade;
     this.data = data;
+    this.cliente.adicionaNovaCompra(this.getValorTotal());
   }
 
   public Produto getProduto() {
@@ -40,7 +41,9 @@ public class Pedido {
   }
 
   public BigDecimal getValorTotal() {
-    return this.getProduto().getPreco().multiply(new BigDecimal(quantidade));
+    return this.getProduto()
+      .getPreco()
+      .multiply(BigDecimal.valueOf(this.quantidade));
   }
 
   public boolean isMaisBaratoQue(Pedido outroPedido) {
