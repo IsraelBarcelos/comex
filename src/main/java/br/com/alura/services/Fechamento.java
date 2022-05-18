@@ -75,7 +75,10 @@ public class Fechamento {
       .stream()
       .forEach(
         pedido -> {
-          if (!this.categoriasProcessadas.contains(pedido.getCategoria())) {
+          if (
+            !this.categoriasProcessadas.getCategorias()
+              .contains(pedido.getCategoria())
+          ) {
             this.categoriasProcessadas.add(pedido.getCategoria());
           }
         }
@@ -88,5 +91,13 @@ public class Fechamento {
 
   public Collection<Cliente> getClientesFieis() {
     return this.clientesDoSistema.getClientesDoSistema();
+  }
+
+  public Collection<String> getCategoriasProcessadas() {
+    return this.categoriasProcessadas.getCategorias();
+  }
+
+  public Collection<String> getSortedCategoriasProcessadas() {
+    return this.categoriasProcessadas.getSortedCategorias();
   }
 }

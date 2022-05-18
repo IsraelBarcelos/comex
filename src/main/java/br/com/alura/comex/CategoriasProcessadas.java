@@ -1,13 +1,22 @@
 package br.com.alura.comex;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CategoriasProcessadas {
 
-  HashSet<String> categorias = new HashSet<>();
+  ArrayList<String> categorias;
 
-  public HashSet<String> getCategorias() {
-    return categorias;
+  public CategoriasProcessadas() {
+    this.categorias = new ArrayList<>();
+  }
+
+  public List<String> getSortedCategorias() {
+    return this.categorias.stream().sorted((a, b) -> a.compareTo(b)).toList();
+  }
+
+  public ArrayList<String> getCategorias() {
+    return this.categorias;
   }
 
   public boolean contains(String categoria) {

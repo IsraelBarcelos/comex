@@ -1,6 +1,9 @@
 package br.com.alura.services;
 
+import br.com.alura.comex.CategoriasProcessadas;
 import br.com.alura.comex.Cliente;
+import br.com.alura.comex.Pedido;
+import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Comparator;
@@ -19,6 +22,7 @@ public class RelatorioSintetico {
     this.imprimePedidoMaisBarato();
     this.imprimeProdutoMaisCaro();
     this.imprimeClientesFieis();
+    this.imprimeVendasPorCategorias();
   }
 
   private void imprimeTotalDePedidos() {
@@ -96,6 +100,36 @@ public class RelatorioSintetico {
           System.out.println(
             "NÚMERO DE PEDIDOS: " + cliente.getNumeroDePedidos() + "\n"
           );
+        }
+      );
+  }
+
+  private void imprimeVendasPorCategorias() { //Posso passar esses métodos para o Fechamento, para manter a responsabilidade da classe apenas de gerar o relatório (S)olid
+    fechamento
+      .getSortedCategoriasProcessadas()
+      .stream()
+      .forEach(
+        categoria -> {
+          long quantidadeVendida = fechamento.pedidosDeUmFechamento
+            .getPedidos()
+            .stream()
+            .filter(pedido -> pedido.getCategoria().equals(categoria))
+            .map(Pedido::getQuantidade)
+            .reduce(Integer::sum)
+            .get();
+
+          BigDecimal valorPorCategorias = fechamento.pedidosDeUmFechamento
+            .getPedidos()
+            .stream()
+            .filter(pedido -> pedido.getCategoria().equals(categoria))
+            .sorted(Comparator.comparing(Pedido::getCategoria))
+            .map(Pedido::getValorTotal)
+            .reduce(BigDecimal::add)
+            .get();
+
+          System.out.println("\nCATEGORIA: " + categoria);
+          System.out.println("QUANTIDADE VENDIDA: " + quantidadeVendida);
+          System.out.println("MONTANTE: R$" + valorPorCategorias);
         }
       );
   }

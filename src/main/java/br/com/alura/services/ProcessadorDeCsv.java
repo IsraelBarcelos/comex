@@ -33,6 +33,20 @@ public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
 
     leitorDeLinhas.nextLine();
 
+    this.transformarDadosEmLinhas(leitorDeLinhas);
+
+    leitorDeLinhas.close();
+  }
+
+  public ArrayList<Pedido> getPedidos() {
+    return pedidos;
+  }
+
+  public ClientesDoSistema getClientesDoSistema() {
+    return clientesDoSistema;
+  }
+
+  private void transformarDadosEmLinhas(Scanner leitorDeLinhas) {
     while (leitorDeLinhas.hasNextLine()) {
       String linha = leitorDeLinhas.nextLine();
       String[] registro = linha.split(",");
@@ -77,14 +91,5 @@ public class ProcessadorDeCsv implements ResgatarRelatoriosInterface {
       );
       pedidos.add(pedido);
     }
-    leitorDeLinhas.close();
-  }
-
-  public ArrayList<Pedido> getPedidos() {
-    return pedidos;
-  }
-
-  public ClientesDoSistema getClientesDoSistema() {
-    return clientesDoSistema;
   }
 }
