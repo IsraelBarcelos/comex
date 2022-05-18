@@ -157,7 +157,7 @@ public class RelatorioSintetico {
       );
   }
 
-  private void ImprimeProdutosMaisCarosDeCadaCategoria() {
+  private void ImprimeProdutosMaisCarosDeCadaCategoria() { //Posso passar esses métodos para o Fechamento, para manter a responsabilidade da classe apenas de gerar o relatório (S)olid
     System.out.println(
       "\n#### RELATÓRIO DE PRODUTOS MAIS CAROS DE CADA CATEGORIA"
     );
@@ -167,6 +167,22 @@ public class RelatorioSintetico {
       .forEach(
         categoria -> {
           System.out.println("\nCATEGORIA: " + categoria);
+          Pedido pedidoPlaceholder =
+            this.fechamento.pedidosDeUmFechamento.getPedidos()
+              .stream()
+              .filter(
+                pedido -> pedido.getProduto().getCategoria().equals(categoria)
+              )
+              .max(
+                Comparator.comparing(pedido -> pedido.getProduto().getPreco())
+              )
+              .get();
+          System.out.println(
+            "PRODUTO: " + pedidoPlaceholder.getProduto().getNome()
+          );
+          System.out.println(
+            "PREÇO: R$ " + pedidoPlaceholder.getProduto().getPreco()
+          );
         }
       );
   }
