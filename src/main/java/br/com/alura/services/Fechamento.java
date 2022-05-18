@@ -8,6 +8,7 @@ import br.com.alura.comex.PedidosDeUmFechamento;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 public class Fechamento {
@@ -99,5 +100,20 @@ public class Fechamento {
 
   public Collection<String> getSortedCategoriasProcessadas() {
     return this.categoriasProcessadas.getSortedCategorias();
+  }
+
+  public List<Pedido> getProdutosMaisVendidoComSkips(int limit) {
+    if (limit > 0) {
+      return this.pedidosDeUmFechamento.getPedidos()
+        .stream()
+        .sorted(Comparator.comparing(Pedido::getQuantidade).reversed())
+        .limit(3)
+        .toList();
+    }
+
+    return this.pedidosDeUmFechamento.getPedidos()
+      .stream()
+      .sorted(Comparator.comparing(Pedido::getQuantidade).reversed())
+      .toList();
   }
 }

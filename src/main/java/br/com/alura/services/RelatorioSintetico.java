@@ -23,6 +23,8 @@ public class RelatorioSintetico {
     this.imprimeProdutoMaisCaro();
     this.imprimeClientesFieis();
     this.imprimeVendasPorCategorias();
+    this.ImprimeProdutosMaisVendidoComLimit();
+    this.ImprimeProdutosMaisCarosDeCadaCategoria();
   }
 
   private void imprimeTotalDePedidos() {
@@ -132,5 +134,27 @@ public class RelatorioSintetico {
           System.out.println("MONTANTE: R$" + valorPorCategorias);
         }
       );
+  }
+
+  private void ImprimeProdutosMaisVendidoComLimit() {
+    System.out.println("\n#### RELATÓRIO DE PRODUTOS MAIS VENDIDOS");
+    this.fechamento.getProdutosMaisVendidoComSkips(3)
+      .stream()
+      .forEach(
+        produto -> {
+          System.out.println(
+            "\nPRODUTO: " +
+            produto.getProduto() +
+            "\nQUANTIDADE: " +
+            produto.getQuantidade()
+          );
+        }
+      );
+  }
+
+  private void ImprimeProdutosMaisCarosDeCadaCategoria() {
+    System.out.println(
+      "\n#### RELATÓRIO DE PRODUTOS MAIS CAROS DE CADA CATEGORIA"
+    );
   }
 }
