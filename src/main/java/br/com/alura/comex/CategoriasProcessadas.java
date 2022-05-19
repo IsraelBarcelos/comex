@@ -7,8 +7,9 @@ public class CategoriasProcessadas {
 
   ArrayList<String> categorias;
 
-  public CategoriasProcessadas() {
+  public CategoriasProcessadas(List<Pedido> pedidos) {
     this.categorias = new ArrayList<>();
+    this.verificaSeEstaNaCategoria(pedidos);
   }
 
   public List<String> getSortedCategorias() {
@@ -29,5 +30,20 @@ public class CategoriasProcessadas {
 
   public int getTotalDeCategorias() {
     return categorias.size();
+  }
+
+  private void verificaSeEstaNaCategoria(List<Pedido> pedidos) {
+    pedidos
+      .stream()
+      .forEach(
+        pedido -> {
+          if (
+            !categorias
+              .contains(pedido.getProduto().getCategoria())
+          ) {
+            this.add(pedido.getProduto().getCategoria());
+          }
+        }
+      );
   }
 }

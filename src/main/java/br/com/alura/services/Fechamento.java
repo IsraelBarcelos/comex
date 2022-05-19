@@ -5,6 +5,7 @@ import br.com.alura.comex.Cliente;
 import br.com.alura.comex.ClientesDoSistema;
 import br.com.alura.comex.Pedido;
 import br.com.alura.comex.PedidosDeUmFechamento;
+
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Comparator;
@@ -13,9 +14,9 @@ import java.util.Optional;
 
 public class Fechamento {
 
-  CategoriasProcessadas categoriasProcessadas = new CategoriasProcessadas();
-  PedidosDeUmFechamento pedidosDeUmFechamento;
-  ClientesDoSistema clientesDoSistema;
+  private CategoriasProcessadas categoriasProcessadas;
+  private PedidosDeUmFechamento pedidosDeUmFechamento;
+  private ClientesDoSistema clientesDoSistema;
 
   public Fechamento(
     PedidosDeUmFechamento pedidosDeUmFechamento,
@@ -23,10 +24,11 @@ public class Fechamento {
   ) {
     this.pedidosDeUmFechamento = pedidosDeUmFechamento;
     this.clientesDoSistema = clientesDoSistema;
+    this.categoriasProcessadas = new CategoriasProcessadas(this.pedidosDeUmFechamento.getPedidos());
+  }
 
-    verificaSeEstaNaCategoria();
-
-    new RelatorioSintetico(this);
+  public PedidosDeUmFechamento getPedidosDeUmFechamento() {
+      return pedidosDeUmFechamento;
   }
 
   public Pedido getPedidoMaisBarato() throws IllegalStateException {
@@ -69,21 +71,6 @@ public class Fechamento {
 
   public int totalDethisPedidosRealizados() {
     return this.pedidosDeUmFechamento.getPedidos().size();
-  }
-
-  public void verificaSeEstaNaCategoria() {
-    this.pedidosDeUmFechamento.getPedidos()
-      .stream()
-      .forEach(
-        pedido -> {
-          if (
-            !this.categoriasProcessadas.getCategorias()
-              .contains(pedido.getProduto().getCategoria())
-          ) {
-            this.categoriasProcessadas.add(pedido.getProduto().getCategoria());
-          }
-        }
-      );
   }
 
   public int getTotalDeCategorias() {
