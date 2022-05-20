@@ -11,7 +11,7 @@ public abstract class Relatorio {
         this.fechamento = fechamento;
     }
 
-    public void imprimeTodosOsRelatorio(Set<Relatorio> relatorios) {
+    public static void imprimeTodosOsRelatorio(Set<Relatorio> relatorios) {
         relatorios.iterator().forEachRemaining(Relatorio::toString);;
     }
 }
