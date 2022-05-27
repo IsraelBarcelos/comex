@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 public class Produto {
 
-  private String nome;
-  private String categoria;
-  private BigDecimal preco;
+  private final String nome;
+  private final String categoria;
+  private final BigDecimal preco;
 
   public Produto(String nome, String categoria, BigDecimal preco) {
     this.nome = nome;

@@ -5,11 +5,11 @@ import java.time.LocalDate;
 
 public class Pedido {
 
-  private Produto produto;
-  private Cliente cliente;
-  private int quantidade;
+  private final Produto produto;
+  private final Cliente cliente;
+  private final int quantidade;
 
-  private LocalDate data;
+  private final LocalDate data;
 
   public Pedido(
     Produto produto,
