@@ -5,8 +5,10 @@ import br.com.alura.comex.Cliente;
 import br.com.alura.comex.ClientesDoSistema;
 import br.com.alura.comex.Pedido;
 import br.com.alura.comex.PedidosDeUmFechamento;
-
+import br.com.alura.services.processadores.Processador;
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
@@ -14,21 +16,23 @@ import java.util.Optional;
 
 public class Fechamento {
 
-  private CategoriasProcessadas categoriasProcessadas;
-  private PedidosDeUmFechamento pedidosDeUmFechamento;
-  private ClientesDoSistema clientesDoSistema;
+  private Processador processador;
+  private final CategoriasProcessadas categoriasProcessadas;
+  private final PedidosDeUmFechamento pedidosDeUmFechamento;
+  private final ClientesDoSistema clientesDoSistema;
 
-  public Fechamento(
-    PedidosDeUmFechamento pedidosDeUmFechamento,
-    ClientesDoSistema clientesDoSistema
-  ) {
-    this.pedidosDeUmFechamento = pedidosDeUmFechamento;
-    this.clientesDoSistema = clientesDoSistema;
-    this.categoriasProcessadas = new CategoriasProcessadas(this.pedidosDeUmFechamento.getPedidos());
+  public Fechamento(Processador processador)
+    throws IOException, URISyntaxException {
+    this.processador.execute();
+    this.pedidosDeUmFechamento =
+      new PedidosDeUmFechamento(processador.getPedidos());
+    this.clientesDoSistema = this.processador.getClientesDoSistema();
+    this.categoriasProcessadas =
+      new CategoriasProcessadas(this.pedidosDeUmFechamento.getPedidos());
   }
 
   public PedidosDeUmFechamento getPedidosDeUmFechamento() {
-      return pedidosDeUmFechamento;
+    return pedidosDeUmFechamento;
   }
 
   public Pedido getPedidoMaisBarato() throws IllegalStateException {
