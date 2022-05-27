@@ -6,17 +6,13 @@ public class RelatorioSintetico extends Relatorio {
 
   public RelatorioSintetico(Fechamento fechamento) {
     super(fechamento);
-    imprimeTotalDethisPedidosRealizados();
-    imprimeTotalDeProdutosVendidos();
-    imprimeTotalDeCategorias();
-    imprimeMontanteDeVendas();
-    imprimePedidoMaisBarato();
-    imprimePedidoMaisCaro();
   }
 
   private void imprimePedidoMaisCaro() {
     System.out.println(
       "PEDIDO MAIS CARO: R$ " +
+      this.fechamento.getPedidoMaisCaro().getValorTotal() +
+      " - " +
       this.fechamento.getPedidoMaisCaro().getProduto().getNome()
     );
   }
@@ -24,6 +20,8 @@ public class RelatorioSintetico extends Relatorio {
   private void imprimePedidoMaisBarato() {
     System.out.println(
       "PEDIDO MAIS BARATO: R$ " +
+      this.fechamento.getPedidoMaisBarato().getProduto().getPreco() +
+      " - " +
       this.fechamento.getPedidoMaisBarato().getProduto().getNome()
     );
   }
@@ -52,5 +50,20 @@ public class RelatorioSintetico extends Relatorio {
       "TOTAL DE PEDIDOS REALIZADOS: " +
       super.fechamento.getTotalDePedidosRealizados()
     );
+  }
+
+  @Override
+  public String toString() {
+    return "relatorio";
+  }
+
+  @Override
+  public void imprimirRelatorios() {
+    imprimeTotalDethisPedidosRealizados();
+    imprimeTotalDeProdutosVendidos();
+    imprimeTotalDeCategorias();
+    imprimeMontanteDeVendas();
+    imprimePedidoMaisBarato();
+    imprimePedidoMaisCaro();
   }
 }
