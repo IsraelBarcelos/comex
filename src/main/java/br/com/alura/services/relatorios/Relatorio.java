@@ -12,6 +12,6 @@ public abstract class Relatorio {
     }
 
     public static void imprimeTodosOsRelatorio(Set<Relatorio> relatorios) {
-        relatorios.iterator().forEachRemaining(Relatorio::toString);;
+        relatorios.iterator().forEachRemaining(Relatorio::toString);
     }
 }
