@@ -1,6 +1,5 @@
 package br.com.alura.services.processadores;
 
-import br.com.alura.comex.ClientesDoSistema;
 import br.com.alura.comex.Pedido;
 import br.com.alura.comex.Produto;
 import br.com.alura.services.processadores.component.PedidoJson;
@@ -9,7 +8,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessadorDeXML extends Processador {
@@ -46,13 +44,5 @@ public class ProcessadorDeXML extends Processador {
         this.pedidos.add(pedidoMontado);
       }
     );
-  }
-
-  public ArrayList<Pedido> getPedidos() {
-    return this.pedidos;
-  }
-
-  public ClientesDoSistema getClientesDoSistema() {
-    return this.clientesDoSistema;
   }
 }
