@@ -23,6 +23,7 @@ public class Fechamento {
 
   public Fechamento(Processador processador)
     throws IOException, URISyntaxException {
+    this.processador = processador;
     this.processador.execute();
     this.pedidosDeUmFechamento =
       new PedidosDeUmFechamento(processador.getPedidos());
