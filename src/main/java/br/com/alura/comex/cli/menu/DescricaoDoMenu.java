@@ -1,4 +1,4 @@
-package br.com.alura.services.execucao.menu;
+package br.com.alura.comex.cli.menu;
 
 public class DescricaoDoMenu {
 

@@ -1,4 +1,4 @@
-package br.com.alura.services.execucao.menu;
+package br.com.alura.comex.cli.menu;
 
 import br.com.alura.services.Fechamento;
 import br.com.alura.services.processadores.Processador;
