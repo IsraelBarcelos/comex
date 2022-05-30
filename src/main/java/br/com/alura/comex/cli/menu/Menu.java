@@ -27,11 +27,15 @@ public class Menu {
   private final void inicializaMenu() {
     try {
       Scanner scanner = new Scanner(System.in);
-      do {
+
+      new DescricaoDoMenu();
+      opt = scanner.nextLine();
+
+      while (set.contains(opt)) {
+        menu(processador, opt);
         new DescricaoDoMenu();
         opt = scanner.nextLine();
-        menu(processador, opt);
-      } while (set.contains(opt));
+      }
 
       scanner.close();
     } catch (Exception e) {
