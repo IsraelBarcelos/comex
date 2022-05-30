@@ -25,10 +25,6 @@ public class ProcessadorDeCSVOpenCSV extends Processador {
     this.linhas = new ArrayList<String[]>();
   }
 
-  public List<String[]> getLinhas() {
-    return linhas;
-  }
-
   public void execute() throws IOException, URISyntaxException {
     URL recursoCSV = ClassLoader.getSystemResource(this.path);
     CSVReader csvReader = new CSVReader(new FileReader(recursoCSV.getPath()));

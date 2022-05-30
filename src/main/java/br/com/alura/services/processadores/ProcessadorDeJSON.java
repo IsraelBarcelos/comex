@@ -23,6 +23,10 @@ public class ProcessadorDeJSON extends Processador {
       new TypeReference<List<PedidoJson>>() {}
     );
 
+    montarPedidos(pedidosCompletos);
+  }
+
+  private void montarPedidos(List<PedidoJson> pedidosCompletos) {
     pedidosCompletos.forEach( //.stream()
       pedido -> {
         this.clientePlaceholder =
