@@ -9,7 +9,7 @@ public class CategoriasProcessadas {
 
   public CategoriasProcessadas(List<Pedido> pedidos) {
     this.categorias = new ArrayList<>();
-    this.verificaSeEstaNaCategoria(pedidos);
+    this.verificaSeEstaNaCategoriaEAdiciona(pedidos);
   }
 
   public List<String> getSortedCategorias() {
@@ -24,7 +24,7 @@ public class CategoriasProcessadas {
     return categorias.contains(categoria);
   }
 
-  public void add(String categoria) {
+  private void add(String categoria) {
     categorias.add(categoria);
   }
 
@@ -32,15 +32,12 @@ public class CategoriasProcessadas {
     return categorias.size();
   }
 
-  private void verificaSeEstaNaCategoria(List<Pedido> pedidos) {
+  public void verificaSeEstaNaCategoriaEAdiciona(List<Pedido> pedidos) {
     pedidos
       .stream()
       .forEach(
         pedido -> {
-          if (
-            !categorias
-              .contains(pedido.getProduto().getCategoria())
-          ) {
+          if (!categorias.contains(pedido.getProduto().getCategoria())) {
             this.add(pedido.getProduto().getCategoria());
           }
         }
