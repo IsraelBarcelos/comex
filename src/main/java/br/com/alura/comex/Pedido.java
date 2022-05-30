@@ -8,7 +8,6 @@ public class Pedido {
   private final Produto produto;
   private final Cliente cliente;
   private final int quantidade;
-
   private final LocalDate data;
 
   public Pedido(
