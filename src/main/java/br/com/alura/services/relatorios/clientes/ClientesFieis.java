@@ -10,17 +10,25 @@ public class ClientesFieis implements ItemDeRelatorio {
   @Override
   public void imprime(Fechamento fechamento) {
     System.out.println("\n#### RELATÓRIO DE CLIENTES FIEIS\n");
+
+    System.out.println(geraSaida(fechamento));
+  }
+
+  @Override
+  public String geraSaida(Fechamento fechamento) {
+    StringBuilder saida = new StringBuilder();
+
     fechamento
       .getClientesFieis()
       .stream()
       .sorted(Comparator.comparing(Cliente::getNome))
       .forEach(
         cliente -> {
-          System.out.println("NOME: " + cliente.getNome());
-          System.out.println(
-            "NÚMERO DE PEDIDOS: " + cliente.getNumeroDePedidos() + "\n"
-          );
+          saida.append("NOME: " + cliente.getNome() + "\n");
+          saida.append("Nº DE PEDIDOS: " + cliente.getNumeroDePedidos() + "\n");
+          saida.append("\n");
         }
       );
+    return saida.toString();
   }
 }

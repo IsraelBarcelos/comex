@@ -6,9 +6,14 @@ import br.com.alura.services.relatorios.ItemDeRelatorio;
 public class TotalDeCategorias implements ItemDeRelatorio {
 
   public void imprime(Fechamento fechamento) {
-    System.out.printf(
-      "- TOTAL DE CATEGORIAS: %s\n",
-      fechamento.getTotalDeCategorias()
-    );
+    System.out.printf("- TOTAL DE CATEGORIAS: %s\n", geraSaida(fechamento));
+    System.out.println(geraSaida(fechamento));
+  }
+
+  @Override
+  public String geraSaida(Fechamento fechamento) {
+    StringBuilder saida = new StringBuilder();
+    saida.append(fechamento.getTotalDeCategorias());
+    return saida.toString();
   }
 }

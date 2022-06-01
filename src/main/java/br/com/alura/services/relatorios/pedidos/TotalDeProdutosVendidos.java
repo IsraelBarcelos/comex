@@ -7,9 +7,15 @@ public class TotalDeProdutosVendidos implements ItemDeRelatorio {
 
   @Override
   public void imprime(Fechamento fechamento) {
-    System.out.printf(
-      "- TOTAL DE PRODUTOS VENDIDOS: %s\n",
-      fechamento.getTotalDeProdutosVendidos()
-    );
+    System.out.println(geraSaida(fechamento));
+  }
+
+  @Override
+  public String geraSaida(Fechamento fechamento) {
+    StringBuilder saida = new StringBuilder();
+    saida.append("- TOTAL DE PRODUTOS VENDIDOS: %s\n");
+    saida.append(fechamento.getTotalDeProdutosVendidos());
+
+    return saida.toString();
   }
 }

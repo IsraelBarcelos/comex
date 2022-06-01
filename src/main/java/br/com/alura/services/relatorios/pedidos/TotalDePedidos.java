@@ -7,10 +7,15 @@ public class TotalDePedidos implements ItemDeRelatorio {
 
   @Override
   public void imprime(Fechamento fechamento) {
-    System.out.println("#### RELATÓRIO DE VALORES TOTAIS");
-    System.out.printf(
-      "- TOTAL DE PEDIDOS REALIZADOS: %s\n",
-      fechamento.getTotalDePedidosRealizados()
-    );
+    System.out.println(geraSaida(fechamento));
+  }
+
+  @Override
+  public String geraSaida(Fechamento fechamento) {
+    StringBuilder saida = new StringBuilder();
+    saida.append("#### RELATÓRIO DE VALORES TOTAIS");
+    saida.append("- TOTAL DE PEDIDOS REALIZADOS: %s\n");
+    saida.append(fechamento.getTotalDePedidosRealizados());
+    return saida.toString();
   }
 }

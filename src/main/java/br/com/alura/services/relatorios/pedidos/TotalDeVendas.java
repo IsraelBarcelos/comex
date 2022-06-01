@@ -10,13 +10,20 @@ public class TotalDeVendas implements ItemDeRelatorio {
 
   @Override
   public void imprime(Fechamento fechamento) {
-    System.out.printf(
-      "- MONTANTE DE VENDAS: %s\n",
+    System.out.println(geraSaida(fechamento));
+  }
+
+  @Override
+  public String geraSaida(Fechamento fechamento) {
+    StringBuilder saida = new StringBuilder();
+    saida.append("- MONTANTE DE VENDAS: %s\n");
+    saida.append(
       NumberFormat
         .getCurrencyInstance(new Locale("pt", "BR"))
         .format(
           fechamento.getMontanteDeVendas().setScale(2, RoundingMode.HALF_DOWN)
         )
     );
+    return saida.toString();
   }
 }

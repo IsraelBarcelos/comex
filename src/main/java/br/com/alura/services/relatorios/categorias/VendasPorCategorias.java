@@ -4,11 +4,20 @@ import br.com.alura.comex.Pedido;
 import br.com.alura.services.Fechamento;
 import br.com.alura.services.relatorios.ItemDeRelatorio;
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Comparator;
+import java.util.Locale;
 
 public class VendasPorCategorias implements ItemDeRelatorio {
 
   public void imprime(Fechamento fechamento) {
+    System.out.println("\n#### VENDAS POR CATEGORIAS\n\n");
+    System.out.println(geraSaida(fechamento));
+  }
+
+  public String geraSaida(Fechamento fechamento) {
+    StringBuilder impressao = new StringBuilder();
+
     fechamento
       .getSortedCategoriasProcessadas()
       .stream()
@@ -38,11 +47,19 @@ public class VendasPorCategorias implements ItemDeRelatorio {
             .map(Pedido::getValorTotal)
             .reduce(BigDecimal::add)
             .get();
-          System.out.println("\n#### VENDAS POR CATEGORIAS");
-          System.out.println("\nCATEGORIA: " + categoria);
-          System.out.println("QUANTIDADE VENDIDA: " + quantidadeVendida);
-          System.out.println("MONTANTE: R$" + valorPorCategorias);
+
+          impressao.append("CATEGORIA: " + categoria);
+          impressao.append("\nQUANTIDADE VENDIDA: " + quantidadeVendida);
+          impressao.append(
+            "\nMONTANTE: " +
+            NumberFormat
+              .getCurrencyInstance(new Locale("pt", "BR"))
+              .format(valorPorCategorias) +
+            "\n"
+          );
         }
       );
+
+    return impressao.toString();
   }
 }

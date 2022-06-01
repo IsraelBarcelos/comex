@@ -1,7 +1,7 @@
 package br.com.alura.services.relatorios;
 
 import br.com.alura.services.Fechamento;
-import br.com.alura.services.relatorios.categorias.ProdutoMaisCaro;
+import br.com.alura.services.relatorios.categorias.ProdutosMaisCaros;
 import br.com.alura.services.relatorios.categorias.TotalDeCategorias;
 import br.com.alura.services.relatorios.categorias.VendasPorCategorias;
 import java.util.Set;
@@ -17,7 +17,7 @@ public class RelatoriosDeCategoria extends Relatorio {
     final Set<ItemDeRelatorio> itens = Set.of(
       new VendasPorCategorias(),
       new TotalDeCategorias(),
-      new ProdutoMaisCaro()
+      new ProdutosMaisCaros()
     );
 
     itens.forEach(item -> item.imprime(this.fechamento));

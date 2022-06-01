@@ -10,8 +10,14 @@ public class PedidoMaisCaro implements ItemDeRelatorio {
 
   @Override
   public void imprime(Fechamento fechamento) {
-    System.out.printf(
-      "- PEDIDO MAIS CARO: %s (%s)\n",
+    System.out.println(geraSaida(fechamento));
+  }
+
+  @Override
+  public String geraSaida(Fechamento fechamento) {
+    StringBuilder saida = new StringBuilder();
+    saida.append("- PEDIDO MAIS CARO: %s (%s)\n");
+    saida.append(
       NumberFormat
         .getCurrencyInstance(new Locale("pt", "BR"))
         .format(
@@ -19,8 +25,10 @@ public class PedidoMaisCaro implements ItemDeRelatorio {
             .getPedidoMaisCaro()
             .getValorTotal()
             .setScale(2, RoundingMode.HALF_DOWN)
-        ),
-      fechamento.getPedidoMaisCaro().getProduto().getNome()
+        )
     );
+    saida.append(fechamento.getPedidoMaisCaro().getProduto().getNome());
+
+    return saida.toString();
   }
 }

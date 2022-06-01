@@ -4,4 +4,6 @@ import br.com.alura.services.Fechamento;
 
 public interface ItemDeRelatorio {
   public void imprime(Fechamento fechamento);
+
+  public String geraSaida(Fechamento fechamento);
 }
