@@ -1,13 +1,13 @@
-package br.com.alura.comexspring;
+package br.com.alura.springcomex;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ComexspringApplication {
+public class SpringcomexApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ComexspringApplication.class, args);
+		SpringApplication.run(SpringcomexApplication.class, args);
 	}
 
 }
