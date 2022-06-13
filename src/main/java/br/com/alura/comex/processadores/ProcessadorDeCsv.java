@@ -14,8 +14,8 @@ import br.com.alura.comex.models.Produto;
 import br.com.alura.comex.models.TipoDescontoPedido;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ClienteRepository;
+import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
-import br.com.alura.comex.utils.JPAUtil;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.net.URISyntaxException;
@@ -39,17 +39,10 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
   @Autowired
   private ClienteRepository clienteRepository;
 
+  private PedidoRepository pedidoRepository;
+
   public ProcessadorDeCsv(String path) {
     this.path = path;
-  }
-
-  public static void main(String[] args) {
-    ProcessadorDeCsv processador = new ProcessadorDeCsv("pedidos.csv");
-    try {
-      processador.execute();
-    } catch (IOException | URISyntaxException e) {
-      e.printStackTrace();
-    }
   }
 
   public void execute() throws IOException, URISyntaxException {
@@ -76,78 +69,105 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
       String[] registro = linha.split(",");
 
       String categoria = registro[0];
-      Categoria categoriaBanco = new CategoriaBuilder()
-        .comNome(categoria)
-        .ativo()
-        .build();
 
-      categoriaRepository.save(categoriaBanco);
+      Categoria categoriaBanco = salvaCategoriaNoBanco(categoria);
 
       String produto = registro[1];
       BigDecimal preco = new BigDecimal(registro[2]);
       int quantidade = Integer.parseInt(registro[3]);
 
-      Produto produtoBanco = new ProdutoBuilder()
-        .comNome(produto)
-        .comQuantidadeEstoque(Integer.parseInt((registro[3] + 1)))
-        .comPrecoUnitario(preco)
-        .comCategoria(categoriaBanco)
-        .build();
-
-      produtoRepository.save(produtoBanco);
+      Produto produtoBanco = salvaProdutoNoBanco(
+        registro,
+        categoriaBanco,
+        produto,
+        preco
+      );
 
       String nomeDoCliente = registro[5];
 
-      Cliente clienteBanco = clienteRepository.findByNome(nomeDoCliente);
-      if (clienteBanco.getNome() == null) {
-        clienteBanco =
-          new ClienteBuilder()
-            .comNome(nomeDoCliente)
-            .comCpf("cpf")
-            .comTelefone("telefone")
-            .comEndereco(
-              new EnderecoBuilder()
-                .comRua("rua")
-                .comNumero(56)
-                .comBairro("bairro")
-                .comCidade("cidade")
-                .comEstado("estado")
-                .build()
-            )
-            .build();
-
-        clienteRepository.save(clienteBanco);
-      }
+      Cliente clienteBanco = salvaClienteNoBanco(nomeDoCliente);
 
       LocalDate data = LocalDate.parse(
         registro[4],
         DateTimeFormatter.ofPattern("dd/MM/yyyy")
       );
-      Pedido pedidoBanco = new PedidoBuilder()
-        .comCliente(clienteBanco)
-        .comData(LocalDate.now())
-        .comDesconto(new BigDecimal(0.00))
-        .comTipoDescontoPedido(TipoDescontoPedido.NENHUM)
-        .comData(data)
-        .build();
-
-      ItemPedido itemPedidoBanco = new ItemPedidoBuilder()
-        .comPedido(pedidoBanco)
-        .comDesconto(pedidoBanco.getDesconto())
-        .comProduto(produtoBanco)
-        .comQuantidade(quantidade)
-        .comPrecoUnitario(produtoBanco.getPrecoUnitario())
-        .build();
-      pedidoBanco.adicionarItemPedido(itemPedidoBanco);
-
-      em.persist(categoriaBanco);
-      em.persist(produtoBanco);
-      em.persist(clienteBanco);
-      em.persist(pedidoBanco);
-      em.persist(itemPedidoBanco);
-
-      em.getTransaction().commit();
-      em.close();
+      salvarItensEPedidosNoBanco(quantidade, produtoBanco, clienteBanco, data);
     }
+  }
+
+  private void salvarItensEPedidosNoBanco(
+    int quantidade,
+    Produto produtoBanco,
+    Cliente clienteBanco,
+    LocalDate data
+  ) {
+    Pedido pedidoBanco = new PedidoBuilder()
+      .comCliente(clienteBanco)
+      .comData(LocalDate.now())
+      .comDesconto(new BigDecimal(0.00))
+      .comTipoDescontoPedido(TipoDescontoPedido.NENHUM)
+      .comData(data)
+      .build();
+
+    ItemPedido itemPedidoBanco = new ItemPedidoBuilder()
+      .comPedido(pedidoBanco)
+      .comDesconto(pedidoBanco.getDesconto())
+      .comProduto(produtoBanco)
+      .comQuantidade(quantidade)
+      .comPrecoUnitario(produtoBanco.getPrecoUnitario())
+      .build();
+    pedidoBanco.adicionarItemPedido(itemPedidoBanco);
+    pedidoRepository.save(pedidoBanco);
+  }
+
+  private Cliente salvaClienteNoBanco(String nomeDoCliente) {
+    Cliente clienteBanco = clienteRepository.findByNome(nomeDoCliente);
+    if (clienteBanco.getNome() == null) {
+      clienteBanco =
+        new ClienteBuilder()
+          .comNome(nomeDoCliente)
+          .comCpf("cpf")
+          .comTelefone("telefone")
+          .comEndereco(
+            new EnderecoBuilder()
+              .comRua("rua")
+              .comNumero(56)
+              .comBairro("bairro")
+              .comCidade("cidade")
+              .comEstado("estado")
+              .build()
+          )
+          .build();
+
+      clienteRepository.save(clienteBanco);
+    }
+    return clienteBanco;
+  }
+
+  private Produto salvaProdutoNoBanco(
+    String[] registro,
+    Categoria categoriaBanco,
+    String produto,
+    BigDecimal preco
+  ) {
+    Produto produtoBanco = new ProdutoBuilder()
+      .comNome(produto)
+      .comQuantidadeEstoque(Integer.parseInt((registro[3] + 1)))
+      .comPrecoUnitario(preco)
+      .comCategoria(categoriaBanco)
+      .build();
+
+    produtoRepository.save(produtoBanco);
+    return produtoBanco;
+  }
+
+  private Categoria salvaCategoriaNoBanco(String categoria) {
+    Categoria categoriaBanco = new CategoriaBuilder()
+      .comNome(categoria)
+      .ativo()
+      .build();
+
+    categoriaRepository.save(categoriaBanco);
+    return categoriaBanco;
   }
 }
