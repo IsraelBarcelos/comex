@@ -1,5 +1,8 @@
 package br.com.alura.comex.controllers.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import br.com.alura.comex.builders.ClienteBuilder;
 import br.com.alura.comex.builders.EnderecoBuilder;
 import br.com.alura.comex.models.Cliente;
@@ -7,14 +10,31 @@ import br.com.alura.comex.models.Endereco;
 
 public class ClienteForm {
 
+    @NotNull
+    @NotEmpty
     private String nome;
+    @NotNull
+    @NotEmpty
     private String cpf;
+    @NotNull
+    @NotEmpty
     private String telefone;
+    @NotNull
+    @NotEmpty
     private String rua;
+    @NotNull
     private Integer numero;
+    @NotNull
+    @NotEmpty
     private String complemento;
+    @NotNull
+    @NotEmpty
     private String bairro;
+    @NotNull
+    @NotEmpty
     private String cidade;
+    @NotNull
+    @NotEmpty
     private String estado;
 
     public ClienteForm() {

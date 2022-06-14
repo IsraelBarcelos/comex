@@ -1,10 +1,14 @@
 package br.com.alura.comex.controllers.form;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import br.com.alura.comex.builders.CategoriaBuilder;
 import br.com.alura.comex.models.Categoria;
 
 public class CategoriaForm {
-
+  @NotNull
+  @NotEmpty
   private String nome;
 
   public String getNome() {
