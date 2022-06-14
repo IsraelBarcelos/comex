@@ -17,6 +17,9 @@ public class ClienteForm {
     private String cidade;
     private String estado;
 
+    public ClienteForm() {
+    }
+
     public String getNome() {
         return nome;
     }
