@@ -35,6 +35,9 @@ public class Pedido {
     @Column(nullable = false, name = "tipo_desconto")
     private TipoDescontoPedido tipoDesconto;
 
+    @Column(nullable = false)
+    private BigDecimal valorTotal = BigDecimal.ZERO;
+
     @ManyToOne
     private Cliente cliente;
 
@@ -81,6 +84,10 @@ public class Pedido {
         this.tipoDesconto = tipoDesconto;
     }
 
+    public BigDecimal getValorTotal() {
+        return valorTotal;
+    }
+
     public List<ItemPedido> getItensPedido() {
         return this.itens;
     }
@@ -88,5 +95,6 @@ public class Pedido {
     public void adicionarItemPedido(ItemPedido itemPedido) {
         itemPedido.setPedido(this);
         this.itens.add(itemPedido);
+        this.valorTotal.add(itemPedido.getValorTotal());
     }
 }
