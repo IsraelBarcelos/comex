@@ -10,7 +10,7 @@ public class Endereco {
   private String rua;
 
   @Column(nullable = false)
-  private int numero;
+  private Integer numero;
 
   private String complemento;
 
@@ -31,11 +31,11 @@ public class Endereco {
     this.rua = rua;
   }
 
-  public int getNumero() {
+  public Integer getNumero() {
     return numero;
   }
 
-  public void setNumero(int numero) {
+  public void setNumero(Integer numero) {
     this.numero = numero;
   }
 

@@ -2,7 +2,6 @@ package br.com.alura.comex.models;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -77,9 +76,16 @@ public class Cliente {
 
     @Override
     public String toString() {
-        return "Cliente [id=" + id + ", nome=" + nome + ", cpf=" + cpf + ", telefone=" + telefone + ", endereco="
-                + endereco
-                + "]";
+        return ("Cliente [id=" +
+                id +
+                ", nome=" +
+                nome +
+                ", cpf=" +
+                cpf +
+                ", telefone=" +
+                telefone +
+                ", endereco=" +
+                endereco +
+                "]");
     }
-
 }
