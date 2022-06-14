@@ -22,7 +22,7 @@ public class Cliente {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cpf;
 
     @Column(nullable = false)
@@ -74,6 +74,10 @@ public class Cliente {
         this.endereco = endereco;
     }
 
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
+
     @Override
     public String toString() {
         return ("Cliente [id=" +
@@ -88,4 +92,5 @@ public class Cliente {
                 endereco +
                 "]");
     }
+
 }
