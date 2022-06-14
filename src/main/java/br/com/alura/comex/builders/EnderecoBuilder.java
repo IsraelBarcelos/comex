@@ -15,7 +15,7 @@ public class EnderecoBuilder {
         return this;
     }
 
-    public EnderecoBuilder comNumero(int numero) {
+    public EnderecoBuilder comNumero(Integer numero) {
         endereco.setNumero(numero);
         return this;
     }
