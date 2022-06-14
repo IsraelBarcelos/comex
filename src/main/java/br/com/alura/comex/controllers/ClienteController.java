@@ -2,11 +2,13 @@ package br.com.alura.comex.controllers;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -24,12 +26,14 @@ public class ClienteController {
     private ClienteRepository clienteRepository;
 
     @GetMapping
-    public List<Cliente> listar() {
-        return clienteRepository.findAll();
+    public List<ClienteDto> listar() {
+        List<ClienteDto> clientes = clienteRepository.findAll().stream().map(ClienteDto::new)
+                .collect(Collectors.toList());
+        return clientes;
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDto> salvar(ClienteForm clienteForm, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<ClienteDto> salvar(@RequestBody ClienteForm clienteForm, UriComponentsBuilder uriBuilder) {
         Cliente cliente = clienteForm.converter();
         clienteRepository.save(cliente);
 
