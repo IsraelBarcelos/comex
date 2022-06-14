@@ -1,28 +1,30 @@
 package br.com.alura.comex.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import br.com.alura.comex.models.Cliente;
 
 public class ClienteDto {
     private String nome;
     private String cpf;
     private String telefone;
-    private String rua;
-    private Integer numero;
-    private String complemento;
-    private String bairro;
-    private String cidade;
-    private String estado;
+    private EnderecoDto endereco;
+    private List<PedidoDto> pedidos;
 
     public ClienteDto(Cliente cliente) {
         this.nome = cliente.getNome();
         this.cpf = cliente.getCpf();
         this.telefone = cliente.getTelefone();
-        this.rua = cliente.getEndereco().getRua();
-        this.numero = cliente.getEndereco().getNumero();
-        this.complemento = cliente.getEndereco().getComplemento();
-        this.bairro = cliente.getEndereco().getBairro();
-        this.cidade = cliente.getEndereco().getCidade();
-        this.estado = cliente.getEndereco().getEstado();
+        this.endereco = new EnderecoDto(cliente.getEndereco());
+        this.pedidos = new ArrayList<>();
+        this.pedidos.addAll(
+                cliente
+                        .getPedidos()
+                        .stream()
+                        .map(PedidoDto::new)
+                        .collect(Collectors.toList()));
     }
 
     public String getNome() {
@@ -49,51 +51,15 @@ public class ClienteDto {
         this.telefone = telefone;
     }
 
-    public String getRua() {
-        return rua;
+    public EnderecoDto getEndereco() {
+        return endereco;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setEndereco(EnderecoDto endereco) {
+        this.endereco = endereco;
     }
 
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public List<PedidoDto> getPedidos() {
+        return pedidos;
     }
 }
