@@ -1,7 +1,6 @@
 package br.com.alura.comex.controllers.form;
 
 import br.com.alura.comex.builders.ProdutoBuilder;
-import br.com.alura.comex.models.Categoria;
 import br.com.alura.comex.models.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import java.math.BigDecimal;
@@ -12,7 +11,7 @@ public class ProdutoForm {
   private String descricao;
   private BigDecimal precoUnitario;
   private Integer quantidadeEstoque;
-  private Categoria nomeCategoria;
+  private String nomeCategoria;
 
   public String getNome() {
     return nome;
@@ -46,22 +45,22 @@ public class ProdutoForm {
     this.quantidadeEstoque = quantidadeEstoque;
   }
 
-  public Categoria getNomeCategoria() {
+  public String getNomeCategoria() {
     return nomeCategoria;
   }
 
-  public void setNomeCategoria(Categoria nomeCategoria) {
+  public void setNomeCategoria(String nomeCategoria) {
     this.nomeCategoria = nomeCategoria;
   }
 
   public Produto converter(CategoriaRepository categoriaRepository) {
     Produto produto = new ProdutoBuilder()
-      .comNome(nome)
-      .comDescricao(descricao)
-      .comPrecoUnitario(precoUnitario)
-      .comQuantidadeEstoque(quantidadeEstoque)
-      .comCategoria(categoriaRepository.findByNome(nomeCategoria))
-      .build();
+        .comNome(nome)
+        .comDescricao(descricao)
+        .comPrecoUnitario(precoUnitario)
+        .comQuantidadeEstoque(quantidadeEstoque)
+        .comCategoria(categoriaRepository.findByNome(nomeCategoria))
+        .build();
 
     return produto;
   }
