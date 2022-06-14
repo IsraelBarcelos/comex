@@ -4,5 +4,5 @@ import br.com.alura.comex.models.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
-  Categoria findByNome(Categoria nomeCategoria);
+  Categoria findByNome(String nomeCategoria);
 }
