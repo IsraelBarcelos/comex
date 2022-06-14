@@ -8,10 +8,19 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class PedidoForm {
 
+  @NotNull
+  @NotEmpty
   private LocalDate data;
+  @NotNull
+  @NotEmpty
   private BigDecimal desconto;
+  @NotNull
+  @NotEmpty
   private String nomeCliente;
   private List<ItemPedido> itens;
 
@@ -49,24 +58,23 @@ public class PedidoForm {
 
   public Pedido converter(ClienteRepository clienteRepository) {
     Pedido pedido = new PedidoBuilder()
-      .comCliente(clienteRepository.findByNome(nomeCliente))
-      .comData(data)
-      .comDesconto(desconto)
-      .build();
+        .comCliente(clienteRepository.findByNome(nomeCliente))
+        .comData(data)
+        .comDesconto(desconto)
+        .build();
 
     return pedido;
   }
 
   public Pedido converterComItens(
-    ClienteRepository clienteRepository,
-    List<ItemPedido> itens
-  ) {
+      ClienteRepository clienteRepository,
+      List<ItemPedido> itens) {
     Pedido pedido = new PedidoBuilder()
-      .comCliente(clienteRepository.findByNome(nomeCliente))
-      .comData(data)
-      .comDesconto(desconto)
-      .comItens(itens)
-      .build();
+        .comCliente(clienteRepository.findByNome(nomeCliente))
+        .comData(data)
+        .comDesconto(desconto)
+        .comItens(itens)
+        .build();
 
     return pedido;
   }

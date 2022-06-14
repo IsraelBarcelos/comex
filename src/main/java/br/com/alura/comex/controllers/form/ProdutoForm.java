@@ -5,12 +5,25 @@ import br.com.alura.comex.models.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Length;
+
 public class ProdutoForm {
 
+  @NotNull
+  @NotEmpty
+  @Length(min = 3)
   private String nome;
   private String descricao;
+  @NotNull
+  @NotEmpty
   private BigDecimal precoUnitario;
+  @NotNull
   private Integer quantidadeEstoque;
+  @NotNull
+  @NotEmpty
   private String nomeCategoria;
 
   public String getNome() {
