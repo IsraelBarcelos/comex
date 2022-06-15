@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/produtos")
+@RequestMapping("/api/produtos")
 public class ProdutoController {
 
     @Autowired
@@ -44,6 +44,7 @@ public class ProdutoController {
     public ResponseEntity<ProdutoDto> cadastrar(
             @RequestBody @Valid ProdutoForm produtoForm,
             UriComponentsBuilder uriBuilder) {
+
         Produto produto = produtoForm.converter(categoriaRepository);
         produtoRepository.save(produto);
 

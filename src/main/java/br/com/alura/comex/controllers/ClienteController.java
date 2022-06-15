@@ -19,7 +19,7 @@ import br.com.alura.comex.models.Cliente;
 import br.com.alura.comex.repository.ClienteRepository;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("api/clientes")
 public class ClienteController {
 
     @Autowired

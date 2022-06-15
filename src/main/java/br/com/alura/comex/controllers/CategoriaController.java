@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
-@RequestMapping("/categorias")
+@RequestMapping("/api/categorias")
 public class CategoriaController {
 
   @Autowired
@@ -28,16 +28,15 @@ public class CategoriaController {
 
   @PostMapping
   public ResponseEntity<CategoriaDto> salvar(
-    @RequestBody CategoriaForm categoriaform,
-    UriComponentsBuilder uriBuilder
-  ) {
+      @RequestBody CategoriaForm categoriaform,
+      UriComponentsBuilder uriBuilder) {
     Categoria categoria = categoriaform.converter();
     categoriaRepository.save(categoria);
 
     URI uri = uriBuilder
-      .path("/categorias/{id}")
-      .buildAndExpand(categoria.getId())
-      .toUri();
+        .path("/categorias/{id}")
+        .buildAndExpand(categoria.getId())
+        .toUri();
 
     return ResponseEntity.created(uri).body(new CategoriaDto(categoria));
   }
