@@ -1,12 +1,14 @@
 package br.com.alura.comex.controllers.form;
 
 import br.com.alura.comex.builders.ProdutoBuilder;
+import br.com.alura.comex.controllers.form.validation.ValidaIdCategoria;
 import br.com.alura.comex.models.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -14,17 +16,17 @@ public class ProdutoForm {
 
   @NotNull
   @NotEmpty
-  @Length(min = 3)
+  @Length(min = 2)
   private String nome;
   private String descricao;
   @NotNull
-  @NotEmpty
+  @Positive
   private BigDecimal precoUnitario;
   @NotNull
   private Integer quantidadeEstoque;
   @NotNull
-  @NotEmpty
-  private String nomeCategoria;
+  @ValidaIdCategoria
+  private Long categoriaId;
 
   public String getNome() {
     return nome;
@@ -58,12 +60,12 @@ public class ProdutoForm {
     this.quantidadeEstoque = quantidadeEstoque;
   }
 
-  public String getNomeCategoria() {
-    return nomeCategoria;
+  public Long getCategoriaId() {
+    return categoriaId;
   }
 
-  public void setNomeCategoria(String nomeCategoria) {
-    this.nomeCategoria = nomeCategoria;
+  public void setCategoriaId(Long categoriaId) {
+    this.categoriaId = categoriaId;
   }
 
   public Produto converter(CategoriaRepository categoriaRepository) {
@@ -72,7 +74,7 @@ public class ProdutoForm {
         .comDescricao(descricao)
         .comPrecoUnitario(precoUnitario)
         .comQuantidadeEstoque(quantidadeEstoque)
-        .comCategoria(categoriaRepository.findByNome(nomeCategoria))
+        .comCategoria(categoriaRepository.findById(categoriaId).get())
         .build();
 
     return produto;
