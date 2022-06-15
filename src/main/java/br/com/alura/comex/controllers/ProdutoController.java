@@ -9,6 +9,7 @@ import br.com.alura.comex.repository.ProdutoRepository;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -36,9 +37,9 @@ public class ProdutoController {
     private CategoriaRepository categoriaRepository;
 
     @GetMapping
-    public List<ProdutoDto> index() {
+    public ResponseEntity<List<ProdutoDto>> index() {
         List<Produto> produtos = produtoRepository.findAll();
-        return ProdutoDto.converter(produtos);
+        return ResponseEntity.ok(ProdutoDto.converter(produtos));
     }
 
     @PostMapping
@@ -59,9 +60,14 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
-    public ProdutoDto detalhar(@PathVariable Long id) {
-        Produto produto = produtoRepository.getReferenceById(id);
-        return new ProdutoDto(produto);
+    public ResponseEntity<ProdutoDto> detalhar(@PathVariable Long id) {
+        Optional<Produto> produto = produtoRepository.findById(id);
+
+        if (produto.isPresent()) {
+            return ResponseEntity.ok(new ProdutoDto(produto.get()));
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")
@@ -76,8 +82,13 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        produtoRepository.deleteById(id);
-        return ResponseEntity.ok().build();
+        Optional<Produto> produto = produtoRepository.findById(id);
+
+        if (produto.isPresent()) {
+            produtoRepository.delete(produto.get());
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }
