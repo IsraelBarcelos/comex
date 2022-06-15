@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -33,8 +35,8 @@ public class PedidoController {
 
     @GetMapping
     public ResponseEntity<List<PedidoDto>> listar() {
-        List<Pedido> pedidos = pedidoRepository.findAll();
-        return ResponseEntity.ok(PedidoDto.converter(pedidos));
+        Page<Pedido> pedidos = pedidoRepository.findAll(PageRequest.of(0, 5));
+        return ResponseEntity.ok(PedidoDto.converter(pedidos.get().toList()));
     }
 
     @PostMapping
