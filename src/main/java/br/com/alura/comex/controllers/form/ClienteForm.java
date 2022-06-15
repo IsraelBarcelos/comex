@@ -3,6 +3,8 @@ package br.com.alura.comex.controllers.form;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 import br.com.alura.comex.builders.ClienteBuilder;
 import br.com.alura.comex.builders.EnderecoBuilder;
 import br.com.alura.comex.models.Cliente;
@@ -12,6 +14,7 @@ public class ClienteForm {
 
     @NotNull
     @NotEmpty
+    @Length(min = 2)
     private String nome;
     @NotNull
     @NotEmpty
@@ -24,8 +27,6 @@ public class ClienteForm {
     private String rua;
     @NotNull
     private Integer numero;
-    @NotNull
-    @NotEmpty
     private String complemento;
     @NotNull
     @NotEmpty

@@ -27,7 +27,9 @@ public class ClienteController {
 
     @GetMapping
     public List<ClienteDto> listar() {
-        List<ClienteDto> clientes = clienteRepository.findAll().stream().map(ClienteDto::new)
+        List<ClienteDto> clientes = clienteRepository.findAll().stream().sorted((cliente1, cliente2) -> {
+            return cliente1.getNome().toLowerCase().compareTo(cliente2.getNome().toLowerCase());
+        }).map(ClienteDto::new)
                 .collect(Collectors.toList());
         return clientes;
     }
