@@ -1,6 +1,14 @@
 package br.com.alura.comex.repository;
 
 import br.com.alura.comex.models.Pedido;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PedidoRepository extends JpaRepository<Pedido, Long> {}
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface PedidoRepository extends JpaRepository<Pedido, Long> {
+
+    @Query("select p from Pedido p join p.itens itens where itens.produto.categoria.nome = ?1")
+    List<Pedido> findByItemPedidoProdutoCategoriaNome(String nomeCategoria);
+}
