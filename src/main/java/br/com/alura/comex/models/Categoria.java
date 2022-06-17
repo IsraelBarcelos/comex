@@ -45,8 +45,16 @@ public class Categoria {
     return ativo;
   }
 
+  public void alteraAtivacao() {
+    this.ativo = !this.ativo;
+  }
+
   public void setAtivo(boolean ativo) {
     this.ativo = ativo;
+  }
+
+  public void ativaCategoria() {
+    this.ativo = true;
   }
 
   @Override

@@ -15,13 +15,13 @@ public class CategoriaBuilder {
         return this;
     }
 
-    public CategoriaBuilder ativo() {
-        categoria.setAtivo(true);
+    public CategoriaBuilder ativo(boolean ativo) {
+        categoria.setAtivo(ativo);
         return this;
     }
 
-    public CategoriaBuilder naoAtivo() {
-        categoria.setAtivo(false);
+    public CategoriaBuilder ativaCategoria() {
+        categoria.ativaCategoria();
         return this;
     }
 

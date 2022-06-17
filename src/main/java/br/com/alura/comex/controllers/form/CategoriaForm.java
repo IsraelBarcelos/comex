@@ -22,7 +22,7 @@ public class CategoriaForm {
   }
 
   public Categoria converter() {
-    Categoria categoria = new CategoriaBuilder().comNome(nome).ativo().build();
+    Categoria categoria = new CategoriaBuilder().comNome(nome).ativaCategoria().build();
 
     return categoria;
   }

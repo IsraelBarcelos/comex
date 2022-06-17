@@ -11,7 +11,6 @@ import br.com.alura.comex.models.Cliente;
 import br.com.alura.comex.models.ItemPedido;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.models.Produto;
-import br.com.alura.comex.models.TipoDescontoPedido;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ClienteRepository;
 import br.com.alura.comex.repository.PedidoRepository;
@@ -77,45 +76,40 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
       int quantidade = Integer.parseInt(registro[3]);
 
       Produto produtoBanco = salvaProdutoNoBanco(
-        registro,
-        categoriaBanco,
-        produto,
-        preco
-      );
+          registro,
+          categoriaBanco,
+          produto,
+          preco);
 
       String nomeDoCliente = registro[5];
 
       Cliente clienteBanco = salvaClienteNoBanco(nomeDoCliente);
 
       LocalDate data = LocalDate.parse(
-        registro[4],
-        DateTimeFormatter.ofPattern("dd/MM/yyyy")
-      );
+          registro[4],
+          DateTimeFormatter.ofPattern("dd/MM/yyyy"));
       salvarItensEPedidosNoBanco(quantidade, produtoBanco, clienteBanco, data);
     }
   }
 
   private void salvarItensEPedidosNoBanco(
-    int quantidade,
-    Produto produtoBanco,
-    Cliente clienteBanco,
-    LocalDate data
-  ) {
+      int quantidade,
+      Produto produtoBanco,
+      Cliente clienteBanco,
+      LocalDate data) {
     Pedido pedidoBanco = new PedidoBuilder()
-      .comCliente(clienteBanco)
-      .comData(LocalDate.now())
-      .comDesconto(new BigDecimal(0.00))
-      .comTipoDescontoPedido(TipoDescontoPedido.NENHUM)
-      .comData(data)
-      .build();
+        .comData(data)
+        .comCliente(clienteBanco)
+        .comDesconto(pedidoRepository)
+        .build();
 
     ItemPedido itemPedidoBanco = new ItemPedidoBuilder()
-      .comPedido(pedidoBanco)
-      .comDesconto(pedidoBanco.getDesconto())
-      .comProduto(produtoBanco)
-      .comQuantidade(quantidade)
-      .comPrecoUnitario(produtoBanco.getPrecoUnitario())
-      .build();
+        .comPedido(pedidoBanco)
+        .comDesconto()
+        .comProduto(produtoBanco)
+        .comQuantidade(quantidade)
+        .comPrecoUnitario(produtoBanco.getPrecoUnitario())
+        .build();
     pedidoBanco.adicionarItemPedido(itemPedidoBanco);
     pedidoRepository.save(pedidoBanco);
   }
@@ -123,20 +117,18 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
   private Cliente salvaClienteNoBanco(String nomeDoCliente) {
     Cliente clienteBanco = clienteRepository.findByNome(nomeDoCliente);
     if (clienteBanco.getNome() == null) {
-      clienteBanco =
-        new ClienteBuilder()
+      clienteBanco = new ClienteBuilder()
           .comNome(nomeDoCliente)
           .comCpf("cpf")
           .comTelefone("telefone")
           .comEndereco(
-            new EnderecoBuilder()
-              .comRua("rua")
-              .comNumero(56)
-              .comBairro("bairro")
-              .comCidade("cidade")
-              .comEstado("estado")
-              .build()
-          )
+              new EnderecoBuilder()
+                  .comRua("rua")
+                  .comNumero(56)
+                  .comBairro("bairro")
+                  .comCidade("cidade")
+                  .comEstado("estado")
+                  .build())
           .build();
 
       clienteRepository.save(clienteBanco);
@@ -145,17 +137,16 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
   }
 
   private Produto salvaProdutoNoBanco(
-    String[] registro,
-    Categoria categoriaBanco,
-    String produto,
-    BigDecimal preco
-  ) {
+      String[] registro,
+      Categoria categoriaBanco,
+      String produto,
+      BigDecimal preco) {
     Produto produtoBanco = new ProdutoBuilder()
-      .comNome(produto)
-      .comQuantidadeEstoque(Integer.parseInt((registro[3] + 1)))
-      .comPrecoUnitario(preco)
-      .comCategoria(categoriaBanco)
-      .build();
+        .comNome(produto)
+        .comQuantidadeEstoque(Integer.parseInt((registro[3] + 1)))
+        .comPrecoUnitario(preco)
+        .comCategoria(categoriaBanco)
+        .build();
 
     produtoRepository.save(produtoBanco);
     return produtoBanco;
@@ -163,9 +154,9 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
 
   private Categoria salvaCategoriaNoBanco(String categoria) {
     Categoria categoriaBanco = new CategoriaBuilder()
-      .comNome(categoria)
-      .ativo()
-      .build();
+        .comNome(categoria)
+        .ativaCategoria()
+        .build();
 
     categoriaRepository.save(categoriaBanco);
     return categoriaBanco;

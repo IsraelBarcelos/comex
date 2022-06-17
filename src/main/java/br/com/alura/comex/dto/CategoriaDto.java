@@ -6,20 +6,20 @@ import java.util.stream.Collectors;
 
 public class CategoriaDto {
 
-  private String nome;
+    private String nome;
 
-  public CategoriaDto(Categoria categoria) {
-    this.nome = categoria.getNome();
-  }
+    public CategoriaDto(Categoria categoria) {
+        this.nome = categoria.getNome();
+    }
 
-  public String getNome() {
-    return nome;
-  }
+    public String getNome() {
+        return nome;
+    }
 
-  public static List<CategoriaDto> converter(List<Categoria> categorias) {
-    return categorias
-      .stream()
-      .map(CategoriaDto::new)
-      .collect(Collectors.toList());
-  }
+    public static List<CategoriaDto> converter(List<Categoria> categorias) {
+        return categorias
+                .stream()
+                .map(CategoriaDto::new)
+                .collect(Collectors.toList());
+    }
 }
