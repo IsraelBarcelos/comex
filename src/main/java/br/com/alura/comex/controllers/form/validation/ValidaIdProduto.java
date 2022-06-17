@@ -8,9 +8,9 @@ import javax.validation.Payload;
 
 @Target({ java.lang.annotation.ElementType.FIELD })
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = IdCategoriaValidation.class)
-public @interface ValidaIdCategoria {
-    String message() default "Id da categoria é inválido";
+@Constraint(validatedBy = IdProdutoValidation.class)
+public @interface ValidaIdProduto {
+    String message() default "Id do produto é inválido";
 
     Class<?>[] groups() default {};
 
