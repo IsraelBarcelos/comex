@@ -1,6 +1,7 @@
 package br.com.alura.comex.models;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,10 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.com.alura.comex.models.descontos.descontoPedido.CalculadoraDeDescontosPedido;
+import br.com.alura.comex.models.descontos.descontoPedido.TipoDescontoPedido;
+import br.com.alura.comex.repository.PedidoRepository;
 
 @Entity
 @Table(name = "pedidos")
@@ -64,8 +69,9 @@ public class Pedido {
         return desconto;
     }
 
-    public void setDesconto(BigDecimal desconto) {
-        this.desconto = desconto;
+    public void setDesconto(PedidoRepository pedidoRepository) {
+        this.desconto = new CalculadoraDeDescontosPedido().calcular(this, pedidoRepository).setScale(2,
+                RoundingMode.HALF_UP);
     }
 
     public Long getId() {
@@ -93,8 +99,13 @@ public class Pedido {
     }
 
     public void adicionarItemPedido(ItemPedido itemPedido) {
+        this.valorTotal = this.valorTotal.add(itemPedido.getValorTotalComDesconto());
+        this.itens.forEach(item -> {
+            item.getProduto()
+                    .retirarDoEstoqueParaOPedido(item.getQuantidade());
+        });
         itemPedido.setPedido(this);
         this.itens.add(itemPedido);
-        this.valorTotal.add(itemPedido.getValorTotal());
+
     }
 }

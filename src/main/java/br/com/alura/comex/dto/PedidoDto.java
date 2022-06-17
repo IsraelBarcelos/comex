@@ -16,7 +16,7 @@ public class PedidoDto {
     private Integer quantidadeDeItens;
     private String nomeCliente;
 
-    private static Comparator<Pedido> comparator = new Comparator<Pedido>() {
+    private static Comparator<Pedido> comparatorDataENomeCliente = new Comparator<Pedido>() {
 
         public int compare(Pedido o1, Pedido o2) {
 
@@ -82,8 +82,7 @@ public class PedidoDto {
 
     public static List<PedidoDto> converter(List<Pedido> pedidos) {
         return pedidos.stream()
-                // .sorted(Comparator.comparing(Pedido::getData).reversed())
-                .sorted(comparator)
+                .sorted(comparatorDataENomeCliente)
                 .map(PedidoDto::new)
                 .collect(Collectors.toList());
     }

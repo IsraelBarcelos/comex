@@ -3,8 +3,9 @@ package br.com.alura.comex.builders;
 import br.com.alura.comex.models.Cliente;
 import br.com.alura.comex.models.ItemPedido;
 import br.com.alura.comex.models.Pedido;
-import br.com.alura.comex.models.TipoDescontoPedido;
-import java.math.BigDecimal;
+import br.com.alura.comex.models.descontos.descontoPedido.TipoDescontoPedido;
+import br.com.alura.comex.repository.PedidoRepository;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,20 +27,21 @@ public class PedidoBuilder {
     return this;
   }
 
-  public PedidoBuilder comDesconto(BigDecimal desconto) {
-    this.pedido.setDesconto(desconto);
+  public PedidoBuilder comDesconto(PedidoRepository pedidoRepository) {
+    this.pedido.setDesconto(pedidoRepository);
     return this;
   }
 
   public PedidoBuilder comTipoDescontoPedido(
-    TipoDescontoPedido tipoDescontoPedido
-  ) {
+      TipoDescontoPedido tipoDescontoPedido) {
     this.pedido.setTipoDesconto(tipoDescontoPedido);
     return this;
   }
 
   public PedidoBuilder comItens(List<ItemPedido> itens) {
-    itens.forEach(this.pedido::adicionarItemPedido);
+    itens.forEach(item -> {
+      this.pedido.adicionarItemPedido(item);
+    });
     return this;
   }
 

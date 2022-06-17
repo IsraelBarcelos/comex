@@ -22,7 +22,7 @@ public class ItemPedidoDetalhamentoPedidoDto {
         this.nomeProduto = itemPedido.getProduto().getNome();
         this.categoria = itemPedido.getProduto().getCategoria().getNome();
         this.quantidade = itemPedido.getQuantidade();
-        this.valorUnitarioItemPedido = itemPedido.getPrecoUnitario();
+        this.valorUnitarioItemPedido = itemPedido.getProduto().getPrecoUnitario();
         this.valorUnitarioProduto = itemPedido.getProduto().getPrecoUnitario();
         this.desconto = itemPedido.getDesconto();
     }

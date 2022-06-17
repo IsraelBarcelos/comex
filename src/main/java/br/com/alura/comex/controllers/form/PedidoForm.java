@@ -1,81 +1,52 @@
 package br.com.alura.comex.controllers.form;
 
 import br.com.alura.comex.builders.PedidoBuilder;
-import br.com.alura.comex.models.ItemPedido;
+import br.com.alura.comex.controllers.form.validation.ValidaIdCliente;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.repository.ClienteRepository;
-import java.math.BigDecimal;
+import br.com.alura.comex.repository.PedidoRepository;
+import br.com.alura.comex.repository.ProdutoRepository;
+
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 public class PedidoForm {
 
-  @NotNull
-  @NotEmpty
-  private LocalDate data;
-  @NotNull
-  @NotEmpty
-  private BigDecimal desconto;
-  @NotNull
-  @NotEmpty
-  private String nomeCliente;
-  private List<ItemPedido> itens;
+    @NotNull
+    @ValidaIdCliente
+    private Long clienteId;
+    @NotNull
+    private List<AdicionarItemPedidoDto> itens;
 
-  public LocalDate getData() {
-    return data;
-  }
+    public Long getClienteId() {
+        return this.clienteId;
+    }
 
-  public void setData(LocalDate data) {
-    this.data = data;
-  }
+    public void setClienteId(Long clienteId) {
+        this.clienteId = clienteId;
+    }
 
-  public BigDecimal getDesconto() {
-    return desconto;
-  }
+    public List<AdicionarItemPedidoDto> getItens() {
+        return this.itens;
+    }
 
-  public void setDesconto(BigDecimal desconto) {
-    this.desconto = desconto;
-  }
+    public void setItens(List<AdicionarItemPedidoDto> itens) {
+        this.itens = itens;
+    }
 
-  public String getNomeCliente() {
-    return nomeCliente;
-  }
+    public Pedido converter(ClienteRepository clienteRepository, ProdutoRepository produtoRepository,
+            PedidoRepository pedidoRepository) {
+        Pedido pedido = new PedidoBuilder()
+                .comCliente(clienteRepository.findById(clienteId).get())
+                .comItens(itens.stream().map(item -> item.converter(produtoRepository)).collect(Collectors.toList()))
+                .comData(LocalDate.now())
+                .comDesconto(pedidoRepository)
+                .build();
 
-  public void setNomeCliente(String nomeCliente) {
-    this.nomeCliente = nomeCliente;
-  }
+        return pedido;
+    }
 
-  public List<ItemPedido> getItens() {
-    return itens;
-  }
-
-  public void setItens(List<ItemPedido> itens) {
-    this.itens = itens;
-  }
-
-  public Pedido converter(ClienteRepository clienteRepository) {
-    Pedido pedido = new PedidoBuilder()
-        .comCliente(clienteRepository.findByNome(nomeCliente))
-        .comData(data)
-        .comDesconto(desconto)
-        .build();
-
-    return pedido;
-  }
-
-  public Pedido converterComItens(
-      ClienteRepository clienteRepository,
-      List<ItemPedido> itens) {
-    Pedido pedido = new PedidoBuilder()
-        .comCliente(clienteRepository.findByNome(nomeCliente))
-        .comData(data)
-        .comDesconto(desconto)
-        .comItens(itens)
-        .build();
-
-    return pedido;
-  }
 }

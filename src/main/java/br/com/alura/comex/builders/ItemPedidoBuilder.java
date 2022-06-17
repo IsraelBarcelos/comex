@@ -20,7 +20,7 @@ public class ItemPedidoBuilder {
     }
 
     public ItemPedidoBuilder comQuantidade(int quantidade) {
-        itemPedido.setQuantidade(quantidade);
+        itemPedido.setQuantidade(itemPedido.getProduto(), quantidade);
         return this;
     }
 
@@ -34,8 +34,8 @@ public class ItemPedidoBuilder {
         return this;
     }
 
-    public ItemPedidoBuilder comDesconto(BigDecimal desconto) {
-        itemPedido.setDesconto(desconto);
+    public ItemPedidoBuilder comDesconto() {
+        itemPedido.setDesconto();
         return this;
     }
 

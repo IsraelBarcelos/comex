@@ -4,6 +4,9 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +25,7 @@ import br.com.alura.comex.dto.PedidoDto;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.repository.ClienteRepository;
 import br.com.alura.comex.repository.PedidoRepository;
+import br.com.alura.comex.repository.ProdutoRepository;
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -33,6 +37,9 @@ public class PedidoController {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
     @GetMapping
     public ResponseEntity<List<PedidoDto>> listar() {
         Page<Pedido> pedidos = pedidoRepository.findAll(PageRequest.of(0, 5));
@@ -40,12 +47,12 @@ public class PedidoController {
     }
 
     @PostMapping
-    public ResponseEntity<PedidoDto> salvar(@RequestBody PedidoForm pedidoForm, UriComponentsBuilder uriBuilder) {
+    @Transactional
+    public ResponseEntity<PedidoDto> salvar(@RequestBody @Valid PedidoForm pedidoForm,
+            UriComponentsBuilder uriBuilder) {
 
-        Pedido pedido = pedidoForm.converter(clienteRepository);
+        Pedido pedido = pedidoForm.converter(clienteRepository, produtoRepository, pedidoRepository);
         pedidoRepository.save(pedido);
-        pedido.getItensPedido().forEach(item -> item.getProduto()
-                .setQuantidadeEstoque(item.getProduto().getQuantidadeEstoque() - item.getQuantidade()));
 
         URI uri = uriBuilder
                 .path("/pedidos/{id}")

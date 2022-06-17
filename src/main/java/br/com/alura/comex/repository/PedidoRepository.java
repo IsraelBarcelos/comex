@@ -15,4 +15,7 @@ public interface PedidoRepository extends CrudRepository<Pedido, Long> {
     List<Pedido> findByItemPedidoProdutoCategoriaNome(String nomeCategoria);
 
     Page<Pedido> findAll(Pageable pageable);
+
+    @Query("select count(p) from Pedido p where p.cliente.id = ?1")
+    Integer pedidosDeUmCliente(Long clienteId);
 }
