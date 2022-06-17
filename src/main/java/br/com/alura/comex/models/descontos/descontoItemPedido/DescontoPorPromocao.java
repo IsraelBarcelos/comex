@@ -4,24 +4,22 @@ import java.math.BigDecimal;
 
 import br.com.alura.comex.models.ItemPedido;
 
-public class DescontoPorPromocao extends DescontoItemPedido {
+public class DescontoPorPromocao extends AbstractDescontoItemPedido {
 
     private BigDecimal valorDesconto;
 
-    public DescontoPorPromocao(DescontoItemPedido successor, BigDecimal valorDesconto) {
+    public DescontoPorPromocao(AbstractDescontoItemPedido successor, BigDecimal valorDesconto) {
         super(successor);
         this.valorDesconto = valorDesconto;
     }
 
     public BigDecimal calcula(ItemPedido itemPedido) {
+        itemPedido.setTipoDesconto(TipoDescontoItemPedido.PROMOCAO);
+        return valorDesconto;
+    }
 
-        System.out.println(itemPedido);
-
-        if (valorDesconto.compareTo(new BigDecimal(0)) > 0) {
-            itemPedido.setTipoDesconto(TipoDescontoItemPedido.PROMOCAO);
-
-            return valorDesconto;
-        }
-        return successor.calcula(itemPedido);
+    @Override
+    public boolean deveAplicar(ItemPedido itemPedido) {
+        return valorDesconto.compareTo(new BigDecimal(0)) > 0;
     }
 }

@@ -7,7 +7,7 @@ import br.com.alura.comex.models.ItemPedido;
 public class CalculadoraDeDescontosItemPedido {
 
     public BigDecimal calcular(ItemPedido itemPedido) {
-        DescontoItemPedido desconto = new DescontoPorQuantidade(
+        AbstractDescontoItemPedido desconto = new DescontoPorQuantidade(
                 new DescontoPorPromocao(new SemDesconto(null), new BigDecimal(20.00)));
 
         return desconto.calcula(itemPedido);

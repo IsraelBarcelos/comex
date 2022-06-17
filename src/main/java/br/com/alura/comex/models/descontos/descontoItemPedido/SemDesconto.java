@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import br.com.alura.comex.models.ItemPedido;
 
-public class SemDesconto extends DescontoItemPedido {
+public class SemDesconto extends AbstractDescontoItemPedido {
 
-    public SemDesconto(DescontoItemPedido successor) {
+    public SemDesconto(AbstractDescontoItemPedido successor) {
         super(null);
     }
 
@@ -14,6 +14,11 @@ public class SemDesconto extends DescontoItemPedido {
     public BigDecimal calcula(ItemPedido itemPedido) {
         itemPedido.setTipoDesconto(TipoDescontoItemPedido.NENHUM);
         return BigDecimal.ZERO;
+    }
+
+    @Override
+    public boolean deveAplicar(ItemPedido itemPedido) {
+        return true;
     }
 
 }

@@ -16,11 +16,13 @@ public class DescontoFidelidade extends AbstractDescontoPedido {
 
     @Override
     public BigDecimal calcula(Pedido pedido) {
-        if (pedidoRepository.pedidosDeUmCliente(pedido.getCliente().getId()) > 5) {
-            pedido.setTipoDesconto(TipoDescontoPedido.FIDELIDADE);
-            return pedido.getValorTotal().multiply(new BigDecimal(0.05));
-        }
-        return successor.calcula(pedido);
+        pedido.setTipoDesconto(TipoDescontoPedido.FIDELIDADE);
+        return pedido.getValorTotal().multiply(new BigDecimal(0.05));
+    }
+
+    @Override
+    public boolean deveAplicar(Pedido pedido) {
+        return pedidoRepository.pedidosDeUmCliente(pedido.getCliente().getId()) > 5;
     }
 
 }

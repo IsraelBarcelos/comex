@@ -16,4 +16,9 @@ public class SemDesconto extends AbstractDescontoPedido {
         return BigDecimal.ZERO;
     }
 
+    @Override
+    public boolean deveAplicar(Pedido pedido) {
+        return true;
+    }
+
 }

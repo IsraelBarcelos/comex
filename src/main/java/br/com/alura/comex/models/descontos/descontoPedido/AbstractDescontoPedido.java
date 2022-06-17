@@ -12,5 +12,15 @@ public abstract class AbstractDescontoPedido {
         this.successor = successor;
     }
 
+    public BigDecimal deveCalcular(Pedido pedido) {
+        if (deveAplicar(pedido)) {
+            return calcula(pedido);
+        }
+
+        return successor.calcula(pedido);
+    }
+
     public abstract BigDecimal calcula(Pedido pedido);
+
+    public abstract boolean deveAplicar(Pedido pedido);
 }
