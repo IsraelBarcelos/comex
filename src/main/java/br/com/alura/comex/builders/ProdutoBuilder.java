@@ -29,7 +29,7 @@ public class ProdutoBuilder {
     }
 
     public ProdutoBuilder comQuantidadeEstoque(int quantidadeEstoque) {
-        this.produto.setQuantidadeEstoque(quantidadeEstoque);
+        this.produto.adicionarProdutoAoEstoque(quantidadeEstoque);
         return this;
     }
 

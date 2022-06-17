@@ -4,25 +4,28 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Length;
 
+import br.com.alura.comex.controllers.form.validation.ValidaIdCategoria;
 import br.com.alura.comex.models.Produto;
 import br.com.alura.comex.repository.ProdutoRepository;
 
 public class AtualizacaoProdutoForm {
     @NotNull
     @NotEmpty
-    @Length(min = 3)
+    @Length(min = 2)
     private String nome;
-    private String descricao;
     @NotNull
+    @Positive
     private BigDecimal precoUnitario;
+    private String descricao;
     @NotNull
     private Integer quantidadeEstoque;
     @NotNull
-    @NotEmpty
-    private String nomeCategoria;
+    @ValidaIdCategoria
+    private Long categoriaId;
 
     public String getNome() {
         return nome;
@@ -56,12 +59,12 @@ public class AtualizacaoProdutoForm {
         this.quantidadeEstoque = quantidadeEstoque;
     }
 
-    public String getNomeCategoria() {
-        return nomeCategoria;
+    public Long getCategoriaId() {
+        return categoriaId;
     }
 
-    public void setNomeCategoria(String nomeCategoria) {
-        this.nomeCategoria = nomeCategoria;
+    public void setCategoriaId(Long categoriaId) {
+        this.categoriaId = categoriaId;
     }
 
     public Produto atualizar(Long id, ProdutoRepository produtoRepository) {
@@ -69,8 +72,8 @@ public class AtualizacaoProdutoForm {
         produto.setNome(nome);
         produto.setDescricao(descricao);
         produto.setPrecoUnitario(precoUnitario);
-        produto.getCategoria().setNome(nomeCategoria);
-        produto.setQuantidadeEstoque(quantidadeEstoque);
+        produto.getCategoria().setId(categoriaId);
+        produto.adicionarProdutoAoEstoque(quantidadeEstoque);
 
         return produto;
     }

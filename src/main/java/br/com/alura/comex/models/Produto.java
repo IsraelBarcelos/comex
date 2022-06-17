@@ -24,10 +24,10 @@ public class Produto {
     private String descricao;
 
     @Column(nullable = false, name = "preco_unitario")
-    private BigDecimal precoUnitario;
+    private BigDecimal precoUnitario = BigDecimal.ZERO;
 
     @Column(nullable = false, name = "quantidade_estoque")
-    private int quantidadeEstoque;
+    private int quantidadeEstoque = 0;
 
     @OneToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
@@ -68,8 +68,15 @@ public class Produto {
         return quantidadeEstoque;
     }
 
-    public void setQuantidadeEstoque(int quantidadeEstoque) {
-        this.quantidadeEstoque = quantidadeEstoque;
+    public void retirarDoEstoqueParaOPedido(int quantidadeASerRetirada) {
+        if (quantidadeASerRetirada > quantidadeEstoque) {
+            throw new IllegalArgumentException("Não há quantidade suficiente de " + this.nome + " no estoque");
+        }
+        this.quantidadeEstoque -= quantidadeASerRetirada;
+    }
+
+    public void adicionarProdutoAoEstoque(int quantidadeASerAdicionada) {
+        this.quantidadeEstoque += quantidadeASerAdicionada;
     }
 
     public Categoria getCategoria() {
