@@ -6,10 +6,12 @@ import br.com.alura.comex.dto.ProdutoDto;
 import br.com.alura.comex.models.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
+import br.com.alura.comex.utils.IterableToArrayList;
 
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -38,8 +40,11 @@ public class ProdutoController {
 
     @GetMapping
     public ResponseEntity<List<ProdutoDto>> index() {
-        List<Produto> produtos = produtoRepository.findAll();
-        return ResponseEntity.ok(ProdutoDto.converter(produtos));
+
+        List<ProdutoDto> produtos = IterableToArrayList.execute(produtoRepository.findAll()).stream()
+                .map(ProdutoDto::new)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(produtos);
     }
 
     @PostMapping

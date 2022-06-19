@@ -1,6 +1,7 @@
 package br.com.alura.comex.controllers.form;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -68,7 +69,12 @@ public class AtualizacaoProdutoForm {
     }
 
     public Produto atualizar(Long id, ProdutoRepository produtoRepository) {
-        Produto produto = produtoRepository.getReferenceById(id);
+        Optional<Produto> produtoOptional = produtoRepository.findById(id);
+        if (!produtoOptional.isPresent()) {
+            throw new IllegalArgumentException("Produto não encontrado");
+        }
+
+        Produto produto = produtoOptional.get();
         produto.setNome(nome);
         produto.setDescricao(descricao);
         produto.setPrecoUnitario(precoUnitario);

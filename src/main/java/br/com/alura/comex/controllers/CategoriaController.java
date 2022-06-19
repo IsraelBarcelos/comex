@@ -8,12 +8,14 @@ import br.com.alura.comex.models.Categoria;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.PedidoRepository;
+import br.com.alura.comex.utils.IterableToArrayList;
 
 import java.net.URI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -40,8 +42,10 @@ public class CategoriaController {
 
   @GetMapping
   public ResponseEntity<List<CategoriaDto>> index() {
-    List<Categoria> categorias = categoriaRepository.findAll();
-    return ResponseEntity.ok(CategoriaDto.converter(categorias));
+    List<CategoriaDto> categorias = IterableToArrayList.execute(categoriaRepository.findAll()).stream()
+        .map(CategoriaDto::new)
+        .collect(Collectors.toList());
+    return ResponseEntity.ok(categorias);
   }
 
   @PostMapping
@@ -62,13 +66,12 @@ public class CategoriaController {
 
   @GetMapping("/pedidos")
   public ResponseEntity<Map<String, PedidoPorCategoriaDto>> listarPedidosDeUmaCategoria() {
-    List<Categoria> categorias = categoriaRepository.findAll();
+    List<Categoria> categorias = IterableToArrayList.execute(categoriaRepository.findAll());
 
     Map<String, List<Pedido>> pedidos = new HashMap<>();
     categorias.stream().forEach(categoria -> {
       pedidos.put(categoria.getNome(), pedidoRepository.findByItemPedidoProdutoCategoriaNome(categoria.getNome()));
     });
-    // categoriaRepository.findPedidosDeUmaCategoria();
     return ResponseEntity.ok(PedidoPorCategoriaDto.converter(pedidos));
   }
 

@@ -1,6 +1,7 @@
 package br.com.alura.comex.controllers;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,9 +28,15 @@ public class ClienteController {
 
     @GetMapping
     public List<ClienteDto> listar() {
-        List<ClienteDto> clientes = clienteRepository.findAll().stream().sorted((cliente1, cliente2) -> {
-            return cliente1.getNome().toLowerCase().compareTo(cliente2.getNome().toLowerCase());
-        }).map(ClienteDto::new)
+        List<Cliente> clienteIterableToList = new ArrayList<>();
+        clienteRepository.findAll().forEach(cliente -> {
+            clienteIterableToList.add(cliente);
+        });
+
+        List<ClienteDto> clientes = clienteIterableToList.stream()
+                .sorted((cliente1, cliente2) -> {
+                    return cliente1.getNome().toLowerCase().compareTo(cliente2.getNome().toLowerCase());
+                }).map(ClienteDto::new)
                 .collect(Collectors.toList());
         return clientes;
     }
