@@ -14,12 +14,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import br.com.alura.comex.models.Usuario;
 import br.com.alura.comex.repository.UsuarioRepository;
 
-public class TokenByAuthenticationFilter extends OncePerRequestFilter {
+public class JwtTokenFilter extends OncePerRequestFilter {
 
     private TokenService tokenService;
     private UsuarioRepository usuarioRepository;
 
-    public TokenByAuthenticationFilter(TokenService tokenService, UsuarioRepository usuarioRepository) {
+    public JwtTokenFilter(TokenService tokenService, UsuarioRepository usuarioRepository) {
         this.tokenService = tokenService;
         this.usuarioRepository = usuarioRepository;
     }

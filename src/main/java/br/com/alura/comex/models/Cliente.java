@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -30,6 +31,9 @@ public class Cliente {
 
     @Embedded
     private Endereco endereco;
+
+    @OneToOne
+    private Usuario usuario;
 
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<Pedido>();
@@ -76,6 +80,10 @@ public class Cliente {
 
     public List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    public Usuario getUsuario() {
+        return this.usuario;
     }
 
     @Override

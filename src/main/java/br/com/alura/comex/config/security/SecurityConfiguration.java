@@ -38,18 +38,30 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.GET, "/api/categorias/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/produtos/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
-                .anyRequest().authenticated()
-                .and().csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().addFilterBefore(new TokenByAuthenticationFilter(tokenService, usuarioRepository),
-                        UsernamePasswordAuthenticationFilter.class);
-
+                .antMatchers(HttpMethod.GET, "/api/usuarios/**").permitAll()
+                .antMatchers("/**.html").permitAll()
+                .antMatchers("/v2/api-docs/**").permitAll()
+                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/swagger-resources/**").permitAll()
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/configuration/**").permitAll()
+                .antMatchers("/swagger-ui").permitAll()
+                .antMatchers("/spring-security-rest/api/v2/api-docs").permitAll()
+                .antMatchers("/comex/api/swagger-ui/**").permitAll()
+                .antMatchers("/api/swagger-ui/**").permitAll()
+                .antMatchers("/swagger-ui/**").permitAll()
+                .anyRequest().authenticated();
+        http.addFilterBefore(new JwtTokenFilter(tokenService, usuarioRepository),
+                UsernamePasswordAuthenticationFilter.class);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.csrf().disable();
+        http.cors().disable();
         return http.build();
     }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/api/pedidos/teste");
+        return (web) -> web.ignoring().antMatchers("/**.html");
     }
 
     @Bean

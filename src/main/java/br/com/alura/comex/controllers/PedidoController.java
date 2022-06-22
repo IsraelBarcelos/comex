@@ -7,6 +7,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -43,6 +45,7 @@ public class PedidoController {
     private ProdutoRepository produtoRepository;
 
     @GetMapping
+    @Cacheable("pedidos")
     public ResponseEntity<Page<PedidoDto>> listar(@RequestParam Integer page) {
         Pageable pagination = PageRequest.of(page, 5, Sort.by("data").descending().and(Sort.by("cliente.nome")));
         Page<Pedido> pedidos = pedidoRepository.findAll(pagination);
@@ -72,5 +75,11 @@ public class PedidoController {
             return ResponseEntity.ok(new DetalhamentoDePedidoDto(pedido.get()));
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/aW52YWxpZGEgcmVsYXTDs3JpbyBkZSB2ZW5kYXM")
+    @CacheEvict("pedidos")
+    public ResponseEntity<Object> invalidadaCache() {
+        return ResponseEntity.ok().build();
     }
 }
