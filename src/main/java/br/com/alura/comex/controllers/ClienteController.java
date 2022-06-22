@@ -1,16 +1,18 @@
 package br.com.alura.comex.controllers;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -27,18 +29,15 @@ public class ClienteController {
     private ClienteRepository clienteRepository;
 
     @GetMapping
-    public List<ClienteDto> listar() {
-        List<Cliente> clienteIterableToList = new ArrayList<>();
-        clienteRepository.findAll().forEach(cliente -> {
-            clienteIterableToList.add(cliente);
-        });
+    public Page<ClienteDto> listar(@RequestParam(required = false) Optional<Integer> pagina) {
+        Integer paginaCorreta = 0;
+        if (pagina.isPresent()) {
+            paginaCorreta = pagina.get();
+        }
 
-        List<ClienteDto> clientes = clienteIterableToList.stream()
-                .sorted((cliente1, cliente2) -> {
-                    return cliente1.getNome().toLowerCase().compareTo(cliente2.getNome().toLowerCase());
-                }).map(ClienteDto::new)
-                .collect(Collectors.toList());
-        return clientes;
+        Pageable pagination = PageRequest.of(paginaCorreta, 5);
+        Page<Cliente> clientes = clienteRepository.findAll(pagination);
+        return ClienteDto.converter(clientes);
     }
 
     @PostMapping
