@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.ObjectPostProcessor;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@Profile(value = {"production", "test"})
 public class SecurityConfiguration {
 
     @Autowired
@@ -37,19 +39,9 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/categorias/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/produtos/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/actuator/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/usuarios/**").permitAll()
-                .antMatchers("/**.html").permitAll()
-                .antMatchers("/v2/api-docs/**").permitAll()
-                .antMatchers("/swagger-ui.html").permitAll()
-                .antMatchers("/swagger-resources/**").permitAll()
-                .antMatchers("/webjars/**").permitAll()
-                .antMatchers("/configuration/**").permitAll()
-                .antMatchers("/swagger-ui").permitAll()
-                .antMatchers("/spring-security-rest/api/v2/api-docs").permitAll()
-                .antMatchers("/comex/api/swagger-ui/**").permitAll()
-                .antMatchers("/api/swagger-ui/**").permitAll()
-                .antMatchers("/swagger-ui/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/categorias").hasRole("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
         http.addFilterBefore(new JwtTokenFilter(tokenService, usuarioRepository),
                 UsernamePasswordAuthenticationFilter.class);
@@ -61,7 +53,10 @@ public class SecurityConfiguration {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/**.html");
+        return (web) -> web.ignoring().antMatchers("/**.html", "/v2/api-docs/**", "/swagger-ui.html",
+                "/swagger-resources/**",
+                "/webjars/**", "/configuration/**", "/swagger-ui", "/spring-security-rest/api/v2/api-docs",
+                "/comex/api/swagger-ui/**", "/api/swagger-ui/**", "/swagger-ui/**");
     }
 
     @Bean
