@@ -86,6 +86,8 @@ public class Cliente {
         return this.usuario;
     }
 
+    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
+
     @Override
     public String toString() {
         return ("Cliente [id=" +

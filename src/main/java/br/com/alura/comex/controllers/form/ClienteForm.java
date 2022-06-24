@@ -3,6 +3,7 @@ package br.com.alura.comex.controllers.form;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import br.com.alura.comex.repository.UsuarioRepository;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.alura.comex.builders.ClienteBuilder;
@@ -37,6 +38,10 @@ public class ClienteForm {
     @NotNull
     @NotEmpty
     private String estado;
+
+    @NotNull
+    @NotEmpty
+    private String usuarioEmail;
 
     public ClienteForm() {
     }
@@ -113,7 +118,15 @@ public class ClienteForm {
         this.estado = estado;
     }
 
-    public Cliente converter() {
+    public String getUsuarioEmail() {
+        return usuarioEmail;
+    }
+
+    public void setUsuarioEmail(String usuarioEmail) {
+        this.usuarioEmail = this.usuarioEmail;
+    }
+
+    public Cliente converter(UsuarioRepository usuarioRepository) {
         Endereco endereco = new EnderecoBuilder()
                 .comRua(rua)
                 .comNumero(numero)
@@ -127,6 +140,7 @@ public class ClienteForm {
                 .comCpf(cpf)
                 .comTelefone(telefone)
                 .comEndereco(endereco)
+                .comUsuario(usuarioRepository.findByEmail(usuarioEmail).get())
                 .build();
 
         return cliente;

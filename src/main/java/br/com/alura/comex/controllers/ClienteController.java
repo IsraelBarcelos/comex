@@ -3,6 +3,7 @@ package br.com.alura.comex.controllers;
 import java.net.URI;
 import java.util.Optional;
 
+import br.com.alura.comex.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +29,9 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
     @GetMapping
     public Page<ClienteDto> listar(@RequestParam(required = false) Optional<Integer> pagina) {
         Integer paginaCorreta = 0;
@@ -41,8 +45,8 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDto> salvar(@RequestBody ClienteForm clienteForm, UriComponentsBuilder uriBuilder) {
-        Cliente cliente = clienteForm.converter();
+    public ResponseEntity<ClienteDto> salvar(@RequestBody ClienteForm clienteForm, UriComponentsBuilder uriBuilder, UsuarioRepository usuarioRepository) {
+        Cliente cliente = clienteForm.converter(usuarioRepository);
         clienteRepository.save(cliente);
 
         URI uri = uriBuilder

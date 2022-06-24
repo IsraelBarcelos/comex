@@ -2,6 +2,7 @@ package br.com.alura.comex.builders;
 
 import br.com.alura.comex.models.Cliente;
 import br.com.alura.comex.models.Endereco;
+import br.com.alura.comex.models.Usuario;
 
 public class ClienteBuilder {
 
@@ -28,6 +29,11 @@ public class ClienteBuilder {
 
     public ClienteBuilder comEndereco(Endereco endereco) {
         this.cliente.setEndereco(endereco);
+        return this;
+    }
+
+    public ClienteBuilder comUsuario(Usuario usuario) {
+        this.cliente.setUsuario(usuario);
         return this;
     }
 
