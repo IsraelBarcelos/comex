@@ -8,62 +8,83 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import br.com.alura.comex.models.Categoria;
+import br.com.alura.comex.repository.CategoriaRepository;
+
 import java.net.URI;
+import java.util.Optional;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("test")
-public class CategoriaRepositoryTest {
+@ActiveProfiles("dev")
+public class CategoriaControllerTest {
 
+    @Autowired
+    private MockMvc mockMvc;
 
-        @Autowired
-        private MockMvc mockMvc;
+    @Autowired
+    private CategoriaRepository categoriaRepository;
 
-        @Test
-        public void shouldReturnAListOfCategories() throws Exception {
-            URI uri = new URI("/categorias");
-            String json = new JSONObject()
-                    .toString();
+    @Test
+    public void shouldDeleteACategoria() throws Exception {
 
-            mockMvc.perform(MockMvcRequestBuilders
-                            .post(uri)
-                            .content(json)
-                            .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(MockMvcResultMatchers.status().is(200));
+        Categoria categoria = getCategoriaFromDatabase();
+
+        URI uri = new URI("/api/categorias/" + categoria.getId());
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete(uri))
+                .andExpect(MockMvcResultMatchers.status().is(204));
+    }
+
+    private Categoria getCategoriaFromDatabase() throws Exception {
+
+        Optional<Categoria> categoria = categoriaRepository.findByNome("testeCategoriaBanco");
+
+        if (categoria.isPresent()) {
+
+            return categoria.get();
         }
 
-        @Test
-        public void shouldReturn200IfAllIsRight() throws  Exception {
-            URI uri = new URI("/auth");
-            String json = new JSONObject()
-                    .put("email", "teste@teste.com")
-                    .put("senha", "123456")
-                    .toString();
+        this.shouldCreateACategoria();
 
-            mockMvc.perform(MockMvcRequestBuilders
-                            .post(uri)
-                            .content(json)
-                            .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(MockMvcResultMatchers.status().is(200));
+        return categoriaRepository.findByNome("testeCategoriaBanco").get();
+
+    }
+
+    @Test
+    public void shouldReturnAListOfCategoriesWith200Code() throws Exception {
+        URI uri = new URI("/api/categorias");
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .get(uri))
+                .andExpect(MockMvcResultMatchers.status().is(200))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.content[*].nome").isNotEmpty());
+        ;
+    }
+
+    @Test
+    public void shouldCreateACategoria() throws Exception {
+        URI uri = new URI("/api/categorias");
+        String json = new JSONObject()
+                .put("nome", "testeCategoriaBanco")
+                .toString();
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+                .post(uri)
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().is(201))
+                .andReturn();
+        if (mvcResult.getResponse().getStatus() == 201) {
+            return;
         }
-
-        @Test
-        public void shouldReturn400HttpErrorForUserDataIsIncomplete() throws Exception {
-            URI uri = new URI("/auth");
-            String json = new JSONObject()
-                    .put("email", "teste@1234.email.com")
-                    .toString();
-
-            mockMvc.perform(MockMvcRequestBuilders
-                            .post(uri)
-                            .content(json)
-                            .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(MockMvcResultMatchers.status().is(400));
-        }
-
+        shouldDeleteACategoria();
     }
 
 }
