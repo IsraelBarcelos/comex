@@ -29,9 +29,6 @@ public class ClienteController {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-
     @GetMapping
     public Page<ClienteDto> listar(@RequestParam(required = false) Optional<Integer> pagina) {
         Integer paginaCorreta = 0;
@@ -45,7 +42,8 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<ClienteDto> salvar(@RequestBody ClienteForm clienteForm, UriComponentsBuilder uriBuilder, UsuarioRepository usuarioRepository) {
+    public ResponseEntity<ClienteDto> salvar(@RequestBody ClienteForm clienteForm, UriComponentsBuilder uriBuilder,
+            UsuarioRepository usuarioRepository) {
         Cliente cliente = clienteForm.converter(usuarioRepository);
         clienteRepository.save(cliente);
 

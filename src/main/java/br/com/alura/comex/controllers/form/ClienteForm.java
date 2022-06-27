@@ -123,7 +123,7 @@ public class ClienteForm {
     }
 
     public void setUsuarioEmail(String usuarioEmail) {
-        this.usuarioEmail = this.usuarioEmail;
+        this.usuarioEmail = usuarioEmail;
     }
 
     public Cliente converter(UsuarioRepository usuarioRepository) {
