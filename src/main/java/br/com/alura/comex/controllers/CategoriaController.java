@@ -82,6 +82,17 @@ public class CategoriaController {
     return ResponseEntity.ok(PedidoPorCategoriaDto.converter(pedidos));
   }
 
+  @GetMapping("/{id}")
+  public ResponseEntity<CategoriaDto> detalhar(@PathVariable Long id) {
+    Optional<Categoria> categoria = categoriaRepository.findById(id);
+
+    if (categoria.isPresent()) {
+      return ResponseEntity.ok(new CategoriaDto(categoria.get()));
+    }
+
+    return ResponseEntity.notFound().build();
+  }
+
   @PatchMapping("/{id}")
   @Transactional
   @CacheEvict(value = { "categorias", "pedidosPorCategorias" }, allEntries = true)
