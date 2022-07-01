@@ -1,5 +1,5 @@
-run:
-  web: sh mvnw spring-boot:run -X
 build:
   docker:
     web: Dockerfile
+run:
+  web: sh mvnw spring-boot:run -X
