@@ -1,5 +1,4 @@
 run:
-  web: mvn clean package -DskipTests
   web: sh mvnw spring-boot:run -X
 build:
   docker:
