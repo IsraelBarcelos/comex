@@ -4,7 +4,13 @@ ADD target/comex.jar teste.jar
 ENTRYPOINT ["java", "-jar","/teste.jar"]
 #testando
 #testando
-#testando
+#
+#
+#
+#
+#
+#
+#
 #RUN adduser --system --group spring
 # ADD target/comex.jar app.jar
 #USER spring:spring
