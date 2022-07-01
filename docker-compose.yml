@@ -22,7 +22,6 @@ services:
   alura:
     image: openjdk:18.0.1.1-slim-buster
     container_name: alura-comex
-    restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
@@ -31,11 +30,11 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       DB_USERNAME: ${DB_USERNAME}
       JWT_PASSWORD: ${JWT_PASSWORD}
-      PORT: 8080
-      SPRING_PROFILES_ACTIVE: test
+      DB_LINK: ${DB_LINK}
+      SPRING_PROFILES_ACTIVE: production
     networks:
       - networkdeteste
     volumes:
       - .:/app
     working_dir: /app
-    command: sh mvnw spring-boot:run -Xmx512m
+    command: sh mvnw spring-boot:run -X

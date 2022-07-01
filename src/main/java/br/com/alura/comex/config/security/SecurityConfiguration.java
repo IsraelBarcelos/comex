@@ -21,7 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@Profile(value = {"production", "test"})
+@Profile(value = { "production", "test" })
 public class SecurityConfiguration {
 
     @Autowired
@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/categorias/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/produtos/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/usuarios/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/usuarios/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/categorias").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
