@@ -1,7 +1,10 @@
-FROM openjdk:18.0.1-slim
-RUN adduser --system --group spring
-USER spring:spring
-RUN mvn clean package -DskipTests
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-# ENTRYPOINT ["java", "-Xmx512m", "-Dserver.port=${PORT}", "-jar","./app.jar"]
+FROM openjdk:18.0.1.1-slim-buster
+EXPOSE 8080
+ADD target/comex.jar teste.jar
+ENTRYPOINT ["java", "-jar","/teste.jar"]
+#testando
+#testando
+#testando
+#RUN adduser --system --group spring
+# ADD target/comex.jar app.jar
+#USER spring:spring
