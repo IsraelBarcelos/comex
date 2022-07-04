@@ -35,6 +35,8 @@ public class SecurityConfiguration {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.addFilterBefore(new JwtTokenFilter(tokenService, usuarioRepository),
+                UsernamePasswordAuthenticationFilter.class);
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/auth").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/categorias/**").permitAll()
@@ -43,8 +45,7 @@ public class SecurityConfiguration {
                 .antMatchers(HttpMethod.POST, "/api/categorias").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/**").hasRole("ADMIN")
                 .anyRequest().authenticated();
-        http.addFilterBefore(new JwtTokenFilter(tokenService, usuarioRepository),
-                UsernamePasswordAuthenticationFilter.class);
+
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.csrf().disable();
         http.cors().disable();

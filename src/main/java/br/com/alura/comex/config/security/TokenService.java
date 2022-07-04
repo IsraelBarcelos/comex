@@ -25,11 +25,11 @@ public class TokenService {
         Date expirationDate = new Date(nowDate.getTime() + Long.parseLong(expiration));
 
         return Jwts.builder()
-                .setIssuer("Web Application xyz")
+                .setIssuer("Web Application test")
                 .setSubject(logado.getId().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(expirationDate)
-                .signWith(io.jsonwebtoken.SignatureAlgorithm.HS512, secret)
+                .signWith(io.jsonwebtoken.SignatureAlgorithm.HS256, secret)
                 .compact();
     }
 
