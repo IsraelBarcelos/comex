@@ -3,14 +3,14 @@ package br.com.alura.comex.dto;
 import br.com.alura.comex.models.Usuario;
 
 public class UsuarioDto {
-    String usuario;
+    String email;
 
     public UsuarioDto(Usuario usuario) {
-        this.usuario = usuario.getEmail();
+        this.email = usuario.getEmail();
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getEmail() {
+        return email;
     }
 
     public static UsuarioDto converter(Usuario usuario) {
