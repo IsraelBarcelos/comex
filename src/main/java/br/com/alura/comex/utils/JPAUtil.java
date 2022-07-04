@@ -7,8 +7,7 @@ import javax.persistence.Persistence;
 public class JPAUtil {
 
   private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory(
-      "gf8xx75icz5iuaoi");
-  /* TODO: alterar aqui */
+      "${DATABASE_NAME}");
 
   public static EntityManager getEntityManager() {
     return FACTORY.createEntityManager();
