@@ -20,7 +20,7 @@ services:
       - ./mysql:/var/lib/mysql
 
   alura:
-    image: openjdk:17-alpine
+    image: alura/comex
     container_name: alura-comex
     ports:
       - "8080:8080"

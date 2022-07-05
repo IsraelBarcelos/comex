@@ -14,15 +14,18 @@ EXPOSE 8080
 VOLUME /tmp
 COPY --from=0 "/app/target/*.jar" app.jar
 
-ENV DATABASE_NAME=$DATABASE_NAME
-ENV DB_LINK=$DB_LINK
-ENV DB_USERNAME=$DB_USERNAME
-ENV DB_PASSWORD=$DB_PASSWORD
-ENV JWT_PASSWORD=$JWT_PASSWORD
-ENV SPRING_PROFILES_ACTIVE=$SPRING_PROFILES_ACTIVE
-ENV DB_DATABASE=$DATABASE_NAME
+ENV DATABASE_NAME="comexdb"
+ENV DB_LINK="jdbc:mysql://mysqlcomex:3306/comexdb"
+ENV DB_ROOT_PASSWORD: "root"
+ENV DB_USERNAME="root"
+ENV DB_PASSWORD="root"
+ENV JWT_PASSWORD="root"
+ENV SPRING_PROFILES_ACTIVE="production"
+ENV DB_DATABASE="comexdb"
+ENV PORT="8080"
+ENV JAVA_OPTS="-Xmx512m -Xms512m"
 
-CMD [ "sh", "-c", "java -XX:+UseContainerSupport -Dserver.port=$PORT $JAVA_OPTS -jar /app.jar" ]
+CMD [ "sh", "-c", "java -XX:+UseContainerSupport -jar /app.jar" ]
 
 # EXPOSE 8080
 # RUN addgroup -S spring && adduser -S spring -G spring
