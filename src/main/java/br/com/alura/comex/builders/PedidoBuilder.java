@@ -6,7 +6,7 @@ import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.models.descontos.descontoPedido.TipoDescontoPedido;
 import br.com.alura.comex.repository.PedidoRepository;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class PedidoBuilder {
@@ -17,7 +17,7 @@ public class PedidoBuilder {
     this.pedido = new Pedido();
   }
 
-  public PedidoBuilder comData(LocalDate data) {
+  public PedidoBuilder comData(LocalDateTime data) {
     this.pedido.setData(data);
     return this;
   }

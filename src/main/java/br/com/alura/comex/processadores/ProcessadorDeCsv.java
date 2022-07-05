@@ -20,7 +20,7 @@ import java.math.BigDecimal;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Path;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,7 +85,7 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
 
       Cliente clienteBanco = salvaClienteNoBanco(nomeDoCliente);
 
-      LocalDate data = LocalDate.parse(
+      LocalDateTime data = LocalDateTime.parse(
           registro[4],
           DateTimeFormatter.ofPattern("dd/MM/yyyy"));
       salvarItensEPedidosNoBanco(quantidade, produtoBanco, clienteBanco, data);
@@ -96,7 +96,7 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
       int quantidade,
       Produto produtoBanco,
       Cliente clienteBanco,
-      LocalDate data) {
+      LocalDateTime data) {
     Pedido pedidoBanco = new PedidoBuilder()
         .comData(data)
         .comCliente(clienteBanco)
@@ -104,7 +104,6 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
         .build();
 
     ItemPedido itemPedidoBanco = new ItemPedidoBuilder()
-        .comPedido(pedidoBanco)
         .comDesconto()
         .comProduto(produtoBanco)
         .comQuantidade(quantidade)
@@ -115,7 +114,7 @@ public class ProcessadorDeCsv implements ProcessadorInterface {
   }
 
   private Cliente salvaClienteNoBanco(String nomeDoCliente) {
-    Cliente clienteBanco = clienteRepository.findByNome(nomeDoCliente);
+    Cliente clienteBanco = clienteRepository.findByNome(nomeDoCliente).get();
     if (clienteBanco.getNome() == null) {
       clienteBanco = new ClienteBuilder()
           .comNome(nomeDoCliente)

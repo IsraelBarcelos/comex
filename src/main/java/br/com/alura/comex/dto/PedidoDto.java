@@ -1,14 +1,15 @@
 package br.com.alura.comex.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import org.springframework.data.domain.Page;
 
 import br.com.alura.comex.models.Pedido;
 
 public class PedidoDto {
 
-    private LocalDate data;
+    private LocalDateTime data;
     private BigDecimal valorTotal;
     private BigDecimal desconto;
     private Integer quantidadeDeItens;
@@ -24,11 +25,11 @@ public class PedidoDto {
         }).reduce(0, Integer::sum);
     };
 
-    public LocalDate getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 

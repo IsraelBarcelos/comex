@@ -1,14 +1,14 @@
 package br.com.alura.comex.dto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.alura.comex.models.Pedido;
 
 public class DetalhamentoDePedidoDto {
-    private LocalDate data;
+    private LocalDateTime data;
     private BigDecimal valorTotal;
     private BigDecimal desconto;
     private List<ItemPedidoDetalhamentoPedidoDto> itens;
@@ -24,11 +24,11 @@ public class DetalhamentoDePedidoDto {
         this.nomeCliente = pedido.getCliente().getNome();
     }
 
-    public LocalDate getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 

@@ -7,7 +7,7 @@ import br.com.alura.comex.repository.ClienteRepository;
 import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,7 +42,7 @@ public class PedidoForm {
         Pedido pedido = new PedidoBuilder()
                 .comCliente(clienteRepository.findById(clienteId).get())
                 .comItens(itens.stream().map(item -> item.converter(produtoRepository)).collect(Collectors.toList()))
-                .comData(LocalDate.now())
+                .comData(LocalDateTime.now())
                 .comDesconto(pedidoRepository)
                 .build();
 
