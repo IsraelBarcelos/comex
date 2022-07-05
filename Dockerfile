@@ -10,10 +10,12 @@ RUN mvn clean install
 
 FROM openjdk:17-alpine
 
-VOLUME /tmp
-COPY --from=0 "/app/target/comex-*-SNAPSHOT.jar" app.jar
+EXPOSE 8080
 
-CMD [ "sh", "-c", "java -Dserver.port=$PORT $JAVA_OPTS -jar /app.jar" ]
+VOLUME /tmp
+COPY --from=0 "/app/target/*.jar" app.jar
+
+CMD [ "sh", "-c", "java -XX:+UseContainerSupport -Dserver.port=$PORT $JAVA_OPTS -jar /app.jar" ]
 
 # EXPOSE 8080
 # RUN addgroup -S spring && adduser -S spring -G spring
