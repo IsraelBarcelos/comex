@@ -1,4 +1,4 @@
-version: '3.1'
+version: "3.1"
 networks:
   networkdeteste:
     driver: bridge
@@ -19,9 +19,9 @@ services:
     volumes:
       - ./mysql:/var/lib/mysql
 
-  api:
+  alura:
     image: openjdk:17-alpine
-    container_name: alura-comex-api
+    container_name: alura-comex
     ports:
       - "8080:8080"
     environment:
