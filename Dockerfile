@@ -1,15 +1,7 @@
-FROM openjdk:18.0.1.1-slim-buster
+FROM openjdk:17-alpine
 EXPOSE 8080
-
-#testando
-#testando
-#
-#
-#
-#
-#
-#
-#
-#RUN adduser --system --group spring
-# ADD target/comex.jar app.jar
-#USER spring:spring
+RUN addgroup -S spring && adduser -S spring -G spring
+USER spring:spring
+ARG JAR_FILE=target/comex-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} app.jar
+ENTRYPOINT ["java","-jar","/app.jar"]

@@ -32,6 +32,7 @@ build/
 ### VS Code ###
 .vscode/
 .env
+mysql/
 mysql/#ib_16384_0.dblwr
 mysql/#ib_16384_1.dblwr
 mysql/auto.cnf
@@ -194,3 +195,6 @@ mysql/performance_schema/variables_info_186.sdi
 mysql/sys/sys_config.ibd
 mysql/binlog.000007
 mysql/binlog.000006
+mysql/comexdb/perfis.ibd
+mysql/comexdb/usuarios_perfis.ibd
+mysql/comexdb/usuarios.ibd
