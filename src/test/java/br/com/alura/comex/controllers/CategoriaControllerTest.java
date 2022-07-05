@@ -1,6 +1,7 @@
 package br.com.alura.comex.controllers;
 
 import org.json.JSONObject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -8,19 +9,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.models.Categoria;
 import br.com.alura.comex.repository.CategoriaRepository;
+import br.com.alura.comex.repository.UsuarioRepository;
+import br.com.alura.comex.utils.CreateCategoriaUtil;
+import br.com.alura.comex.utils.CreateSessionUtil;
+import br.com.alura.comex.utils.GenerateRandomNumber;
 
 import java.net.URI;
 import java.util.Optional;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 public class CategoriaControllerTest {
 
     @Autowired
@@ -28,6 +32,19 @@ public class CategoriaControllerTest {
 
     @Autowired
     private CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @BeforeEach
+    public void setup() throws Exception {
+
+        if (CreateSessionUtil.createSession(mockMvc, usuarioRepository)) {
+            throw new Exception("Não foi possível criar uma sessão");
+        }
+
+        CreateCategoriaUtil.createCategoria(categoriaRepository);
+    }
 
     @Test
     public void shouldDeleteACategoria() throws Exception {
@@ -37,54 +54,60 @@ public class CategoriaControllerTest {
         URI uri = new URI("/api/categorias/" + categoria.getId());
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete(uri))
+                .delete(uri)
+                .header("authorization", "Bearer " + CreateSessionUtil.token))
                 .andExpect(MockMvcResultMatchers.status().is(204));
+    }
+
+    @Test
+    public void shouldNotDeleteACategoria() throws Exception {
+        Categoria categoria = getCategoriaFromDatabase();
+
+        URI uri = new URI("/api/categorias/" + categoria.getId());
+
+        mockMvc.perform(MockMvcRequestBuilders
+                .delete(uri))
+                .andExpect(MockMvcResultMatchers.status().is(403));
     }
 
     private Categoria getCategoriaFromDatabase() throws Exception {
 
-        Optional<Categoria> categoria = categoriaRepository.findByNome("testeCategoriaBanco");
-
-        if (categoria.isPresent()) {
-
-            return categoria.get();
+        Optional<Categoria> categoria = categoriaRepository.findByNome(CreateCategoriaUtil.nome);
+        if (!categoria.isPresent()) {
+            CreateCategoriaUtil.createCategoria(categoriaRepository);
+            return categoriaRepository.findByNome(CreateCategoriaUtil.nome).get();
         }
-
-        this.shouldCreateACategoria();
-
-        return categoriaRepository.findByNome("testeCategoriaBanco").get();
+        return categoria.get();
 
     }
 
     @Test
     public void shouldReturnAListOfCategoriesWith200Code() throws Exception {
+
+        getCategoriaFromDatabase();
+
         URI uri = new URI("/api/categorias");
 
         mockMvc.perform(MockMvcRequestBuilders
-                .get(uri))
+                .get(uri)
+                .header("authorization", "Bearer " + CreateSessionUtil.token))
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[*].nome").isNotEmpty());
-        ;
     }
 
     @Test
     public void shouldCreateACategoria() throws Exception {
         URI uri = new URI("/api/categorias");
         String json = new JSONObject()
-                .put("nome", "testeCategoriaBanco")
+                .put("nome", "testeCategoriaBanco" + GenerateRandomNumber.generateRandomNumber())
                 .toString();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        mockMvc.perform(MockMvcRequestBuilders
                 .post(uri)
                 .content(json)
+                .header("authorization", "Bearer " + CreateSessionUtil.token)
                 .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(201))
-                .andReturn();
-        if (mvcResult.getResponse().getStatus() == 201) {
-            return;
-        }
-        shouldDeleteACategoria();
+                .andExpect(MockMvcResultMatchers.status().is(201));
     }
-
 }

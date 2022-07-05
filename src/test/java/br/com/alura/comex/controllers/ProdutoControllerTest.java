@@ -1,22 +1,32 @@
 package br.com.alura.comex.controllers;
 
+import java.math.BigDecimal;
 import java.net.URI;
-import java.util.Optional;
 
 import org.json.JSONObject;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.models.Produto;
+import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
+import br.com.alura.comex.repository.UsuarioRepository;
+import br.com.alura.comex.utils.CreateCategoriaUtil;
+import br.com.alura.comex.utils.CreateProdutoUtil;
+import br.com.alura.comex.utils.CreateSessionUtil;
+import br.com.alura.comex.utils.GenerateRandomNumber;
 
-@WebMvcTest
+@SpringBootTest
+@AutoConfigureMockMvc
+@ActiveProfiles("test")
 public class ProdutoControllerTest {
 
     @Autowired
@@ -24,6 +34,22 @@ public class ProdutoControllerTest {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+
+    @BeforeEach
+    public void setup() throws Exception {
+
+        if (CreateSessionUtil.createSession(mockMvc, usuarioRepository)) {
+            throw new Exception("Não foi possível criar uma sessão");
+        }
+
+        CreateProdutoUtil.createProduto(produtoRepository, categoriaRepository);
+    }
 
     @Test
     public void shouldDeleteAProduto() throws Exception {
@@ -33,23 +59,14 @@ public class ProdutoControllerTest {
         URI uri = new URI("/api/produtos/" + produto.getId());
 
         mockMvc.perform(MockMvcRequestBuilders
-                .delete(uri))
+                .delete(uri)
+                .header("authorization", "Bearer " + CreateSessionUtil.token))
                 .andExpect(MockMvcResultMatchers.status().is(204));
     }
 
     private Produto getProdutoFromDatabase() throws Exception {
 
-        Optional<Produto> Produto = produtoRepository.findByNome("testeProdutoBanco");
-
-        if (Produto.isPresent()) {
-
-            return Produto.get();
-        }
-
-        this.shouldCreateAProduto();
-
-        return produtoRepository.findByNome("testeProdutoBanco").get();
-
+        return produtoRepository.findByNome(CreateProdutoUtil.nome).get();
     }
 
     @Test
@@ -66,21 +83,22 @@ public class ProdutoControllerTest {
 
     @Test
     public void shouldCreateAProduto() throws Exception {
+
         URI uri = new URI("/api/produtos");
         String json = new JSONObject()
-                .put("nome", "testeProdutoBanco")
+                .put("nome", "testeProdutoBanco" + GenerateRandomNumber.generateRandomNumber())
+                .put("categoriaId", categoriaRepository.findByNome(CreateCategoriaUtil.nome).get().getId())
+                .put("precoUnitario", BigDecimal.valueOf(564.00))
+                .put("quantidadeEstoque", 5)
+                .put("descricao", "uma descricao")
                 .toString();
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders
+        mockMvc.perform(MockMvcRequestBuilders
                 .post(uri)
                 .content(json)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().is(201))
-                .andReturn();
-        if (mvcResult.getResponse().getStatus() == 201) {
-            return;
-        }
-        shouldDeleteAProduto();
+                .contentType(MediaType.APPLICATION_JSON)
+                .header("authorization", "Bearer " + CreateSessionUtil.token))
+                .andExpect(MockMvcResultMatchers.status().is(201));
     }
 
 }
