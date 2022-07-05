@@ -3,7 +3,6 @@ package br.com.alura.comex.builders;
 import java.math.BigDecimal;
 
 import br.com.alura.comex.models.ItemPedido;
-import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.models.Produto;
 
 public class ItemPedidoBuilder {
@@ -26,11 +25,6 @@ public class ItemPedidoBuilder {
 
     public ItemPedidoBuilder comProduto(Produto produto) {
         itemPedido.setProduto(produto);
-        return this;
-    }
-
-    public ItemPedidoBuilder comPedido(Pedido pedido) {
-        itemPedido.setPedido(pedido);
         return this;
     }
 
