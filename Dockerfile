@@ -19,7 +19,7 @@ ENV DB_DATABASE="comexdb"
 ENV PORT="8080"
 ENV JAVA_OPTS="-Xmx512m -Xms512m"
 
-RUN mvn install
+RUN mvn install -DskipTests
 
 FROM openjdk:17-alpine
 
