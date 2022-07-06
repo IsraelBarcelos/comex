@@ -5,7 +5,21 @@ WORKDIR /app
 
 RUN ls -l
 
-RUN mvn install -DskipTests
+ENV DATABASE_NAME="comexdb"
+ENV DB_LINK="jdbc:mysql://mysqlcomex:3306/comexdb"
+ENV DB_ROOT_PASSWORD: "root"
+ENV DB_USERNAME="root"
+ENV DB_HOST="mysqlcomex"
+ENV DB_PORT=3306
+ENV DB_NAME="comexdb"
+ENV DB_PASSWORD="root"
+ENV JWT_PASSWORD="123456"
+ENV SPRING_PROFILES_ACTIVE="production"
+ENV DB_DATABASE="comexdb"
+ENV PORT="8080"
+ENV JAVA_OPTS="-Xmx512m -Xms512m"
+
+RUN mvn install
 
 FROM openjdk:17-alpine
 
@@ -18,14 +32,16 @@ ENV DATABASE_NAME="comexdb"
 ENV DB_LINK="jdbc:mysql://mysqlcomex:3306/comexdb"
 ENV DB_ROOT_PASSWORD: "root"
 ENV DB_USERNAME="root"
+ENV DB_HOST="mysqlcomex"
+ENV DB_PORT=3306
+ENV DB_NAME="comexdb"
 ENV DB_PASSWORD="root"
-ENV JWT_PASSWORD="root"
+ENV JWT_PASSWORD="123456"
 ENV SPRING_PROFILES_ACTIVE="production"
 ENV DB_DATABASE="comexdb"
-ENV PORT="8080"
 ENV JAVA_OPTS="-Xmx512m -Xms512m"
 
-CMD [ "sh", "-c", "java -XX:+UseContainerSupport -jar /app.jar" ]
+CMD [ "sh", "-c", "java -XX:+UseContainerSupport -Xmx512m -Xms512m -Dserver.port=$PORT -jar /app.jar " ]
 
 # EXPOSE 8080
 # RUN addgroup -S spring && adduser -S spring -G spring

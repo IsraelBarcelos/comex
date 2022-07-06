@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 public class JPAUtil {
 
-  @Value("${DATABASE_NAME}")
+  @Value("${DB_NAME}")
   private static String databaseName;
 
   private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory(
