@@ -1,5 +1,6 @@
 package br.com.alura.comex.builders;
 
+import br.com.alura.comex.models.Perfil;
 import br.com.alura.comex.models.Usuario;
 
 public class UsuarioBuilder {
@@ -17,6 +18,11 @@ public class UsuarioBuilder {
 
     public UsuarioBuilder comNome(String nome) {
         this.usuario.setNome(nome);
+        return this;
+    }
+
+    public UsuarioBuilder addPerfil(Perfil perfil) {
+        this.usuario.addPerfil(perfil);
         return this;
     }
 
