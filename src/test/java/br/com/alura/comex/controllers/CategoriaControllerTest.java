@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -14,9 +15,11 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.models.Categoria;
 import br.com.alura.comex.repository.CategoriaRepository;
+import br.com.alura.comex.repository.PerfilRepository;
 import br.com.alura.comex.repository.UsuarioRepository;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateSessionUtil;
+import br.com.alura.comex.utils.CreateUserUtil;
 import br.com.alura.comex.utils.GenerateRandomNumber;
 
 import java.net.URI;
@@ -36,14 +39,18 @@ public class CategoriaControllerTest {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PerfilRepository perfilRepository;
+
     @BeforeEach
     public void setup() throws Exception {
-
-        if (CreateSessionUtil.createSession(mockMvc, usuarioRepository)) {
-            throw new Exception("Não foi possível criar uma sessão");
-        }
-
+        CreateUserUtil.createUser(usuarioRepository, passwordEncoder, perfilRepository);
+        CreateSessionUtil.createSession(mockMvc, usuarioRepository, passwordEncoder, perfilRepository);
         CreateCategoriaUtil.createCategoria(categoriaRepository);
+
     }
 
     @Test

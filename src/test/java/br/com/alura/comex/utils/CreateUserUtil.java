@@ -1,18 +1,52 @@
 package br.com.alura.comex.utils;
 
+import java.util.Optional;
+
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import br.com.alura.comex.builders.UsuarioBuilder;
+import br.com.alura.comex.models.Perfil;
 import br.com.alura.comex.models.Usuario;
+import br.com.alura.comex.repository.PerfilRepository;
 import br.com.alura.comex.repository.UsuarioRepository;
 
 public class CreateUserUtil {
-    public static void createUser(String email, String password, UsuarioRepository usuarioRepository) throws Exception {
+
+    public static final String email = "teste@teste.com";
+    public static final String password = "123456";
+    public static final String nomeDoUsuario = "usuarioDoBancoTeste";
+
+    public static void createUser(UsuarioRepository usuarioRepository, PasswordEncoder passwordEncoder,
+            PerfilRepository perfilRepository)
+            throws Exception {
+
         if (!usuarioRepository.findByEmail(email).isPresent()) {
+
+            Perfil perfil = getPerfil(perfilRepository);
+
             Usuario user = new UsuarioBuilder()
                     .comEmail(email)
-                    .comSenha(password)
-                    .comNome("usuarioDoBancoTeste")
+                    .comSenha(passwordEncoder.encode(password))
+                    .comNome(nomeDoUsuario)
+                    .addPerfil(perfil)
                     .build();
             usuarioRepository.save(user);
         }
+
     }
+
+    private static Perfil getPerfil(PerfilRepository perfilRepository) {
+        Optional<Perfil> optionalPerfil = perfilRepository.getByNome("ROLE_ADMIN");
+
+        if (!optionalPerfil.isPresent()) {
+            Perfil perfil = new Perfil();
+            perfil.setNome("ROLE_ADMIN");
+            perfilRepository.save(perfil);
+
+            return perfil;
+        }
+
+        return optionalPerfil.get();
+    }
+
 }

@@ -10,12 +10,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
-@DataJpaTest
+@SpringBootTest
+@AutoConfigureMockMvc
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public class PedidoRepositoryTest {
@@ -35,11 +38,17 @@ public class PedidoRepositoryTest {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PerfilRepository perfilRepository;
+
     @BeforeEach
     public void setup() throws Exception {
-        CreateClienteUtil.createCliente(clienteRepository, usuarioRepository);
+        CreateClienteUtil.createCliente(clienteRepository, usuarioRepository, passwordEncoder, perfilRepository);
         CreatePedidoUtil.createPedido(clienteRepository, pedidoRepository, usuarioRepository, produtoRepository,
-                categoriaRepository);
+                categoriaRepository, passwordEncoder, perfilRepository);
         CreateCategoriaUtil.createCategoria(categoriaRepository);
     }
 

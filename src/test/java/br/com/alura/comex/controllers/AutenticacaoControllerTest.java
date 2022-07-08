@@ -7,13 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.models.Usuario;
+import br.com.alura.comex.repository.PerfilRepository;
 import br.com.alura.comex.repository.UsuarioRepository;
+import br.com.alura.comex.utils.CreateUserUtil;
 
 import java.net.URI;
 import java.util.Optional;
@@ -31,41 +34,29 @@ public class AutenticacaoControllerTest {
         @Autowired
         private UsuarioRepository usuarioRepository;
 
+        @Autowired
+        PasswordEncoder passwordEncoder;
+
+        @Autowired
+        private PerfilRepository perfilRepository;
+
         @BeforeEach
         public void setUsuario() throws Exception {
                 usuarioTeste = getUsuarioFromDatabase();
         }
 
         private Usuario getUsuarioFromDatabase() throws Exception {
-
-                Optional<Usuario> usuario = usuarioRepository.findByEmail("teste@teste.com");
-
-                if (usuario.isPresent()) {
-
-                        return usuario.get();
-                }
-
-                this.createUser();
-
-                return usuarioRepository.findByEmail("teste@teste.com").get();
-
-        }
-
-        private Usuario createUser() throws Exception {
-                Usuario usuario = new Usuario();
-                usuario.setNome("testeCategoriaBanco");
-                usuario.setEmail("teste@teste.com");
-                usuario.setSenha("123456");
-                usuarioRepository.save(usuario);
-                return usuario;
+                CreateUserUtil.createUser(usuarioRepository, passwordEncoder, perfilRepository);
+                Optional<Usuario> usuario = usuarioRepository.findByEmail(CreateUserUtil.email);
+                return usuario.get();
         }
 
         @Test
         public void shouldReturn400HttpErrorIfUserDataIsWrong() throws Exception {
                 URI uri = new URI("/auth");
                 String json = new JSONObject()
-                                .put("email", "teste@1234.email.com")
-                                .put("senha", "123456")
+                                .put("email", CreateUserUtil.email)
+                                .put("senha", CreateUserUtil.password + "123213")
                                 .toString();
 
                 mockMvc.perform(MockMvcRequestBuilders
@@ -79,8 +70,8 @@ public class AutenticacaoControllerTest {
         public void shouldReturn200IfAllIsRight() throws Exception {
                 URI uri = new URI("/auth");
                 String json = new JSONObject()
-                                .put("email", "teste@teste.com")
-                                .put("senha", "123456")
+                                .put("email", CreateUserUtil.email)
+                                .put("senha", CreateUserUtil.password)
                                 .toString();
 
                 mockMvc.perform(MockMvcRequestBuilders

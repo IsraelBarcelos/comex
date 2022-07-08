@@ -7,9 +7,11 @@ import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -17,15 +19,18 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.models.Produto;
 import br.com.alura.comex.repository.CategoriaRepository;
+import br.com.alura.comex.repository.PerfilRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 import br.com.alura.comex.repository.UsuarioRepository;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateProdutoUtil;
 import br.com.alura.comex.utils.CreateSessionUtil;
+import br.com.alura.comex.utils.CreateUserUtil;
 import br.com.alura.comex.utils.GenerateRandomNumber;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
 public class ProdutoControllerTest {
 
@@ -41,13 +46,17 @@ public class ProdutoControllerTest {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    PerfilRepository perfilRepository;
+
     @BeforeEach
     public void setup() throws Exception {
 
-        if (CreateSessionUtil.createSession(mockMvc, usuarioRepository)) {
-            throw new Exception("Não foi possível criar uma sessão");
-        }
-
+        CreateUserUtil.createUser(usuarioRepository, passwordEncoder, perfilRepository);
+        CreateSessionUtil.createSession(mockMvc, usuarioRepository, passwordEncoder, perfilRepository);
         CreateProdutoUtil.createProduto(produtoRepository, categoriaRepository);
     }
 
@@ -78,7 +87,6 @@ public class ProdutoControllerTest {
                 .andExpect(MockMvcResultMatchers.status().is(200))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content").exists())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.content[*].nome").isNotEmpty());
-        ;
     }
 
     @Test
