@@ -1,0 +1,21 @@
+cache:
+  directories:
+    - $HOME/.m2
+
+language: java
+
+services:
+  - docker
+
+stages:
+  - test
+  - deploy
+
+install: skip
+
+jobs:
+  include:
+    - stage: test
+      name: "testing app"
+      services: mysql
+      before_script
