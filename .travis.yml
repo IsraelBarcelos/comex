@@ -17,4 +17,4 @@ jobs:
     - stage: deploy
       name: "deploying"
       script:
-        - make deploy
+        - deploy.sh
