@@ -1,4 +1,4 @@
-package br.com.alura.comex.controllers.form;
+package br.com.alura.comex.cliente;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -6,11 +6,7 @@ import javax.validation.constraints.NotNull;
 import br.com.alura.comex.repository.UsuarioRepository;
 import org.hibernate.validator.constraints.Length;
 
-import br.com.alura.comex.builders.ClienteBuilder;
 import br.com.alura.comex.builders.EnderecoBuilder;
-import br.com.alura.comex.models.Cliente;
-import br.com.alura.comex.models.Endereco;
-import br.com.alura.comex.models.Telefone;
 
 public class ClienteForm {
 

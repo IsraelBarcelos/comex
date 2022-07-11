@@ -6,9 +6,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import br.com.alura.comex.builders.ItemPedidoBuilder;
 import br.com.alura.comex.builders.PedidoBuilder;
+import br.com.alura.comex.cliente.ClienteRepository;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.repository.CategoriaRepository;
-import br.com.alura.comex.repository.ClienteRepository;
 import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.PerfilRepository;
 import br.com.alura.comex.repository.ProdutoRepository;

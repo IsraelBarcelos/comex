@@ -1,5 +1,6 @@
 package br.com.alura.comex.repository;
 
+import br.com.alura.comex.cliente.ClienteRepository;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateClienteUtil;

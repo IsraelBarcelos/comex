@@ -2,11 +2,11 @@ package br.com.alura.comex.utils;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import br.com.alura.comex.builders.ClienteBuilder;
 import br.com.alura.comex.builders.EnderecoBuilder;
-import br.com.alura.comex.models.Cliente;
-import br.com.alura.comex.models.Telefone;
-import br.com.alura.comex.repository.ClienteRepository;
+import br.com.alura.comex.cliente.Cliente;
+import br.com.alura.comex.cliente.ClienteBuilder;
+import br.com.alura.comex.cliente.ClienteRepository;
+import br.com.alura.comex.cliente.Telefone;
 import br.com.alura.comex.repository.PerfilRepository;
 import br.com.alura.comex.repository.UsuarioRepository;
 

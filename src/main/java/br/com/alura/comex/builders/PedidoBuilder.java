@@ -1,6 +1,6 @@
 package br.com.alura.comex.builders;
 
-import br.com.alura.comex.models.Cliente;
+import br.com.alura.comex.cliente.Cliente;
 import br.com.alura.comex.models.ItemPedido;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.models.descontos.descontoPedido.TipoDescontoPedido;

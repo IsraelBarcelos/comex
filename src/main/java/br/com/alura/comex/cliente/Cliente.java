@@ -1,4 +1,4 @@
-package br.com.alura.comex.models;
+package br.com.alura.comex.cliente;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.alura.comex.models.Pedido;
+import br.com.alura.comex.models.Usuario;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

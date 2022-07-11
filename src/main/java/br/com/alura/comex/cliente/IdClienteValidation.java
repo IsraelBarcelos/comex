@@ -1,11 +1,11 @@
-package br.com.alura.comex.controllers.form.validation;
+package br.com.alura.comex.cliente;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.alura.comex.repository.ClienteRepository;
+import br.com.alura.comex.controllers.form.validation.ValidaIdCliente;
 
 public class IdClienteValidation implements ConstraintValidator<ValidaIdCliente, Long> {
 

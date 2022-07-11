@@ -23,11 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.alura.comex.cliente.ClienteRepository;
 import br.com.alura.comex.controllers.form.PedidoForm;
 import br.com.alura.comex.dto.DetalhamentoDePedidoDto;
 import br.com.alura.comex.dto.PedidoDto;
 import br.com.alura.comex.models.Pedido;
-import br.com.alura.comex.repository.ClienteRepository;
 import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 

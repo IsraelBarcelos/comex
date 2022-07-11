@@ -1,9 +1,9 @@
 package br.com.alura.comex.controllers.form;
 
 import br.com.alura.comex.builders.PedidoBuilder;
+import br.com.alura.comex.cliente.ClienteRepository;
 import br.com.alura.comex.controllers.form.validation.ValidaIdCliente;
 import br.com.alura.comex.models.Pedido;
-import br.com.alura.comex.repository.ClienteRepository;
 import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
 

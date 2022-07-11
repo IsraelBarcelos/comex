@@ -1,6 +1,4 @@
-package br.com.alura.comex.repository;
-
-import br.com.alura.comex.models.Cliente;
+package br.com.alura.comex.cliente;
 
 import java.util.Optional;
 

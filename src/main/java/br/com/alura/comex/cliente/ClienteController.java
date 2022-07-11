@@ -1,4 +1,4 @@
-package br.com.alura.comex.controllers;
+package br.com.alura.comex.cliente;
 
 import java.net.URI;
 import java.util.Optional;
@@ -16,11 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import br.com.alura.comex.controllers.form.ClienteForm;
-import br.com.alura.comex.dto.ClienteDto;
-import br.com.alura.comex.models.Cliente;
-import br.com.alura.comex.repository.ClienteRepository;
 
 @RestController
 @RequestMapping("api/clientes")

@@ -1,4 +1,4 @@
-package br.com.alura.comex.models;
+package br.com.alura.comex.cliente;
 
 import javax.persistence.Embeddable;
 

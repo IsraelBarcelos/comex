@@ -1,6 +1,6 @@
 package br.com.alura.comex.dto;
 
-import br.com.alura.comex.models.Endereco;
+import br.com.alura.comex.cliente.Endereco;
 
 public class EnderecoDto {
     private String rua;

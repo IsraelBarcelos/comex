@@ -1,8 +1,5 @@
-package br.com.alura.comex.builders;
+package br.com.alura.comex.cliente;
 
-import br.com.alura.comex.models.Cliente;
-import br.com.alura.comex.models.Endereco;
-import br.com.alura.comex.models.Telefone;
 import br.com.alura.comex.models.Usuario;
 
 public class ClienteBuilder {
