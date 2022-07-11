@@ -10,6 +10,7 @@ import br.com.alura.comex.builders.ClienteBuilder;
 import br.com.alura.comex.builders.EnderecoBuilder;
 import br.com.alura.comex.models.Cliente;
 import br.com.alura.comex.models.Endereco;
+import br.com.alura.comex.models.Telefone;
 
 public class ClienteForm {
 
@@ -41,89 +42,17 @@ public class ClienteForm {
 
     @NotNull
     @NotEmpty
+    private Integer ddd;
+
+    @NotNull
+    @NotEmpty
+    private Integer numeroTelefone;
+
+    @NotNull
+    @NotEmpty
     private String usuarioEmail;
 
     public ClienteForm() {
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public String getRua() {
-        return rua;
-    }
-
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public Integer getNumero() {
-        return numero;
-    }
-
-    public void setNumero(Integer numero) {
-        this.numero = numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getUsuarioEmail() {
-        return usuarioEmail;
-    }
-
-    public void setUsuarioEmail(String usuarioEmail) {
-        this.usuarioEmail = usuarioEmail;
     }
 
     public Cliente converter(UsuarioRepository usuarioRepository) {
@@ -138,7 +67,7 @@ public class ClienteForm {
         Cliente cliente = new ClienteBuilder()
                 .comNome(nome)
                 .comCpf(cpf)
-                .comTelefone(telefone)
+                .comTelefone(new Telefone(ddd, numeroTelefone))
                 .comEndereco(endereco)
                 .comUsuario(usuarioRepository.findByEmail(usuarioEmail).get())
                 .build();

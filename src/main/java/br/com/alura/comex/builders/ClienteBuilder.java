@@ -2,6 +2,7 @@ package br.com.alura.comex.builders;
 
 import br.com.alura.comex.models.Cliente;
 import br.com.alura.comex.models.Endereco;
+import br.com.alura.comex.models.Telefone;
 import br.com.alura.comex.models.Usuario;
 
 public class ClienteBuilder {
@@ -18,11 +19,11 @@ public class ClienteBuilder {
     }
 
     public ClienteBuilder comCpf(String cpf) {
-        this.cliente.setCpf(cpf);
+        this.cliente.getCpf().setNumeroCpf(cpf);
         return this;
     }
 
-    public ClienteBuilder comTelefone(String telefone) {
+    public ClienteBuilder comTelefone(Telefone telefone) {
         this.cliente.setTelefone(telefone);
         return this;
     }

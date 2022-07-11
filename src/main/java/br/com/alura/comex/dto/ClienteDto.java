@@ -12,8 +12,8 @@ public class ClienteDto {
 
     public ClienteDto(Cliente cliente) {
         this.nome = cliente.getNome();
-        this.cpf = cliente.getCpf();
-        this.telefone = cliente.getTelefone();
+        this.cpf = cliente.getCpf().getNumeroCpf();
+        this.telefone = cliente.getTelefone().getNumeroComDDD();
         this.local = cliente.getEndereco().getCidade() + "/" + cliente.getEndereco().getEstado();
     }
 

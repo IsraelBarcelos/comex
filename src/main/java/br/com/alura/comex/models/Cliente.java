@@ -12,8 +12,15 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "clientes")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Cliente {
 
     @Id
@@ -24,10 +31,12 @@ public class Cliente {
     private String nome;
 
     @Column(nullable = false, unique = true)
-    private String cpf;
+    @Embedded
+    private Cpf cpf;
 
     @Column(nullable = false)
-    private String telefone;
+    @Embedded
+    private Telefone telefone;
 
     @Embedded
     private Endereco endereco;
@@ -37,70 +46,5 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos = new ArrayList<Pedido>();
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
-    }
-
-    public List<Pedido> getPedidos() {
-        return pedidos;
-    }
-
-    public Usuario getUsuario() {
-        return this.usuario;
-    }
-
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
-
-    @Override
-    public String toString() {
-        return ("Cliente [id=" +
-                id +
-                ", nome=" +
-                nome +
-                ", cpf=" +
-                cpf +
-                ", telefone=" +
-                telefone +
-                ", endereco=" +
-                endereco +
-                "]");
-    }
 
 }
