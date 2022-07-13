@@ -3,12 +3,12 @@ package br.com.alura.comex.utils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import br.com.alura.comex.builders.EnderecoBuilder;
-import br.com.alura.comex.cliente.Cliente;
-import br.com.alura.comex.cliente.ClienteBuilder;
-import br.com.alura.comex.cliente.ClienteRepository;
-import br.com.alura.comex.cliente.Telefone;
+import br.com.alura.comex.dominio.cliente.Cliente;
+import br.com.alura.comex.dominio.cliente.ClienteBuilder;
+import br.com.alura.comex.dominio.cliente.Telefone;
+import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.repository.PerfilRepository;
-import br.com.alura.comex.repository.UsuarioRepository;
 
 public class CreateClienteUtil {
 
@@ -24,7 +24,7 @@ public class CreateClienteUtil {
     public final static Integer ddd = 54;
     public final static Integer numeroTelefone = 123456789;
 
-    public static void createCliente(ClienteRepository clienteRepository, UsuarioRepository usuarioRepository,
+    public static void createCliente(ClienteRepositoryComJPA clienteRepository, UsuarioRepository usuarioRepository,
             PasswordEncoder passwordEncoder, PerfilRepository perfilRepository)
             throws Exception {
         if (clienteRepository.findByNome(nome).isPresent()) {

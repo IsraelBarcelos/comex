@@ -1,4 +1,4 @@
-package br.com.alura.comex.cliente;
+package br.com.alura.comex.dominio.cliente;
 
 import org.springframework.data.domain.Page;
 

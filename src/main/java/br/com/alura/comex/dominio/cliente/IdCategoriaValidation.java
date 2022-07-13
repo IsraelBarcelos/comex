@@ -1,4 +1,4 @@
-package br.com.alura.comex.cliente;
+package br.com.alura.comex.dominio.cliente;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

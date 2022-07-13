@@ -1,9 +1,11 @@
-package br.com.alura.comex.cliente;
+package br.com.alura.comex.dominio.cliente;
 
 import java.net.URI;
 import java.util.Optional;
 
-import br.com.alura.comex.repository.UsuarioRepository;
+import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.infra.usuario.UsuarioRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -22,7 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ClienteController {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteRepositoryComJPA clienteRepository;
 
     @GetMapping
     public Page<ClienteDto> listar(@RequestParam(required = false) Optional<Integer> pagina) {

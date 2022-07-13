@@ -1,6 +1,7 @@
 package br.com.alura.comex.repository;
 
-import br.com.alura.comex.cliente.ClienteRepository;
+import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateClienteUtil;
@@ -28,7 +29,7 @@ public class PedidoRepositoryTest {
     private PedidoRepository pedidoRepository;
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteRepositoryComJPA clienteRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;

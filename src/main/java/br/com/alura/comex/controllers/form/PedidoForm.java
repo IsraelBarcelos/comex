@@ -1,8 +1,8 @@
 package br.com.alura.comex.controllers.form;
 
 import br.com.alura.comex.builders.PedidoBuilder;
-import br.com.alura.comex.cliente.ClienteRepository;
 import br.com.alura.comex.controllers.form.validation.ValidaIdCliente;
+import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
@@ -37,7 +37,7 @@ public class PedidoForm {
         this.itens = itens;
     }
 
-    public Pedido converter(ClienteRepository clienteRepository, ProdutoRepository produtoRepository,
+    public Pedido converter(ClienteRepositoryComJPA clienteRepository, ProdutoRepository produtoRepository,
             PedidoRepository pedidoRepository) {
         Pedido pedido = new PedidoBuilder()
                 .comCliente(clienteRepository.findById(clienteId).get())

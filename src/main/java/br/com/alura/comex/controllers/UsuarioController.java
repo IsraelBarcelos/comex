@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.comex.controllers.form.AddProfileForm;
-import br.com.alura.comex.controllers.form.UserForm;
-import br.com.alura.comex.dto.UsuarioDto;
+import br.com.alura.comex.dominio.usuario.UserForm;
+import br.com.alura.comex.dominio.usuario.UsuarioDto;
+import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.models.Perfil;
 import br.com.alura.comex.models.Usuario;
 import br.com.alura.comex.repository.PerfilRepository;
-import br.com.alura.comex.repository.UsuarioRepository;
 
 @RestController
 @RequestMapping(path = "/api/usuarios")

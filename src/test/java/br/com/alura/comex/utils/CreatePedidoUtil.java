@@ -6,16 +6,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import br.com.alura.comex.builders.ItemPedidoBuilder;
 import br.com.alura.comex.builders.PedidoBuilder;
-import br.com.alura.comex.cliente.ClienteRepository;
+import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.repository.CategoriaRepository;
 import br.com.alura.comex.repository.PedidoRepository;
 import br.com.alura.comex.repository.PerfilRepository;
 import br.com.alura.comex.repository.ProdutoRepository;
-import br.com.alura.comex.repository.UsuarioRepository;
 
 public class CreatePedidoUtil {
-        public static void createPedido(ClienteRepository clienteRepository, PedidoRepository pedidoRepository,
+        public static void createPedido(ClienteRepositoryComJPA clienteRepository, PedidoRepository pedidoRepository,
                         UsuarioRepository usuarioRepository, ProdutoRepository produtoRepository,
                         CategoriaRepository categoriaRepository, PasswordEncoder passwordEncoder,
                         PerfilRepository perfilRepository) throws Exception {

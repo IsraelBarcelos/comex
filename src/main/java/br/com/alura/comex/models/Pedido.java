@@ -18,7 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import br.com.alura.comex.cliente.Cliente;
+import br.com.alura.comex.dominio.cliente.Cliente;
 import br.com.alura.comex.models.descontos.descontoPedido.CalculadoraDeDescontosPedido;
 import br.com.alura.comex.models.descontos.descontoPedido.TipoDescontoPedido;
 import br.com.alura.comex.repository.PedidoRepository;

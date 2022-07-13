@@ -1,4 +1,4 @@
-package br.com.alura.comex.cliente;
+package br.com.alura.comex.dominio.cliente;
 
 import br.com.alura.comex.models.Usuario;
 
