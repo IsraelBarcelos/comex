@@ -11,8 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.models.Usuario;
-import br.com.alura.comex.repository.UsuarioRepository;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
 

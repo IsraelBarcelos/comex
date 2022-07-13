@@ -1,4 +1,4 @@
-package br.com.alura.comex.controllers.form;
+package br.com.alura.comex.dominio.usuario;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;

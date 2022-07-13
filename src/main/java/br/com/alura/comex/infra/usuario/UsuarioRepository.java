@@ -1,4 +1,4 @@
-package br.com.alura.comex.repository;
+package br.com.alura.comex.infra.usuario;
 
 import java.util.Optional;
 
