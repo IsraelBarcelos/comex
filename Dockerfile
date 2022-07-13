@@ -6,9 +6,9 @@ WORKDIR /app
 RUN ls -l
 
 ENV DB_ROOT_PASSWORD: "root"
-ENV DB_USERNAME="root"
-ENV DB_HOST="mysqlcomex"
+ENV DB_USER="userfromdb"
 ENV DB_PORT=3306
+ENV DB_HOST="mysqlcomex"
 ENV DB_NAME="comexdb"
 ENV DB_PASSWORD="root"
 ENV JWT_PASSWORD="123456"
@@ -24,9 +24,9 @@ VOLUME /tmp
 COPY --from=0 "/app/target/*.jar" app.jar
 
 ENV DB_ROOT_PASSWORD: "root"
-ENV DB_USERNAME="root"
-ENV DB_HOST="mysqlcomex"
+ENV DB_USER="userfromdb"
 ENV DB_PORT=3306
+ENV DB_HOST="mysqlcomex"
 ENV DB_NAME="comexdb"
 ENV DB_PASSWORD="root"
 ENV JWT_PASSWORD="123456"

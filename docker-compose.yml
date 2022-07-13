@@ -10,10 +10,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_DATABASE: ${DB_NAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
       MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_USER: ${DB_USER}
     networks:
       - networkdeteste
     volumes:
@@ -25,14 +25,12 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DATABASE_NAME: "comexdb"
-      DB_LINK: "jdbc:mysql://mysqlcomex:3306/comexdb"
-      DB_ROOT_PASSWORD: "root"
-      DB_USERNAME: "root"
-      DB_PASSWORD: "root"
-      JWT_PASSWORD: "root"
-      SPRING_PROFILES_ACTIVE: "production"
-      DB_DATABASE: "comexdb"
+      DB_NAME: ${DB_NAME}
+      DB_ROOT_PASSWORD: ${DB_PASSWORD}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      JWT_PASSWORD: ${JWT_PASSWORD}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE}
     networks:
       - networkdeteste
     volumes:
