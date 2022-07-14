@@ -28,7 +28,7 @@ create table if not exists perfis(id BIGINT not null auto_increment, nome varcha
 create table if not exists clientes(
 	id BIGINT NOT NULL AUTO_INCREMENT
     , nome varchar(250) not null
-    , cpf varchar(250) not null
+    , numeroCpf varchar(250) not null
     , rua varchar(250) not null
     , numero varchar(250) not null
     , complemento varchar(250)
