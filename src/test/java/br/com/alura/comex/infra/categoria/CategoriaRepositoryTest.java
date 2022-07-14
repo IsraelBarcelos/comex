@@ -1,8 +1,7 @@
-package br.com.alura.comex.repository;
+package br.com.alura.comex.infra.categoria;
 
 import br.com.alura.comex.dominio.categoria.Categoria;
 import br.com.alura.comex.dominio.categoria.CategoriaBuilder;
-import br.com.alura.comex.infra.categoria.CategoriaRepository;
 
 import java.util.Optional;
 

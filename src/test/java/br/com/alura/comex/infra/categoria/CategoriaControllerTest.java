@@ -1,4 +1,4 @@
-package br.com.alura.comex.controllers;
+package br.com.alura.comex.infra.categoria;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.dominio.categoria.Categoria;
-import br.com.alura.comex.infra.categoria.CategoriaRepository;
 import br.com.alura.comex.infra.usuario.PerfilRepository;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.utils.CreateCategoriaUtil;

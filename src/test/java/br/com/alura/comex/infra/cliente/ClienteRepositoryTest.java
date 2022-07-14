@@ -1,4 +1,4 @@
-package br.com.alura.comex.repository;
+package br.com.alura.comex.infra.cliente;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.alura.comex.dominio.cliente.Cliente;
-import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.infra.usuario.PerfilRepository;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.utils.CreateClienteUtil;

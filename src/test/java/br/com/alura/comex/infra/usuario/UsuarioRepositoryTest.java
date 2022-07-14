@@ -1,7 +1,6 @@
-package br.com.alura.comex.repository;
+package br.com.alura.comex.infra.usuario;
 
 import br.com.alura.comex.dominio.usuario.Usuario;
-import br.com.alura.comex.infra.usuario.UsuarioRepository;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

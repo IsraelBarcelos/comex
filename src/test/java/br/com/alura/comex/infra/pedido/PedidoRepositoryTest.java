@@ -1,9 +1,8 @@
-package br.com.alura.comex.repository;
+package br.com.alura.comex.infra.pedido;
 
 import br.com.alura.comex.dominio.pedido.Pedido;
 import br.com.alura.comex.infra.categoria.CategoriaRepository;
 import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
-import br.com.alura.comex.infra.pedido.PedidoRepository;
 import br.com.alura.comex.infra.produto.ProdutoRepository;
 import br.com.alura.comex.infra.usuario.PerfilRepository;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;

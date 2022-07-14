@@ -1,4 +1,4 @@
-package br.com.alura.comex.controllers;
+package br.com.alura.comex.infra.produto;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.dominio.produto.Produto;
 import br.com.alura.comex.infra.categoria.CategoriaRepository;
-import br.com.alura.comex.infra.produto.ProdutoRepository;
 import br.com.alura.comex.infra.usuario.PerfilRepository;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
