@@ -2,10 +2,10 @@ package br.com.alura.comex.utils;
 
 import java.math.BigDecimal;
 
-import br.com.alura.comex.builders.ProdutoBuilder;
-import br.com.alura.comex.models.Produto;
-import br.com.alura.comex.repository.CategoriaRepository;
-import br.com.alura.comex.repository.ProdutoRepository;
+import br.com.alura.comex.dominio.produto.Produto;
+import br.com.alura.comex.dominio.produto.ProdutoBuilder;
+import br.com.alura.comex.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.infra.produto.ProdutoRepository;
 
 public class CreateProdutoUtil {
     public final static String nome = "Produto Teste";

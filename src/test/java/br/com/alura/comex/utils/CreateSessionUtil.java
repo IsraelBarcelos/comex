@@ -11,8 +11,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.jayway.jsonpath.JsonPath;
 
+import br.com.alura.comex.infra.usuario.PerfilRepository;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
-import br.com.alura.comex.repository.PerfilRepository;
 
 public class CreateSessionUtil {
 

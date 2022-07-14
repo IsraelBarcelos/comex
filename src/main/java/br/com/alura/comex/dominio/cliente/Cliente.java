@@ -12,8 +12,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import br.com.alura.comex.dominio.pedido.Pedido;
 import br.com.alura.comex.dominio.usuario.Usuario;
-import br.com.alura.comex.models.Pedido;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

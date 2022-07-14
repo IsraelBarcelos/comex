@@ -1,8 +1,12 @@
 package br.com.alura.comex.repository;
 
+import br.com.alura.comex.dominio.pedido.Pedido;
+import br.com.alura.comex.infra.categoria.CategoriaRepository;
 import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.infra.pedido.PedidoRepository;
+import br.com.alura.comex.infra.produto.ProdutoRepository;
+import br.com.alura.comex.infra.usuario.PerfilRepository;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
-import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateClienteUtil;
 import br.com.alura.comex.utils.CreatePedidoUtil;

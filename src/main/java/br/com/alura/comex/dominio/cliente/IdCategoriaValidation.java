@@ -5,8 +5,8 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.alura.comex.controllers.form.validation.ValidaIdCategoria;
-import br.com.alura.comex.repository.CategoriaRepository;
+import br.com.alura.comex.dominio.categoria.ValidaIdCategoria;
+import br.com.alura.comex.infra.categoria.CategoriaRepository;
 
 public class IdCategoriaValidation implements ConstraintValidator<ValidaIdCategoria, Long> {
 
