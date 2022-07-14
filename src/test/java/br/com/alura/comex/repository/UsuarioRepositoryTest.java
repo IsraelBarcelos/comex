@@ -1,7 +1,8 @@
 package br.com.alura.comex.repository;
 
+import br.com.alura.comex.dominio.usuario.Usuario;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
-import br.com.alura.comex.models.Usuario;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

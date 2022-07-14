@@ -1,7 +1,5 @@
 package br.com.alura.comex.dominio.usuario;
 
-import br.com.alura.comex.models.Usuario;
-
 public class UsuarioDto {
     String email;
 

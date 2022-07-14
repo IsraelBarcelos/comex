@@ -1,4 +1,4 @@
-package br.com.alura.comex.models;
+package br.com.alura.comex.dominio.usuario;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import br.com.alura.comex.models.Perfil;
 
 @Entity
 @Table(name = "usuarios")

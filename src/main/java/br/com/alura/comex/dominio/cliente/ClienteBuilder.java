@@ -1,6 +1,6 @@
 package br.com.alura.comex.dominio.cliente;
 
-import br.com.alura.comex.models.Usuario;
+import br.com.alura.comex.dominio.usuario.Usuario;
 
 public class ClienteBuilder {
 

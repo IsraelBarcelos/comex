@@ -3,9 +3,6 @@ package br.com.alura.comex.dominio.usuario;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import br.com.alura.comex.builders.UsuarioBuilder;
-import br.com.alura.comex.models.Usuario;
-
 public class UserForm {
 
     @NotNull

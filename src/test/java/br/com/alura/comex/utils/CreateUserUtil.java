@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import br.com.alura.comex.builders.UsuarioBuilder;
+import br.com.alura.comex.dominio.usuario.Usuario;
+import br.com.alura.comex.dominio.usuario.UsuarioBuilder;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.models.Perfil;
-import br.com.alura.comex.models.Usuario;
 import br.com.alura.comex.repository.PerfilRepository;
 
 public class CreateUserUtil {

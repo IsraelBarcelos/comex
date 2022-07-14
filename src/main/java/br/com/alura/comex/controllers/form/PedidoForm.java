@@ -1,7 +1,7 @@
 package br.com.alura.comex.controllers.form;
 
 import br.com.alura.comex.builders.PedidoBuilder;
-import br.com.alura.comex.controllers.form.validation.ValidaIdCliente;
+import br.com.alura.comex.dominio.cliente.ValidaIdCliente;
 import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.models.Pedido;
 import br.com.alura.comex.repository.PedidoRepository;
