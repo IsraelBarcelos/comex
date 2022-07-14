@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.usuario;
+package br.com.alura.comex.aplicacao.usuario;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.comex.dominio.usuario.Perfil;
 import br.com.alura.comex.dominio.usuario.Usuario;
+import br.com.alura.comex.infra.usuario.PerfilRepository;
+import br.com.alura.comex.infra.usuario.UsuarioRepository;
 
 @RestController
 @RequestMapping(path = "/api/usuarios")

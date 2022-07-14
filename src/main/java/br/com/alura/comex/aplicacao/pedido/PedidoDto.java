@@ -1,28 +1,29 @@
-package br.com.alura.comex.infra.pedido;
+package br.com.alura.comex.aplicacao.pedido;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import org.springframework.data.domain.Page;
 
 import br.com.alura.comex.dominio.pedido.Pedido;
 
-public class DetalhamentoDePedidoDto {
+public class PedidoDto {
+
     private LocalDateTime data;
     private BigDecimal valorTotal;
     private BigDecimal desconto;
-    private List<ItemPedidoDetalhamentoPedidoDto> itens;
-    private Long idCliente;
+    private Integer quantidadeDeItens;
     private String nomeCliente;
 
-    public DetalhamentoDePedidoDto(Pedido pedido) {
+    public PedidoDto(Pedido pedido) {
         this.data = pedido.getData();
-        this.valorTotal = pedido.getValorTotal();
         this.desconto = pedido.getDesconto();
-        this.itens = ItemPedidoDetalhamentoPedidoDto.converter(pedido.getItensPedido());
-        this.idCliente = pedido.getCliente().getId();
         this.nomeCliente = pedido.getCliente().getNome();
-    }
+        this.valorTotal = pedido.getValorTotal();
+        this.quantidadeDeItens = pedido.getItensPedido().stream().map(itens -> {
+            return itens.getQuantidade();
+        }).reduce(0, Integer::sum);
+    };
 
     public LocalDateTime getData() {
         return data;
@@ -40,7 +41,7 @@ public class DetalhamentoDePedidoDto {
         this.desconto = desconto;
     }
 
-    public String getCpfCliente() {
+    public String getNomeCliente() {
         return nomeCliente;
     }
 
@@ -56,15 +57,12 @@ public class DetalhamentoDePedidoDto {
         this.valorTotal = valorTotal;
     }
 
-    public List<ItemPedidoDetalhamentoPedidoDto> getItens() {
-        return itens;
+    public Integer getQuantidadeDeItens() {
+        return quantidadeDeItens;
     }
 
-    public Long getIdCliente() {
-        return idCliente;
+    public static Page<PedidoDto> converter(Page<Pedido> pedidos) {
+        return pedidos.map(PedidoDto::new);
     }
 
-    public static List<PedidoDto> converter(List<Pedido> pedidos) {
-        return pedidos.stream().map(PedidoDto::new).collect(Collectors.toList());
-    }
 }

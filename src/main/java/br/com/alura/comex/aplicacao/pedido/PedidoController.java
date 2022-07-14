@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.pedido;
+package br.com.alura.comex.aplicacao.pedido;
 
 import java.net.URI;
 import java.util.Optional;
@@ -25,6 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.comex.dominio.pedido.Pedido;
 import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.infra.pedido.PedidoRepository;
 import br.com.alura.comex.infra.produto.ProdutoRepository;
 
 @RestController

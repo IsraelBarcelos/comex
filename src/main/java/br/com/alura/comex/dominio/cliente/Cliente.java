@@ -32,7 +32,6 @@ public class Cliente {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false, unique = true)
     @Embedded
     private Cpf cpf;
 

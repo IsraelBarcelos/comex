@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.usuario;
+package br.com.alura.comex.aplicacao.usuario;
 
 import br.com.alura.comex.dominio.usuario.Usuario;
 

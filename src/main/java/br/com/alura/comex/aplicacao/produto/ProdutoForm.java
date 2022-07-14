@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.produto;
+package br.com.alura.comex.aplicacao.produto;
 
 import br.com.alura.comex.dominio.categoria.ValidaIdCategoria;
 import br.com.alura.comex.dominio.produto.Produto;

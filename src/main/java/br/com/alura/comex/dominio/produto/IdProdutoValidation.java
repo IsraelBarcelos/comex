@@ -1,11 +1,11 @@
-package br.com.alura.comex.infra.produto;
+package br.com.alura.comex.dominio.produto;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.alura.comex.dominio.produto.ValidaIdProduto;
+import br.com.alura.comex.infra.produto.ProdutoRepository;
 
 public class IdProdutoValidation implements ConstraintValidator<ValidaIdProduto, Long> {
 

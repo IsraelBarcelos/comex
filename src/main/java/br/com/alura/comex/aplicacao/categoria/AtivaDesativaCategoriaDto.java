@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.categoria;
+package br.com.alura.comex.aplicacao.categoria;
 
 import br.com.alura.comex.dominio.categoria.Categoria;
 import br.com.alura.comex.dominio.categoria.CategoriaBuilder;

@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.categoria;
+package br.com.alura.comex.aplicacao.categoria;
 
 import org.springframework.data.domain.Page;
 

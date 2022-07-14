@@ -1,7 +1,8 @@
-package br.com.alura.comex.infra.produto;
+package br.com.alura.comex.aplicacao.produto;
 
 import br.com.alura.comex.dominio.produto.Produto;
 import br.com.alura.comex.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.infra.produto.ProdutoRepository;
 
 import java.net.URI;
 import java.util.Optional;

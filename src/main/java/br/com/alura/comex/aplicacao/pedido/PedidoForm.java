@@ -1,9 +1,10 @@
-package br.com.alura.comex.infra.pedido;
+package br.com.alura.comex.aplicacao.pedido;
 
 import br.com.alura.comex.dominio.cliente.ValidaIdCliente;
 import br.com.alura.comex.dominio.pedido.Pedido;
 import br.com.alura.comex.dominio.pedido.PedidoBuilder;
 import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.infra.pedido.PedidoRepository;
 import br.com.alura.comex.infra.produto.ProdutoRepository;
 
 import java.time.LocalDateTime;

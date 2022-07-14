@@ -6,8 +6,6 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-import br.com.alura.comex.infra.produto.IdProdutoValidation;
-
 @Target({ java.lang.annotation.ElementType.FIELD })
 @Retention(java.lang.annotation.RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = IdProdutoValidation.class)

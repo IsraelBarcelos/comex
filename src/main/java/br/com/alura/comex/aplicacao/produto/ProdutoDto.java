@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.produto;
+package br.com.alura.comex.aplicacao.produto;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.pedido;
+package br.com.alura.comex.aplicacao.pedido;
 
 import javax.validation.constraints.NotNull;
 

@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.produto;
+package br.com.alura.comex.aplicacao.produto;
 
 import java.math.BigDecimal;
 import java.util.Optional;
@@ -11,6 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 import br.com.alura.comex.dominio.categoria.ValidaIdCategoria;
 import br.com.alura.comex.dominio.produto.Produto;
+import br.com.alura.comex.infra.produto.ProdutoRepository;
 
 public class AtualizacaoProdutoForm {
     @NotNull

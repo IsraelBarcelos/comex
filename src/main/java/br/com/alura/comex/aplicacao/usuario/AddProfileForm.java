@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.usuario;
+package br.com.alura.comex.aplicacao.usuario;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;

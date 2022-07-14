@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.cliente;
+package br.com.alura.comex.aplicacao.cliente;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.categoria;
+package br.com.alura.comex.aplicacao.categoria;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;

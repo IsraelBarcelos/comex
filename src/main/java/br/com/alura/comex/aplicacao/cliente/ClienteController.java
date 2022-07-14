@@ -1,9 +1,10 @@
-package br.com.alura.comex.infra.cliente;
+package br.com.alura.comex.aplicacao.cliente;
 
 import java.net.URI;
 import java.util.Optional;
 
 import br.com.alura.comex.dominio.cliente.Cliente;
+import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;

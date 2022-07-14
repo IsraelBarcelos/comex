@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import br.com.alura.comex.dominio.cliente.Cliente;
 import br.com.alura.comex.dominio.cliente.ClienteNaoEncontrado;
@@ -13,6 +14,7 @@ public interface ClienteRepositoryComJPA extends JpaRepository<Cliente, Long> {
 
   Optional<Cliente> findByNome(String nomeDoCliente);
 
+  @Query("select c from Cliente c where c.cpf.numeroCpf = ?1")
   Optional<Cliente> findByNumeroCpf(String cpf);
 
   default void adicionarCliente(Cliente cliente) {

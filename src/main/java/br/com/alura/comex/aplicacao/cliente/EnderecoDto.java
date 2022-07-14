@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.cliente;
+package br.com.alura.comex.aplicacao.cliente;
 
 import br.com.alura.comex.dominio.cliente.Endereco;
 
