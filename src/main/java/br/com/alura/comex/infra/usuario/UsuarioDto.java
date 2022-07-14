@@ -1,4 +1,6 @@
-package br.com.alura.comex.dominio.usuario;
+package br.com.alura.comex.infra.usuario;
+
+import br.com.alura.comex.dominio.usuario.Usuario;
 
 public class UsuarioDto {
     String email;

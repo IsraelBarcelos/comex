@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.alura.comex.controllers.form.AddProfileForm;
+import br.com.alura.comex.infra.usuario.UserForm;
+import br.com.alura.comex.infra.usuario.UsuarioDto;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.models.Perfil;
 import br.com.alura.comex.repository.PerfilRepository;

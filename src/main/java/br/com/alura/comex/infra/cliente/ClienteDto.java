@@ -1,6 +1,8 @@
-package br.com.alura.comex.dominio.cliente;
+package br.com.alura.comex.infra.cliente;
 
 import org.springframework.data.domain.Page;
+
+import br.com.alura.comex.dominio.cliente.Cliente;
 
 public class ClienteDto {
     private String nome;

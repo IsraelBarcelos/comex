@@ -3,6 +3,8 @@ package br.com.alura.comex.dominio.cliente;
 import java.net.URI;
 import java.util.Optional;
 
+import br.com.alura.comex.infra.cliente.ClienteDto;
+import br.com.alura.comex.infra.cliente.ClienteForm;
 import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
 

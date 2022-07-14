@@ -1,7 +1,10 @@
-package br.com.alura.comex.dominio.usuario;
+package br.com.alura.comex.infra.usuario;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import br.com.alura.comex.dominio.usuario.Usuario;
+import br.com.alura.comex.dominio.usuario.UsuarioBuilder;
 
 public class UserForm {
 
