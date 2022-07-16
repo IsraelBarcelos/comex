@@ -1,7 +1,5 @@
 package br.com.alura.comex.comercial.aplicacao.cliente;
 
-import java.time.LocalDateTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.com.alura.comex.comercial.dominio.PublicadorDeEventos;
@@ -28,7 +26,7 @@ public class CadastrarCliente {
     public void executa(ClienteForm form) {
         Cliente cliente = form.converter(usuarioRepository);
         clienteRepository.adicionarCliente(cliente);
-        ClienteCadastrado clienteCadastrado = new ClienteCadastrado(cliente.getCpf(), LocalDateTime.now());
+        ClienteCadastrado clienteCadastrado = new ClienteCadastrado(cliente.getCpf());
         publicadorDeEventos.publicar(clienteCadastrado);
     }
 

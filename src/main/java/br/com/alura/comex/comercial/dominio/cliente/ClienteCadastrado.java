@@ -9,7 +9,7 @@ public class ClienteCadastrado implements Evento {
     private final Cpf cpfDoCliente;
     private final LocalDateTime momento;
 
-    public ClienteCadastrado(Cpf cpfDoCliente, LocalDateTime momento) {
+    public ClienteCadastrado(Cpf cpfDoCliente) {
         this.cpfDoCliente = cpfDoCliente;
         this.momento = LocalDateTime.now();
     }

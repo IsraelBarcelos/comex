@@ -1,7 +1,6 @@
 package br.com.alura.comex.comercial.aplicacao.cliente;
 
 import java.net.URI;
-import java.time.LocalDateTime;
 import java.util.Optional;
 
 import br.com.alura.comex.comercial.dominio.PublicadorDeEventos;
@@ -56,7 +55,7 @@ public class ClienteController {
 
         PublicadorDeEventos publicadorDeEventos = new PublicadorDeEventos();
         publicadorDeEventos.adicionar(new LogDeClienteCadastrado());
-        ClienteCadastrado eventoDeClienteCadastrado = new ClienteCadastrado(cliente.getCpf(), LocalDateTime.now());
+        ClienteCadastrado eventoDeClienteCadastrado = new ClienteCadastrado(cliente.getCpf());
         publicadorDeEventos.publicar(eventoDeClienteCadastrado);
 
         return ResponseEntity.created(uri).body(new ClienteDto(cliente));
