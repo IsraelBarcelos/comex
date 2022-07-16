@@ -13,7 +13,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import br.com.alura.comex.dominio.usuario.Usuario;
+import br.com.alura.comex.comercial.dominio.usuario.Usuario;
+import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.utils.CreateUserUtil;
 
 import java.net.URI;

@@ -13,9 +13,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import br.com.alura.comex.dominio.categoria.Categoria;
-import br.com.alura.comex.infra.usuario.PerfilRepository;
-import br.com.alura.comex.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.dominio.categoria.Categoria;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateSessionUtil;
 import br.com.alura.comex.utils.CreateUserUtil;

@@ -1,8 +1,5 @@
 package br.com.alura.comex.infra.categoria;
 
-import br.com.alura.comex.dominio.categoria.Categoria;
-import br.com.alura.comex.dominio.categoria.CategoriaBuilder;
-
 import java.util.Optional;
 
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+
+import br.com.alura.comex.comercial.dominio.categoria.Categoria;
+import br.com.alura.comex.comercial.dominio.categoria.CategoriaBuilder;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)

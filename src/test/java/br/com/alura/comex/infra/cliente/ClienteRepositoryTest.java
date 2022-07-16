@@ -10,9 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ActiveProfiles;
 
-import br.com.alura.comex.dominio.cliente.Cliente;
-import br.com.alura.comex.infra.usuario.PerfilRepository;
-import br.com.alura.comex.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.dominio.cliente.Cliente;
+import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.utils.CreateClienteUtil;
 
 @SpringBootTest

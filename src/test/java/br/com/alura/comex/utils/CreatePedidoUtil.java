@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import br.com.alura.comex.dominio.pedido.ItemPedidoBuilder;
-import br.com.alura.comex.dominio.pedido.Pedido;
-import br.com.alura.comex.dominio.pedido.PedidoBuilder;
-import br.com.alura.comex.infra.categoria.CategoriaRepository;
-import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
-import br.com.alura.comex.infra.pedido.PedidoRepository;
-import br.com.alura.comex.infra.produto.ProdutoRepository;
-import br.com.alura.comex.infra.usuario.PerfilRepository;
-import br.com.alura.comex.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.dominio.pedido.ItemPedidoBuilder;
+import br.com.alura.comex.comercial.dominio.pedido.Pedido;
+import br.com.alura.comex.comercial.dominio.pedido.PedidoBuilder;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.comercial.infra.pedido.PedidoRepository;
+import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
+import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 
 public class CreatePedidoUtil {
         public static void createPedido(ClienteRepositoryComJPA clienteRepository, PedidoRepository pedidoRepository,
