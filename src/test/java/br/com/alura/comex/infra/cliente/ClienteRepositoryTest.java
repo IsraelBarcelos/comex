@@ -40,8 +40,8 @@ public class ClienteRepositoryTest {
 
     @Test
     public void shouldReturnClientByName() {
-        Cliente client = clienteRepository.findByNome(CreateClienteUtil.nome).get();
+        Cliente client = clienteRepository.encontrarClientePeloNome(CreateClienteUtil.nome).get();
         Assertions.assertNotNull(client);
-        Assertions.assertEquals(client.getNome(), CreateClienteUtil.nome);
+        Assertions.assertEquals(CreateClienteUtil.nome, client.getNome());
     }
 }

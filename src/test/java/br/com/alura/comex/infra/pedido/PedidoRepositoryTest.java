@@ -59,7 +59,7 @@ public class PedidoRepositoryTest {
 
     @Test
     public void shouldGetNumbersOfPedidosOfAClientById() {
-        Long clientId = clienteRepository.findByNome(CreateClienteUtil.nome).get().getId();
+        Long clientId = clienteRepository.encontrarClientePeloNome(CreateClienteUtil.nome).get().getId();
         Integer numberOfPedidos = pedidoRepository.pedidosDeUmCliente(clientId);
         Assertions.assertNotNull(numberOfPedidos);
     }

@@ -1,9 +1,13 @@
 package br.com.alura.comex.aplicacao.cliente;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
+import br.com.alura.comex.dominio.PublicadorDeEventos;
 import br.com.alura.comex.dominio.cliente.Cliente;
+import br.com.alura.comex.dominio.cliente.ClienteCadastrado;
+import br.com.alura.comex.dominio.cliente.LogDeClienteCadastrado;
 import br.com.alura.comex.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.infra.usuario.UsuarioRepository;
 
@@ -43,12 +47,17 @@ public class ClienteController {
     public ResponseEntity<ClienteDto> salvar(@RequestBody ClienteForm clienteForm, UriComponentsBuilder uriBuilder,
             UsuarioRepository usuarioRepository) {
         Cliente cliente = clienteForm.converter(usuarioRepository);
-        clienteRepository.save(cliente);
+        clienteRepository.adicionarCliente(cliente);
 
         URI uri = uriBuilder
                 .path("/clientes/{id}")
                 .buildAndExpand(cliente.getId())
                 .toUri();
+
+        PublicadorDeEventos publicadorDeEventos = new PublicadorDeEventos();
+        publicadorDeEventos.adicionar(new LogDeClienteCadastrado());
+        ClienteCadastrado eventoDeClienteCadastrado = new ClienteCadastrado(cliente.getCpf(), LocalDateTime.now());
+        publicadorDeEventos.publicar(eventoDeClienteCadastrado);
 
         return ResponseEntity.created(uri).body(new ClienteDto(cliente));
     }

@@ -25,7 +25,7 @@ public class CreatePedidoUtil {
                         CreateProdutoUtil.createProduto(produtoRepository, categoriaRepository);
 
                         Pedido pedido = new PedidoBuilder().comCliente(clienteRepository
-                                        .findByNome(CreateClienteUtil.nome).get())
+                                        .encontrarClientePeloNome(CreateClienteUtil.nome).get())
                                         .comData(LocalDateTime.now())
                                         .comDesconto(pedidoRepository)
                                         .build();

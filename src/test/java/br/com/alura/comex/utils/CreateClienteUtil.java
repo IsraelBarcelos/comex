@@ -27,7 +27,7 @@ public class CreateClienteUtil {
     public static void createCliente(ClienteRepositoryComJPA clienteRepository, UsuarioRepository usuarioRepository,
             PasswordEncoder passwordEncoder, PerfilRepository perfilRepository)
             throws Exception {
-        if (clienteRepository.findByNome(nome).isPresent()) {
+        if (clienteRepository.encontrarClientePeloNome(nome).isPresent()) {
             return;
         }
 
