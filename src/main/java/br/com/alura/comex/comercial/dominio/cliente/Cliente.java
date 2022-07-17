@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
+import br.com.alura.comex.shared.dominio.Cpf;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -46,6 +47,6 @@ public class Cliente {
     private Usuario usuario;
 
     @OneToMany(mappedBy = "cliente")
-    private List<Pedido> pedidos = new ArrayList<Pedido>();
+    private List<Pedido> pedidos = new ArrayList<>();
 
 }

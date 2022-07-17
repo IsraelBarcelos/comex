@@ -1,5 +1,7 @@
 package br.com.alura.comex.comercial.dominio.cliente;
 
+import br.com.alura.comex.shared.dominio.Cpf;
+
 public class ClienteNaoEncontrado extends RuntimeException {
 
     public ClienteNaoEncontrado(Cpf cpf) {

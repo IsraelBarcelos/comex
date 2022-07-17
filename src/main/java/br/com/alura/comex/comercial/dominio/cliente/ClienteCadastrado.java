@@ -3,6 +3,7 @@ package br.com.alura.comex.comercial.dominio.cliente;
 import java.time.LocalDateTime;
 
 import br.com.alura.comex.comercial.dominio.Evento;
+import br.com.alura.comex.shared.dominio.Cpf;
 
 public class ClienteCadastrado implements Evento {
 

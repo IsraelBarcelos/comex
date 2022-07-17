@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import br.com.alura.comex.comercial.dominio.cliente.Cliente;
-import br.com.alura.comex.comercial.dominio.cliente.Cpf;
 import br.com.alura.comex.comercial.dominio.cliente.RepositorioDeCliente;
+import br.com.alura.comex.shared.dominio.Cpf;
 
 public interface ClienteRepositoryComJPA extends RepositorioDeCliente, JpaRepository<Cliente, Long> {
 

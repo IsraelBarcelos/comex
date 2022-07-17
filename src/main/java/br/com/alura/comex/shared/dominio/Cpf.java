@@ -1,4 +1,4 @@
-package br.com.alura.comex.comercial.dominio.cliente;
+package br.com.alura.comex.shared.dominio;
 
 import javax.persistence.Embeddable;
 
