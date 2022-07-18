@@ -2,11 +2,11 @@ package br.com.alura.comex.comercial.aplicacao.cliente;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import br.com.alura.comex.comercial.dominio.PublicadorDeEventos;
 import br.com.alura.comex.comercial.dominio.cliente.Cliente;
 import br.com.alura.comex.comercial.dominio.cliente.ClienteCadastrado;
 import br.com.alura.comex.comercial.dominio.cliente.RepositorioDeCliente;
 import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.shared.dominio.PublicadorDeEventos;
 
 public class CadastrarCliente {
 

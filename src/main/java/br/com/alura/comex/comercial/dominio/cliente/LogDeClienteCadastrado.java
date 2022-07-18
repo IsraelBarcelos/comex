@@ -1,7 +1,8 @@
 package br.com.alura.comex.comercial.dominio.cliente;
 
-import br.com.alura.comex.comercial.dominio.Evento;
-import br.com.alura.comex.comercial.dominio.Ouvinte;
+import br.com.alura.comex.shared.dominio.Evento;
+import br.com.alura.comex.shared.dominio.Ouvinte;
+import br.com.alura.comex.shared.dominio.TipoDeEvento;
 
 public class LogDeClienteCadastrado extends Ouvinte {
 
@@ -13,6 +14,6 @@ public class LogDeClienteCadastrado extends Ouvinte {
 
     @Override
     protected boolean deveProcessar(Evento evento) {
-        return evento instanceof ClienteCadastrado;
+        return evento.tipo() == TipoDeEvento.CLIENTE_CADASTRADO;
     }
 }

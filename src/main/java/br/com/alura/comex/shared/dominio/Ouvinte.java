@@ -1,4 +1,4 @@
-package br.com.alura.comex.comercial.dominio;
+package br.com.alura.comex.shared.dominio;
 
 public abstract class Ouvinte {
 
