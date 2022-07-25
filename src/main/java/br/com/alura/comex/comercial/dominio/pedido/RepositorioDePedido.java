@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface RepositorioDePedido {
-    void adicionarPedido(Pedido pedido);
+    void criarPedido(Pedido pedido);
 
     Optional<Pedido> encontrarPedidoPeloId(Long id);
 

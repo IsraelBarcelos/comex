@@ -36,7 +36,7 @@ public class CriarPedido {
     public void executa(PedidoForm form) {
         Pedido pedido = form.converter(clienteRepository, produtoRepository,
                 pedidoRepository);
-        repositorioDePedido.adicionarPedido(pedido);
+        repositorioDePedido.criarPedido(pedido);
         PedidoCriado pedidoCriado = new PedidoCriado(pedido);
         publicadorDeEventos.publicar(pedidoCriado);
     }

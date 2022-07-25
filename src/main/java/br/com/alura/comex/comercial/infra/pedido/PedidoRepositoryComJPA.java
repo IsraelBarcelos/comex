@@ -23,4 +23,11 @@ public interface PedidoRepositoryComJPA extends RepositorioDePedido, JpaReposito
     @Query("select p from Pedido p where p.id = ?1")
     Optional<Pedido> encontrarPedidoPeloId(Long id);
 
+    @Query("select p from Pedido p where p.cliente.id = ?1")
+    List<Pedido> listarPedidosDeUmCliente(Long clienteId);
+
+    default void criarPedido(Pedido pedido) {
+        this.save(pedido);
+    }
+
 }
