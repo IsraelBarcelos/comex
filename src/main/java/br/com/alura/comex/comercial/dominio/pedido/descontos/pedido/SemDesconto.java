@@ -1,4 +1,4 @@
-package br.com.alura.comex.comercial.dominio.pedido.descontos.descontoPedido;
+package br.com.alura.comex.comercial.dominio.pedido.descontos.pedido;
 
 import java.math.BigDecimal;
 
