@@ -1,8 +1,8 @@
 package br.com.alura.comex.comercial.dominio.pedido;
 
 import br.com.alura.comex.comercial.dominio.cliente.Cliente;
-import br.com.alura.comex.comercial.dominio.pedido.descontos.descontoPedido.TipoDescontoPedido;
-import br.com.alura.comex.comercial.infra.pedido.PedidoRepository;
+import br.com.alura.comex.comercial.dominio.pedido.descontos.pedido.TipoDescontoPedido;
+import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,7 +25,7 @@ public class PedidoBuilder {
     return this;
   }
 
-  public PedidoBuilder comDesconto(PedidoRepository pedidoRepository) {
+  public PedidoBuilder comDesconto(PedidoRepositoryComJPA pedidoRepository) {
     this.pedido.setDesconto(pedidoRepository);
     return this;
   }

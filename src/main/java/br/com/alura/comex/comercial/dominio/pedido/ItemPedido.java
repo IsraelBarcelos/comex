@@ -13,8 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import br.com.alura.comex.comercial.dominio.pedido.descontos.descontoItemPedido.CalculadoraDeDescontosItemPedido;
-import br.com.alura.comex.comercial.dominio.pedido.descontos.descontoItemPedido.TipoDescontoItemPedido;
+import br.com.alura.comex.comercial.dominio.pedido.descontos.itempedido.CalculadoraDeDescontosItemPedido;
+import br.com.alura.comex.comercial.dominio.pedido.descontos.itempedido.TipoDescontoItemPedido;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
 
 @Entity

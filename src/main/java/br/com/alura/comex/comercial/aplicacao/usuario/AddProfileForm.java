@@ -16,9 +16,6 @@ public class AddProfileForm {
     @Email
     private String email;
 
-    public AddProfileForm() {
-    }
-
     public String getEmail() {
         return email;
     }

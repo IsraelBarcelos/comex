@@ -4,7 +4,7 @@ import br.com.alura.comex.comercial.aplicacao.pedido.PedidoPorCategoriaDto;
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
-import br.com.alura.comex.comercial.infra.pedido.PedidoRepository;
+import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 import br.com.alura.comex.comercial.utils.IterableToArrayList;
 
 import java.net.URI;
@@ -40,7 +40,7 @@ public class CategoriaController {
   private CategoriaRepository categoriaRepository;
 
   @Autowired
-  private PedidoRepository pedidoRepository;
+  private PedidoRepositoryComJPA pedidoRepository;
 
   @GetMapping
   @Cacheable("categorias")

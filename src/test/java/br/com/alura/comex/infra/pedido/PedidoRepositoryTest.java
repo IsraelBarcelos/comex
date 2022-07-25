@@ -3,7 +3,7 @@ package br.com.alura.comex.infra.pedido;
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
-import br.com.alura.comex.comercial.infra.pedido.PedidoRepository;
+import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
 import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
@@ -30,7 +30,7 @@ import java.util.List;
 public class PedidoRepositoryTest {
 
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private PedidoRepositoryComJPA pedidoRepository;
 
     @Autowired
     private ClienteRepositoryComJPA clienteRepository;
@@ -61,7 +61,7 @@ public class PedidoRepositoryTest {
     @Test
     public void shouldGetNumbersOfPedidosOfAClientById() {
         Long clientId = clienteRepository.encontrarClientePeloNome(CreateClienteUtil.nome).get().getId();
-        Integer numberOfPedidos = pedidoRepository.pedidosDeUmCliente(clientId);
+        Integer numberOfPedidos = pedidoRepository.numeroDePedidosDeUmCliente(clientId);
         Assertions.assertNotNull(numberOfPedidos);
     }
 

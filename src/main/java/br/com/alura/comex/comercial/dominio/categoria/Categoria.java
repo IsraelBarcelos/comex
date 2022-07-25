@@ -15,10 +15,6 @@ public class Categoria {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  public Categoria() {
-
-  }
-
   @Column(nullable = false, unique = true)
   private String nome;
 

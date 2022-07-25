@@ -25,7 +25,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
-import br.com.alura.comex.comercial.infra.pedido.PedidoRepository;
+import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
 
 @RestController
@@ -33,7 +33,7 @@ import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
 public class PedidoController {
 
     @Autowired
-    private PedidoRepository pedidoRepository;
+    private PedidoRepositoryComJPA pedidoRepository;
 
     @Autowired
     private ClienteRepositoryComJPA clienteRepository;

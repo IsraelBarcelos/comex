@@ -9,13 +9,14 @@ import br.com.alura.comex.comercial.dominio.pedido.Pedido;
 import br.com.alura.comex.comercial.dominio.pedido.PedidoBuilder;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
-import br.com.alura.comex.comercial.infra.pedido.PedidoRepository;
+import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
 import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 
 public class CreatePedidoUtil {
-        public static void createPedido(ClienteRepositoryComJPA clienteRepository, PedidoRepository pedidoRepository,
+        public static void createPedido(ClienteRepositoryComJPA clienteRepository,
+                        PedidoRepositoryComJPA pedidoRepository,
                         UsuarioRepository usuarioRepository, ProdutoRepository produtoRepository,
                         CategoriaRepository categoriaRepository, PasswordEncoder passwordEncoder,
                         PerfilRepository perfilRepository) throws Exception {

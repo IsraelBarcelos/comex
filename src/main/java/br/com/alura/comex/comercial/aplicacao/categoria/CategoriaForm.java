@@ -23,8 +23,6 @@ public class CategoriaForm {
   }
 
   public Categoria converter() {
-    Categoria categoria = new CategoriaBuilder().comNome(nome).ativaCategoria().build();
-
-    return categoria;
+    return new CategoriaBuilder().comNome(nome).ativaCategoria().build();
   }
 }

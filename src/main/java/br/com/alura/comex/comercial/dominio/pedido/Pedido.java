@@ -19,9 +19,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.alura.comex.comercial.dominio.cliente.Cliente;
-import br.com.alura.comex.comercial.dominio.pedido.descontos.descontoPedido.CalculadoraDeDescontosPedido;
-import br.com.alura.comex.comercial.dominio.pedido.descontos.descontoPedido.TipoDescontoPedido;
-import br.com.alura.comex.comercial.infra.pedido.PedidoRepository;
+import br.com.alura.comex.comercial.dominio.pedido.descontos.pedido.CalculadoraDeDescontosPedido;
+import br.com.alura.comex.comercial.dominio.pedido.descontos.pedido.TipoDescontoPedido;
+import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 
 @Entity
 @Table(name = "pedidos")
@@ -70,7 +70,7 @@ public class Pedido {
         return desconto;
     }
 
-    public void setDesconto(PedidoRepository pedidoRepository) {
+    public void setDesconto(PedidoRepositoryComJPA pedidoRepository) {
         this.desconto = new CalculadoraDeDescontosPedido().calcular(this, pedidoRepository).setScale(2,
                 RoundingMode.HALF_UP);
     }
