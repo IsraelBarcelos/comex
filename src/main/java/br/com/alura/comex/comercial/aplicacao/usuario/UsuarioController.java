@@ -53,9 +53,9 @@ public class UsuarioController {
             perfilRepository.save(perfil);
             usuario.addPerfil(perfil);
             usuarioRepository.save(usuario);
-            return new ResponseEntity<UsuarioDto>(UsuarioDto.converter(usuario), HttpStatus.CREATED);
+            return new ResponseEntity<>(UsuarioDto.converter(usuario), HttpStatus.CREATED);
         } catch (Exception e) {
-            return new ResponseEntity<UsuarioDto>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
     }

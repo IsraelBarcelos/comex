@@ -5,12 +5,12 @@ WORKDIR /app
 
 RUN ls -l
 
-ENV DB_ROOT_PASSWORD: "root"
+ENV DB_ROOT_PASSWORD: "root123456"
 ENV DB_USER="userfromdb"
+ENV DB_PASSWORD="root123456"
 ENV DB_PORT=3306
-ENV DB_HOST="mysqlcomex"
+ENV DB_HOST="banco-comex-israel.cyoj62lmzr3v.sa-east-1.rds.amazonaws.com"
 ENV DB_NAME="comexdb"
-ENV DB_PASSWORD="root"
 ENV JWT_PASSWORD="123456"
 ENV SPRING_PROFILES_ACTIVE="production"
 
@@ -23,12 +23,12 @@ EXPOSE 8080
 VOLUME /tmp
 COPY --from=0 "/app/target/*.jar" app.jar
 
-ENV DB_ROOT_PASSWORD: "root"
+ENV DB_ROOT_PASSWORD: "root123456"
 ENV DB_USER="userfromdb"
+ENV DB_PASSWORD="root123456"
 ENV DB_PORT=3306
-ENV DB_HOST="mysqlcomex"
+ENV DB_HOST="banco-comex-israel.cyoj62lmzr3v.sa-east-1.rds.amazonaws.com"
 ENV DB_NAME="comexdb"
-ENV DB_PASSWORD="root"
 ENV JWT_PASSWORD="123456"
 ENV SPRING_PROFILES_ACTIVE="production"
 

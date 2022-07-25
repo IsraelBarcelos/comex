@@ -5,16 +5,23 @@ spring:
       driverClassName: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:comexdb}
       username: ${DB_USER:userfromdb}
-      password: ${DB_PASSWORD:root}
+      password: ${DB_PASSWORD:root123456}
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   mvc:
     pathmatch:
-      matchingStrategy: ant_path_matcher
+      matchingStrategy: ant-path-matcher
 #jwt
 forum:
   jwt:
     secret: ${JWT_PASSWORD:123456}
     expiration: 900000
+
+AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+AWS_REGION: ${AWS_REGION}
+
+kafka:
+  bootstrapAddress: ${KAFKA_BOOTSTRAP_ADDRESS}
