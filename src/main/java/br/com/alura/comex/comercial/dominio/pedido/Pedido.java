@@ -22,8 +22,16 @@ import br.com.alura.comex.comercial.dominio.cliente.Cliente;
 import br.com.alura.comex.comercial.dominio.pedido.descontos.pedido.CalculadoraDeDescontosPedido;
 import br.com.alura.comex.comercial.dominio.pedido.descontos.pedido.TipoDescontoPedido;
 import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Table(name = "pedidos")
 public class Pedido {
 
@@ -50,49 +58,9 @@ public class Pedido {
     @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<>();
 
-    public LocalDateTime getData() {
-        return data;
-    }
-
-    public void setData(LocalDateTime data) {
-        this.data = data;
-    }
-
-    public Cliente getCliente() {
-        return this.cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
-    public BigDecimal getDesconto() {
-        return desconto;
-    }
-
     public void setDesconto(PedidoRepositoryComJPA pedidoRepository) {
         this.desconto = new CalculadoraDeDescontosPedido().calcular(this, pedidoRepository).setScale(2,
                 RoundingMode.HALF_UP);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public TipoDescontoPedido getTipoDesconto() {
-        return tipoDesconto;
-    }
-
-    public void setTipoDesconto(TipoDescontoPedido tipoDesconto) {
-        this.tipoDesconto = tipoDesconto;
-    }
-
-    public BigDecimal getValorTotal() {
-        return valorTotal;
     }
 
     public List<ItemPedido> getItensPedido() {
