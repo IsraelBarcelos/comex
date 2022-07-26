@@ -11,7 +11,15 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "produtos")
 public class Produto {
@@ -34,42 +42,6 @@ public class Produto {
     @OneToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public BigDecimal getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public void setPrecoUnitario(BigDecimal precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
-
-    public int getQuantidadeEstoque() {
-        return quantidadeEstoque;
-    }
-
     public void retirarDoEstoqueParaOPedido(int quantidadeASerRetirada) {
         if (quantidadeASerRetirada > quantidadeEstoque) {
             throw new IllegalArgumentException("Não há quantidade suficiente de " + this.nome + " no estoque");
@@ -79,26 +51,6 @@ public class Produto {
 
     public void adicionarProdutoAoEstoque(int quantidadeASerAdicionada) {
         this.quantidadeEstoque += quantidadeASerAdicionada;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
-
-    @Override
-    public String toString() {
-        return "Produto{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", precoUnitario=" + precoUnitario +
-                ", quantidadeEstoque=" + quantidadeEstoque +
-                ", categoria=" + categoria +
-                '}';
     }
 
 }

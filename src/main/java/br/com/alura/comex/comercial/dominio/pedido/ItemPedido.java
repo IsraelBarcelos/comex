@@ -16,9 +16,17 @@ import javax.persistence.Table;
 import br.com.alura.comex.comercial.dominio.pedido.descontos.itempedido.CalculadoraDeDescontosItemPedido;
 import br.com.alura.comex.comercial.dominio.pedido.descontos.itempedido.TipoDescontoItemPedido;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "itens_pedido")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ItemPedido {
 
     @Id
@@ -42,45 +50,9 @@ public class ItemPedido {
     @Enumerated(EnumType.STRING)
     private TipoDescontoItemPedido tipoDesconto;
 
-    public Long getId() {
-        return id;
-    }
-
-    public BigDecimal getPrecoUnitario() {
-        return precoUnitario;
-    }
-
-    public void setPrecoUnitario(BigDecimal precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
     public void setQuantidade(Produto produto, int quantidade) {
         this.quantidade = quantidade;
         produto.retirarDoEstoqueParaOPedido(quantidade);
-    }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Pedido getPedido() {
-        return pedido;
-    }
-
-    public void setPedido(Pedido pedido) {
-        this.pedido = pedido;
-    }
-
-    public BigDecimal getDesconto() {
-        return desconto;
     }
 
     public void setDesconto() {
@@ -93,25 +65,6 @@ public class ItemPedido {
 
     public BigDecimal getValorTotalComDesconto() {
         return this.getValorTotal().subtract(this.desconto);
-    }
-
-    public TipoDescontoItemPedido getTipoDesconto() {
-        return tipoDesconto;
-    }
-
-    public void setTipoDesconto(TipoDescontoItemPedido tipoDesconto) {
-        this.tipoDesconto = tipoDesconto;
-    }
-
-    @Override
-    public String toString() {
-        return "ItemPedido [id=" + id +
-                ", precoUnitario=" + precoUnitario +
-                ", quantidade=" + quantidade +
-                ", produto=" + produto +
-                ", pedido=" + pedido +
-                ", desconto=" + desconto +
-                ", valorTotal=" + getValorTotal() + "]";
     }
 
 }
