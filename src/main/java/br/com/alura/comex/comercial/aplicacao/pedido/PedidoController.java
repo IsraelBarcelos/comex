@@ -26,7 +26,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
-import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
+import br.com.alura.comex.comercial.infra.produto.ProdutoRepositoryComJPA;
 
 @RestController
 @RequestMapping("/api/pedidos")
@@ -39,7 +39,7 @@ public class PedidoController {
     private ClienteRepositoryComJPA clienteRepository;
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private ProdutoRepositoryComJPA produtoRepository;
 
     @GetMapping
     @Cacheable("pedidos")

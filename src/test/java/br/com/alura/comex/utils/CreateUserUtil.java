@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import br.com.alura.comex.comercial.aplicacao.usuario.UsuarioBuilder;
+import br.com.alura.comex.comercial.dominio.usuario.Email;
 import br.com.alura.comex.comercial.dominio.usuario.Perfil;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
@@ -25,7 +26,7 @@ public class CreateUserUtil {
             Perfil perfil = getPerfil(perfilRepository);
 
             Usuario user = new UsuarioBuilder()
-                    .comEmail(email)
+                    .comEmail(new Email(email))
                     .comSenha(passwordEncoder.encode(password))
                     .comNome(nomeDoUsuario)
                     .addPerfil(perfil)

@@ -6,7 +6,7 @@ public class UsuarioDto {
     String email;
 
     public UsuarioDto(Usuario usuario) {
-        this.email = usuario.getEmail();
+        this.email = usuario.getEmail().getEndereco();
     }
 
     public String getEmail() {

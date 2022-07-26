@@ -19,7 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.comercial.dominio.produto.Produto;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
-import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
+import br.com.alura.comex.comercial.infra.produto.ProdutoRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
 import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
@@ -38,7 +38,7 @@ public class ProdutoControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private ProdutoRepositoryComJPA produtoRepository;
 
     @Autowired
     private UsuarioRepository usuarioRepository;
@@ -75,7 +75,7 @@ public class ProdutoControllerTest {
 
     private Produto getProdutoFromDatabase() throws Exception {
 
-        return produtoRepository.findByNome(CreateProdutoUtil.nome).get();
+        return produtoRepository.encontrarPeloNome(CreateProdutoUtil.nome).get();
     }
 
     @Test

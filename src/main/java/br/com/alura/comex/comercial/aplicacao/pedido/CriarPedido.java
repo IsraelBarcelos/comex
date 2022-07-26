@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
 import br.com.alura.comex.comercial.dominio.pedido.PedidoCriado;
 import br.com.alura.comex.comercial.dominio.pedido.RepositorioDePedido;
-
+import br.com.alura.comex.comercial.dominio.produto.RepositorioDeProduto;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
-import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
 
 import br.com.alura.comex.shared.dominio.PublicadorDeEventos;
 
@@ -21,7 +20,7 @@ public class CriarPedido {
     ClienteRepositoryComJPA clienteRepository;
 
     @Autowired
-    ProdutoRepository produtoRepository;
+    RepositorioDeProduto produtoRepository;
 
     @Autowired
     PedidoRepositoryComJPA pedidoRepository;

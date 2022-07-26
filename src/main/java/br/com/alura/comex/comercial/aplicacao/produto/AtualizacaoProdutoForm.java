@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.Length;
 
 import br.com.alura.comex.comercial.dominio.categoria.ValidaIdCategoria;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
-import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
+import br.com.alura.comex.comercial.dominio.produto.RepositorioDeProduto;
 
 public class AtualizacaoProdutoForm {
     @NotNull
@@ -68,8 +68,8 @@ public class AtualizacaoProdutoForm {
         this.categoriaId = categoriaId;
     }
 
-    public Produto atualizar(Long id, ProdutoRepository produtoRepository) {
-        Optional<Produto> produtoOptional = produtoRepository.findById(id);
+    public Produto atualizar(Long id, RepositorioDeProduto produtoRepository) {
+        Optional<Produto> produtoOptional = produtoRepository.encontrarProdutoPeloId(id);
         if (!produtoOptional.isPresent()) {
             throw new IllegalArgumentException("Produto não encontrado");
         }
