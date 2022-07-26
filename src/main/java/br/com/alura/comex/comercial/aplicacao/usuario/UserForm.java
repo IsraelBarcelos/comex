@@ -51,7 +51,7 @@ public class UserForm {
 
     public Usuario converter() {
         return new UsuarioBuilder()
-                .comEmail(email)
+                .comEmail(new br.com.alura.comex.comercial.dominio.usuario.Email(email))
                 .comSenha(senha)
                 .comNome(nome)
                 .build();

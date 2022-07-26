@@ -1,8 +1,8 @@
 package br.com.alura.comex.comercial.aplicacao.produto;
 
 import br.com.alura.comex.comercial.dominio.produto.Produto;
+import br.com.alura.comex.comercial.dominio.produto.RepositorioDeProduto;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
-import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
 
 import java.net.URI;
 import java.util.Optional;
@@ -31,7 +31,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ProdutoController {
 
     @Autowired
-    private ProdutoRepository produtoRepository;
+    private RepositorioDeProduto produtoRepository;
 
     @Autowired
     private CategoriaRepository categoriaRepository;
@@ -44,7 +44,7 @@ public class ProdutoController {
         }
         Pageable pagination = PageRequest.of(paginaCorreta, 5);
 
-        Page<ProdutoDto> produtos = produtoRepository.findAll(pagination).map(ProdutoDto::new);
+        Page<ProdutoDto> produtos = produtoRepository.listarTodosProdutos(pagination).map(ProdutoDto::new);
         return ResponseEntity.ok(produtos);
     }
 
@@ -55,7 +55,7 @@ public class ProdutoController {
             UriComponentsBuilder uriBuilder) {
 
         Produto produto = produtoForm.converter(categoriaRepository);
-        produtoRepository.save(produto);
+        produtoRepository.criarProduto(produto);
 
         URI uri = uriBuilder
                 .path("/produtos/{id}")
@@ -67,7 +67,7 @@ public class ProdutoController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoDto> detalhar(@PathVariable Long id) {
-        Optional<Produto> produto = produtoRepository.findById(id);
+        Optional<Produto> produto = produtoRepository.encontrarProdutoPeloId(id);
 
         if (produto.isPresent()) {
             return ResponseEntity.ok(new ProdutoDto(produto.get()));
@@ -88,10 +88,10 @@ public class ProdutoController {
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        Optional<Produto> produto = produtoRepository.findById(id);
+        Optional<Produto> produto = produtoRepository.encontrarProdutoPeloId(id);
 
         if (produto.isPresent()) {
-            produtoRepository.delete(produto.get());
+            produtoRepository.removerProduto(produto.get());
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.notFound().build();
