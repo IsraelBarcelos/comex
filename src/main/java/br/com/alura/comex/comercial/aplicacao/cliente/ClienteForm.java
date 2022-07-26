@@ -8,9 +8,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.alura.comex.comercial.dominio.cliente.Cliente;
-import br.com.alura.comex.comercial.dominio.cliente.ClienteBuilder;
 import br.com.alura.comex.comercial.dominio.cliente.Endereco;
-import br.com.alura.comex.comercial.dominio.cliente.EnderecoBuilder;
 import br.com.alura.comex.comercial.dominio.cliente.Telefone;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
 import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;

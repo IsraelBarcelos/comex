@@ -1,5 +1,8 @@
-package br.com.alura.comex.comercial.dominio.cliente;
+package br.com.alura.comex.comercial.aplicacao.cliente;
 
+import br.com.alura.comex.comercial.dominio.cliente.Cliente;
+import br.com.alura.comex.comercial.dominio.cliente.Endereco;
+import br.com.alura.comex.comercial.dominio.cliente.Telefone;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
 
 public class ClienteBuilder {

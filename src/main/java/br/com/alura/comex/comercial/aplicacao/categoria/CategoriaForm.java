@@ -6,7 +6,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
-import br.com.alura.comex.comercial.dominio.categoria.CategoriaBuilder;
 
 public class CategoriaForm {
   @NotNull

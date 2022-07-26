@@ -1,4 +1,7 @@
-package br.com.alura.comex.comercial.dominio.usuario;
+package br.com.alura.comex.comercial.aplicacao.usuario;
+
+import br.com.alura.comex.comercial.dominio.usuario.Perfil;
+import br.com.alura.comex.comercial.dominio.usuario.Usuario;
 
 public class UsuarioBuilder {
     private Usuario usuario = new Usuario();

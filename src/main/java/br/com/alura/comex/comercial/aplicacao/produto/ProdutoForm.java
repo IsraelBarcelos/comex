@@ -2,7 +2,6 @@ package br.com.alura.comex.comercial.aplicacao.produto;
 
 import br.com.alura.comex.comercial.dominio.categoria.ValidaIdCategoria;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
-import br.com.alura.comex.comercial.dominio.produto.ProdutoBuilder;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 
 import java.math.BigDecimal;

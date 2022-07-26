@@ -1,7 +1,6 @@
 package br.com.alura.comex.comercial.aplicacao.categoria;
 
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
-import br.com.alura.comex.comercial.dominio.categoria.CategoriaBuilder;
 
 public class AtivaDesativaCategoriaDto {
 

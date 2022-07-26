@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import br.com.alura.comex.comercial.dominio.pedido.ItemPedidoBuilder;
+import br.com.alura.comex.comercial.aplicacao.pedido.ItemPedidoBuilder;
+import br.com.alura.comex.comercial.aplicacao.pedido.PedidoBuilder;
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
-import br.com.alura.comex.comercial.dominio.pedido.PedidoBuilder;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;

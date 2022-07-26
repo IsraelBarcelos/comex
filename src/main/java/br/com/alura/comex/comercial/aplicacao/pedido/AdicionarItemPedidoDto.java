@@ -3,7 +3,6 @@ package br.com.alura.comex.comercial.aplicacao.pedido;
 import javax.validation.constraints.NotNull;
 
 import br.com.alura.comex.comercial.dominio.pedido.ItemPedido;
-import br.com.alura.comex.comercial.dominio.pedido.ItemPedidoBuilder;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
 import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
 

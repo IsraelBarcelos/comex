@@ -1,4 +1,6 @@
-package br.com.alura.comex.comercial.dominio.cliente;
+package br.com.alura.comex.comercial.aplicacao.cliente;
+
+import br.com.alura.comex.comercial.dominio.cliente.Endereco;
 
 public class EnderecoBuilder {
 

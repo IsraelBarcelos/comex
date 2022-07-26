@@ -1,7 +1,8 @@
-package br.com.alura.comex.comercial.dominio.pedido;
+package br.com.alura.comex.comercial.aplicacao.pedido;
 
 import java.math.BigDecimal;
 
+import br.com.alura.comex.comercial.dominio.pedido.ItemPedido;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
 
 public class ItemPedidoBuilder {

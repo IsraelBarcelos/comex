@@ -2,8 +2,8 @@ package br.com.alura.comex.utils;
 
 import java.math.BigDecimal;
 
+import br.com.alura.comex.comercial.aplicacao.produto.ProdutoBuilder;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
-import br.com.alura.comex.comercial.dominio.produto.ProdutoBuilder;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 import br.com.alura.comex.comercial.infra.produto.ProdutoRepository;
 

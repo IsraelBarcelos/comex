@@ -1,6 +1,8 @@
-package br.com.alura.comex.comercial.dominio.pedido;
+package br.com.alura.comex.comercial.aplicacao.pedido;
 
 import br.com.alura.comex.comercial.dominio.cliente.Cliente;
+import br.com.alura.comex.comercial.dominio.pedido.ItemPedido;
+import br.com.alura.comex.comercial.dominio.pedido.Pedido;
 import br.com.alura.comex.comercial.dominio.pedido.descontos.pedido.TipoDescontoPedido;
 import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 

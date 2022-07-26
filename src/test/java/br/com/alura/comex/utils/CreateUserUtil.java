@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import br.com.alura.comex.comercial.aplicacao.usuario.UsuarioBuilder;
 import br.com.alura.comex.comercial.dominio.usuario.Perfil;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
-import br.com.alura.comex.comercial.dominio.usuario.UsuarioBuilder;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
 import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 

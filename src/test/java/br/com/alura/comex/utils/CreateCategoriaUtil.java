@@ -1,6 +1,6 @@
 package br.com.alura.comex.utils;
 
-import br.com.alura.comex.comercial.dominio.categoria.CategoriaBuilder;
+import br.com.alura.comex.comercial.aplicacao.categoria.CategoriaBuilder;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 
 public class CreateCategoriaUtil {

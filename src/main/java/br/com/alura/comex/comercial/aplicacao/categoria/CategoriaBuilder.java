@@ -1,4 +1,6 @@
-package br.com.alura.comex.comercial.dominio.categoria;
+package br.com.alura.comex.comercial.aplicacao.categoria;
+
+import br.com.alura.comex.comercial.dominio.categoria.Categoria;
 
 public class CategoriaBuilder {
 

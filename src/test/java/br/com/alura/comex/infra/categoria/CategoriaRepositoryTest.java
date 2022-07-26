@@ -10,8 +10,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
+import br.com.alura.comex.comercial.aplicacao.categoria.CategoriaBuilder;
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
-import br.com.alura.comex.comercial.dominio.categoria.CategoriaBuilder;
 import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 
 @DataJpaTest

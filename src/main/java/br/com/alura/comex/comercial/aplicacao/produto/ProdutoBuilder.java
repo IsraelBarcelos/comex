@@ -1,8 +1,9 @@
-package br.com.alura.comex.comercial.dominio.produto;
+package br.com.alura.comex.comercial.aplicacao.produto;
 
 import java.math.BigDecimal;
 
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
+import br.com.alura.comex.comercial.dominio.produto.Produto;
 
 public class ProdutoBuilder {
 
