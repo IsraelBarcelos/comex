@@ -26,7 +26,7 @@ import java.util.List;
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-public class PedidoRepositoryTest {
+public class PedidoRepositoryComJPATest {
 
     @Autowired
     private PedidoRepositoryComJPA pedidoRepository;

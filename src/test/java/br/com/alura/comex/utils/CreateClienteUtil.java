@@ -5,15 +5,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import br.com.alura.comex.comercial.aplicacao.cliente.ClienteBuilder;
 import br.com.alura.comex.comercial.aplicacao.cliente.EnderecoBuilder;
 import br.com.alura.comex.comercial.dominio.cliente.Cliente;
+import br.com.alura.comex.comercial.dominio.cliente.RepositorioDeCliente;
 import br.com.alura.comex.comercial.dominio.cliente.Telefone;
-import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
+import br.com.alura.comex.comercial.dominio.usuario.RepositorioDeUsuario;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
+import br.com.alura.comex.shared.dominio.Cpf;
 
 public class CreateClienteUtil {
 
     public final static String nome = "teste";
-    public final static String cpf = "cpf";
+    public final static String cpf = "58648610060";
     public final static String telefone = "telefone";
     public final static String rua = "rua";
     public final static int numero = 123;
@@ -24,8 +25,8 @@ public class CreateClienteUtil {
     public final static Integer ddd = 54;
     public final static Integer numeroTelefone = 123456789;
 
-    public static void createCliente(ClienteRepositoryComJPA clienteRepository,
-            UsuarioRepositoryComJPA usuarioRepository,
+    public static void createCliente(RepositorioDeCliente clienteRepository,
+            RepositorioDeUsuario usuarioRepository,
             PasswordEncoder passwordEncoder, PerfilRepository perfilRepository)
             throws Exception {
         if (clienteRepository.encontrarClientePeloNome(nome).isPresent()) {
@@ -36,7 +37,7 @@ public class CreateClienteUtil {
 
         Cliente cliente = new ClienteBuilder()
                 .comNome(nome)
-                .comCpf(cpf)
+                .comCpf(new Cpf(cpf))
                 .comTelefone(new Telefone(ddd, numeroTelefone))
                 .comUsuario(usuarioRepository.encontrarUsuarioPeloEmail(CreateUserUtil.email).get())
                 .comEndereco(new EnderecoBuilder()
@@ -49,6 +50,6 @@ public class CreateClienteUtil {
                         .build())
                 .build();
 
-        clienteRepository.save(cliente);
+        clienteRepository.adicionarCliente(cliente);
     }
 }

@@ -14,7 +14,7 @@ import java.util.Optional;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-class UsuarioRepositoryTest {
+class UsuarioRepositoryComJPATest {
 
     @Autowired
     UsuarioRepositoryComJPA usuarioRepository;

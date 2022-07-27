@@ -16,10 +16,10 @@ import br.com.alura.comex.comercial.dominio.categoria.Categoria;
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-class CategoriaRepositoryComJPATest {
+public class CategoriaRepositoryComJPATest {
 
     @Autowired
-    CategoriaRepositoryComJPA categoriaRepository;
+    private CategoriaRepositoryComJPA categoriaRepository;
 
     @BeforeEach
     public void setup() {
@@ -32,7 +32,7 @@ class CategoriaRepositoryComJPATest {
     }
 
     @Test
-    void shouldReturnCategoriaByName() {
+    public void shouldReturnCategoriaByName() {
         String categoryName = "teste";
         Optional<Categoria> category = categoriaRepository.encontrarCategoriaPeloNome(categoryName);
 

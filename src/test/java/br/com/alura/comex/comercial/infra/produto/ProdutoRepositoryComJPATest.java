@@ -10,8 +10,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import br.com.alura.comex.comercial.aplicacao.produto.ProdutoBuilder;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepositoryComJPA;
+import br.com.alura.comex.utils.CreateCategoriaUtil;
+import br.com.alura.comex.utils.CreateProdutoUtil;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -21,22 +23,24 @@ public class ProdutoRepositoryComJPATest {
     @Autowired
     ProdutoRepositoryComJPA produtoRepository;
 
-    @BeforeEach
-    public void setup() {
-        Optional<Produto> category = produtoRepository.encontrarPeloNome("teste");
-        if (!category.isPresent()) {
-            Produto categoryOnDb = new ProdutoBuilder().comNome("teste").build();
-            produtoRepository.save(categoryOnDb);
-        }
+    @Autowired
+    CategoriaRepositoryComJPA categoriaRepository;
 
+    @BeforeEach
+    public void setup() throws Exception {
+        CreateProdutoUtil.createProduto(produtoRepository, categoriaRepository);
     }
 
     @Test
     public void shouldReturnProdutoByName() {
-        String categoryName = "teste";
-        Optional<Produto> category = produtoRepository.encontrarPeloNome(categoryName);
+        String productName = CreateCategoriaUtil.nome;
+        Optional<Produto> produto = produtoRepository.encontrarPeloNome(productName);
 
-        Assertions.assertNotNull(category);
-        Assertions.assertEquals(category.get().getNome(), categoryName);
+        if (!produto.isPresent()) {
+            Assertions.fail("Produto não encontrado");
+        }
+
+        Assertions.assertNotNull(produto.get());
+        Assertions.assertEquals(productName, produto.get().getNome());
     }
 }

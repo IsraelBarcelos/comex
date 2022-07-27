@@ -19,7 +19,7 @@ import br.com.alura.comex.utils.CreateClienteUtil;
 @AutoConfigureMockMvc
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-public class ClienteRepositoryTest {
+public class ClienteRepositoryComJPATest {
 
     @Autowired
     private ClienteRepositoryComJPA clienteRepository;
