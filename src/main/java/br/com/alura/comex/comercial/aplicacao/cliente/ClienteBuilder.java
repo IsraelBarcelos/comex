@@ -4,6 +4,7 @@ import br.com.alura.comex.comercial.dominio.cliente.Cliente;
 import br.com.alura.comex.comercial.dominio.cliente.Endereco;
 import br.com.alura.comex.comercial.dominio.cliente.Telefone;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
+import br.com.alura.comex.shared.dominio.Cpf;
 
 public class ClienteBuilder {
 
@@ -18,8 +19,8 @@ public class ClienteBuilder {
         return this;
     }
 
-    public ClienteBuilder comCpf(String cpf) {
-        this.cliente.getCpf().setNumeroCpf(cpf);
+    public ClienteBuilder comCpf(Cpf cpf) {
+        this.cliente.setCpf(cpf);
         return this;
     }
 

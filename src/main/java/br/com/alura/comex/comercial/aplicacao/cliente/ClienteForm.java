@@ -12,6 +12,7 @@ import br.com.alura.comex.comercial.dominio.cliente.Endereco;
 import br.com.alura.comex.comercial.dominio.cliente.Telefone;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
 import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
+import br.com.alura.comex.shared.dominio.Cpf;
 
 public class ClienteForm {
 
@@ -71,7 +72,7 @@ public class ClienteForm {
 
         return new ClienteBuilder()
                 .comNome(nome)
-                .comCpf(cpf)
+                .comCpf(new Cpf(cpf))
                 .comTelefone(new Telefone(ddd, numeroTelefone))
                 .comEndereco(endereco)
                 .comUsuario(usuario.get())
