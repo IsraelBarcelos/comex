@@ -28,7 +28,7 @@ create table if not exists perfis(id BIGINT not null auto_increment, nome varcha
 create table if not exists clientes(
 	id BIGINT NOT NULL AUTO_INCREMENT
     , nome varchar(250) not null
-    , numeroCpf varchar(250) not null
+    , cpf varchar(250) not null
     , rua varchar(250) not null
     , numero varchar(250) not null
     , complemento varchar(250)
@@ -36,7 +36,7 @@ create table if not exists clientes(
     , cidade varchar(250) not null
     , estado varchar(250) not null
     , ddd int(2) not null
-    , numeroTelefone int(9) not null
+    , telefone int(9) not null
     , usuario_id bigint not null
     , primary key(id)
     , FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE
