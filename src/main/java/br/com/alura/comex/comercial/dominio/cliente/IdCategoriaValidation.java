@@ -15,7 +15,7 @@ public class IdCategoriaValidation implements ConstraintValidator<ValidaIdCatego
 
     @Override
     public boolean isValid(Long value, ConstraintValidatorContext context) {
-        return categoriaRepository.findById(value).isPresent();
+        return categoriaRepository.encontrarCategoriaPeloId(value).isPresent();
     }
 
 }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class Telefone {
-    @Column(nullable = false)
+    @Column(nullable = false, name = "telefone")
     private Integer numeroTelefone;
     @Column(nullable = false)
     private Integer ddd;
