@@ -11,7 +11,7 @@ import br.com.alura.comex.comercial.dominio.cliente.Cliente;
 import br.com.alura.comex.comercial.dominio.cliente.Endereco;
 import br.com.alura.comex.comercial.dominio.cliente.Telefone;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 
 public class ClienteForm {
 
@@ -53,7 +53,7 @@ public class ClienteForm {
     @NotEmpty
     private String usuarioEmail;
 
-    public Cliente converter(UsuarioRepository usuarioRepository) {
+    public Cliente converter(UsuarioRepositoryComJPA usuarioRepository) {
         Endereco endereco = new EnderecoBuilder()
                 .comRua(rua)
                 .comNumero(numero)
@@ -63,7 +63,7 @@ public class ClienteForm {
                 .comEstado(estado)
                 .build();
 
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(usuarioEmail);
+        Optional<Usuario> usuario = usuarioRepository.encontrarUsuarioPeloEmail(usuarioEmail);
 
         if (!usuario.isPresent()) {
             throw new IllegalArgumentException("Usuário não encontrado");

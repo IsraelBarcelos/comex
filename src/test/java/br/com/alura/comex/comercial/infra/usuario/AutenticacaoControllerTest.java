@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.usuario;
+package br.com.alura.comex.comercial.infra.usuario;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,8 +14,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
-import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 import br.com.alura.comex.utils.CreateUserUtil;
 
 import java.net.URI;
@@ -32,7 +30,7 @@ public class AutenticacaoControllerTest {
         Usuario usuarioTeste;
 
         @Autowired
-        private UsuarioRepository usuarioRepository;
+        private UsuarioRepositoryComJPA usuarioRepository;
 
         @Autowired
         PasswordEncoder passwordEncoder;
@@ -47,7 +45,7 @@ public class AutenticacaoControllerTest {
 
         private Usuario getUsuarioFromDatabase() throws Exception {
                 CreateUserUtil.createUser(usuarioRepository, passwordEncoder, perfilRepository);
-                Optional<Usuario> usuario = usuarioRepository.findByEmail(CreateUserUtil.email);
+                Optional<Usuario> usuario = usuarioRepository.encontrarUsuarioPeloEmail(CreateUserUtil.email);
                 return usuario.get();
         }
 

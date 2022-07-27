@@ -1,5 +1,7 @@
 package br.com.alura.comex.comercial.aplicacao.usuario;
 
+import java.util.Optional;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -15,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.alura.comex.comercial.dominio.usuario.Perfil;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 
 @RestController
 @RequestMapping(path = "/api/usuarios")
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepositoryComJPA usuarioRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -32,31 +34,33 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioDto> cadastraUsuario(@RequestBody @Valid UserForm userForm) {
-
         try {
-            userForm.setSenha(passwordEncoder.encode(userForm.getSenha()));
             Usuario usuario = usuarioRepository.save(userForm.converter());
-            return new ResponseEntity<UsuarioDto>(UsuarioDto.converter(usuario), HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<UsuarioDto>(HttpStatus.BAD_REQUEST);
-        }
+            userForm.setSenha(passwordEncoder.encode(userForm.getSenha()));
 
+            return new ResponseEntity<>(UsuarioDto.converter(usuario), HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
     }
 
     @Transactional
     @PostMapping("/add-perfil")
     public ResponseEntity<UsuarioDto> addPerfil(@RequestBody @Valid AddProfileForm profileForm) {
 
-        try {
-            Usuario usuario = usuarioRepository.findByEmail(profileForm.getEmail()).get();
-            Perfil perfil = profileForm.converter();
-            perfilRepository.save(perfil);
-            usuario.addPerfil(perfil);
-            usuarioRepository.save(usuario);
-            return new ResponseEntity<>(UsuarioDto.converter(usuario), HttpStatus.CREATED);
-        } catch (Exception e) {
+        Optional<Usuario> usuario = usuarioRepository.encontrarUsuarioPeloEmail(profileForm.getEmail());
+
+        if (!usuario.isPresent()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
+        Usuario usuarioPresente = usuario.get();
+
+        Perfil perfil = profileForm.converter();
+        perfilRepository.save(perfil);
+        usuarioPresente.addPerfil(perfil);
+        usuarioRepository.save(usuarioPresente);
+        return new ResponseEntity<>(UsuarioDto.converter(usuarioPresente), HttpStatus.CREATED);
 
     }
 

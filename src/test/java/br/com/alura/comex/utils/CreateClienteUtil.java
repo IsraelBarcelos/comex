@@ -8,7 +8,7 @@ import br.com.alura.comex.comercial.dominio.cliente.Cliente;
 import br.com.alura.comex.comercial.dominio.cliente.Telefone;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 
 public class CreateClienteUtil {
 
@@ -24,7 +24,8 @@ public class CreateClienteUtil {
     public final static Integer ddd = 54;
     public final static Integer numeroTelefone = 123456789;
 
-    public static void createCliente(ClienteRepositoryComJPA clienteRepository, UsuarioRepository usuarioRepository,
+    public static void createCliente(ClienteRepositoryComJPA clienteRepository,
+            UsuarioRepositoryComJPA usuarioRepository,
             PasswordEncoder passwordEncoder, PerfilRepository perfilRepository)
             throws Exception {
         if (clienteRepository.encontrarClientePeloNome(nome).isPresent()) {
@@ -37,7 +38,7 @@ public class CreateClienteUtil {
                 .comNome(nome)
                 .comCpf(cpf)
                 .comTelefone(new Telefone(ddd, numeroTelefone))
-                .comUsuario(usuarioRepository.findByEmail(CreateUserUtil.email).get())
+                .comUsuario(usuarioRepository.encontrarUsuarioPeloEmail(CreateUserUtil.email).get())
                 .comEndereco(new EnderecoBuilder()
                         .comBairro(bairro)
                         .comCidade(cidade)

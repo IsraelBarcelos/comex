@@ -7,7 +7,7 @@ import br.com.alura.comex.comercial.dominio.cliente.Cliente;
 import br.com.alura.comex.comercial.dominio.cliente.ClienteCadastrado;
 import br.com.alura.comex.comercial.dominio.cliente.LogDeClienteCadastrado;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 import br.com.alura.comex.shared.dominio.PublicadorDeEventos;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<ClienteDto> salvar(@RequestBody ClienteForm clienteForm, UriComponentsBuilder uriBuilder,
-            UsuarioRepository usuarioRepository) {
+            UsuarioRepositoryComJPA usuarioRepository) {
         Cliente cliente = clienteForm.converter(usuarioRepository);
         clienteRepository.adicionarCliente(cliente);
 

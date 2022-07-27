@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 import br.com.alura.comex.comercial.aplicacao.produto.ProdutoBuilder;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.produto.ProdutoRepositoryComJPA;
 
 public class CreateProdutoUtil {
@@ -13,13 +13,14 @@ public class CreateProdutoUtil {
     public final static BigDecimal valor = new BigDecimal(10);
     public final static int quantidadeEstoque = 55;
 
-    public static void createProduto(ProdutoRepositoryComJPA produtoRepository, CategoriaRepository categoriaRepository)
+    public static void createProduto(ProdutoRepositoryComJPA produtoRepository,
+            CategoriaRepositoryComJPA categoriaRepository)
             throws Exception {
         if (!produtoRepository.encontrarPeloNome(nome).isPresent()) {
             CreateCategoriaUtil.createCategoria(categoriaRepository);
 
             Produto produto = new ProdutoBuilder()
-                    .comCategoria(categoriaRepository.findByNome(CreateCategoriaUtil.nome).get())
+                    .comCategoria(categoriaRepository.encontrarCategoriaPeloNome(CreateCategoriaUtil.nome).get())
                     .comDescricao(descricao)
                     .comNome(nome)
                     .comPrecoUnitario(valor)

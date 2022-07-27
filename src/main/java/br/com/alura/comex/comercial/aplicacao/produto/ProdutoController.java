@@ -1,8 +1,8 @@
 package br.com.alura.comex.comercial.aplicacao.produto;
 
 import br.com.alura.comex.comercial.dominio.produto.Produto;
-import br.com.alura.comex.comercial.dominio.produto.RepositorioDeProduto;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepositoryComJPA;
+import br.com.alura.comex.comercial.infra.produto.ProdutoRepositoryComJPA;
 
 import java.net.URI;
 import java.util.Optional;
@@ -31,10 +31,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class ProdutoController {
 
     @Autowired
-    private RepositorioDeProduto produtoRepository;
+    private ProdutoRepositoryComJPA produtoRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepositoryComJPA categoriaRepository;
 
     @GetMapping
     public ResponseEntity<Page<ProdutoDto>> listar(@RequestParam(required = false) Optional<Integer> pagina) {

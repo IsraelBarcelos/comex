@@ -1,10 +1,12 @@
 package br.com.alura.comex.comercial.aplicacao.produto;
 
+import br.com.alura.comex.comercial.dominio.categoria.Categoria;
+import br.com.alura.comex.comercial.dominio.categoria.RepositorioDeCategoria;
 import br.com.alura.comex.comercial.dominio.categoria.ValidaIdCategoria;
 import br.com.alura.comex.comercial.dominio.produto.Produto;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -68,15 +70,20 @@ public class ProdutoForm {
     this.categoriaId = categoriaId;
   }
 
-  public Produto converter(CategoriaRepository categoriaRepository) {
-    Produto produto = new ProdutoBuilder()
+  public Produto converter(RepositorioDeCategoria categoriaRepository) {
+
+    Optional<Categoria> categoria = categoriaRepository.encontrarCategoriaPeloId(categoriaId);
+
+    if (!categoria.isPresent()) {
+      throw new IllegalArgumentException("Categoria não encontrada");
+    }
+
+    return new ProdutoBuilder()
         .comNome(nome)
         .comDescricao(descricao)
         .comPrecoUnitario(precoUnitario)
         .comQuantidadeEstoque(quantidadeEstoque)
-        .comCategoria(categoriaRepository.findById(categoriaId).get())
+        .comCategoria(categoria.get())
         .build();
-
-    return produto;
   }
 }

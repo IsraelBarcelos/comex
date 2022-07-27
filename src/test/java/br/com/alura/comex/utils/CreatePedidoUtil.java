@@ -7,18 +7,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import br.com.alura.comex.comercial.aplicacao.pedido.ItemPedidoBuilder;
 import br.com.alura.comex.comercial.aplicacao.pedido.PedidoBuilder;
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.produto.ProdutoRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 
 public class CreatePedidoUtil {
         public static void createPedido(ClienteRepositoryComJPA clienteRepository,
                         PedidoRepositoryComJPA pedidoRepository,
-                        UsuarioRepository usuarioRepository, ProdutoRepositoryComJPA produtoRepository,
-                        CategoriaRepository categoriaRepository, PasswordEncoder passwordEncoder,
+                        UsuarioRepositoryComJPA usuarioRepository, ProdutoRepositoryComJPA produtoRepository,
+                        CategoriaRepositoryComJPA categoriaRepository, PasswordEncoder passwordEncoder,
                         PerfilRepository perfilRepository) throws Exception {
                 if (pedidoRepository.findAll().isEmpty()) {
                         CreateClienteUtil.createCliente(clienteRepository, usuarioRepository, passwordEncoder,

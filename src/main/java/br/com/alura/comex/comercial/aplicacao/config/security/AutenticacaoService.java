@@ -9,16 +9,16 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 
 @Service
 public class AutenticacaoService implements UserDetailsService {
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepositoryComJPA usuarioRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Optional<Usuario> usuario = usuarioRepository.findByEmail(email);
+        Optional<Usuario> usuario = usuarioRepository.encontrarUsuarioPeloEmail(email);
 
         if (!usuario.isPresent()) {
             throw new UsernameNotFoundException("Dados inválidos para autenticação!");

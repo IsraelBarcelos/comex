@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.usuario;
+package br.com.alura.comex.comercial.infra.usuario;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -8,24 +8,23 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
 
 import java.util.Optional;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-public class UsuarioRepositoryTest {
+class UsuarioRepositoryTest {
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    UsuarioRepositoryComJPA usuarioRepository;
 
     @Test
-    public void shouldReturnAUserByEmail() {
+    void shouldReturnAUserByEmail() {
         String email = "teste@teste.com";
-        Optional<Usuario> user = usuarioRepository.findByEmail(email);
+        Optional<Usuario> user = usuarioRepository.encontrarUsuarioPeloEmail(email);
 
         Assertions.assertNotNull(user.get());
-        Assertions.assertEquals(user.get().getEmail(), "teste@teste.com");
+        Assertions.assertEquals("teste@teste.com", user.get().getEmail().getEndereco());
     }
 }

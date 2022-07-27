@@ -1,30 +1,38 @@
 package br.com.alura.comex.comercial.dominio.usuario;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Embeddable
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 public class Email {
 
+    @Column(name = "email", nullable = false)
     private String endereco;
 
-    private String regexEmail = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";
-
-    private boolean enderecoTemTamanhoValido = endereco.length() > 0;
-    private boolean enderecoEstaNoPadraoCorreto = endereco.matches(regexEmail);
+    private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
 
     public Email(String endereco) {
-        if (endereco == null || !enderecoTemTamanhoValido || !enderecoEstaNoPadraoCorreto) {
+        Pattern pattern = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(endereco);
+        if (endereco == null) {
+            throw new IllegalArgumentException("Email está nulo");
+        }
+
+        if (!matcher.matches()) {
             throw new IllegalArgumentException("Email inválido");
         }
+
         this.endereco = endereco;
+
     }
 }

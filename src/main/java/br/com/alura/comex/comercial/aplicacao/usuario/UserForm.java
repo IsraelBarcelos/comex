@@ -1,14 +1,15 @@
 package br.com.alura.comex.comercial.aplicacao.usuario;
 
-import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import br.com.alura.comex.comercial.dominio.usuario.Email;
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
 
 public class UserForm {
 
     @NotNull
-    @Email
+    @NotEmpty
     private String email;
     @NotNull
     private String senha;
@@ -51,7 +52,7 @@ public class UserForm {
 
     public Usuario converter() {
         return new UsuarioBuilder()
-                .comEmail(new br.com.alura.comex.comercial.dominio.usuario.Email(email))
+                .comEmail(new Email(email))
                 .comSenha(senha)
                 .comNome(nome)
                 .build();

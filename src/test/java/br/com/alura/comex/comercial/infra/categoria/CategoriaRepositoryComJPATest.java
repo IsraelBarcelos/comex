@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.categoria;
+package br.com.alura.comex.comercial.infra.categoria;
 
 import java.util.Optional;
 
@@ -12,19 +12,18 @@ import org.springframework.test.context.ActiveProfiles;
 
 import br.com.alura.comex.comercial.aplicacao.categoria.CategoriaBuilder;
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ActiveProfiles("test")
-public class CategoriaRepositoryTest {
+class CategoriaRepositoryComJPATest {
 
     @Autowired
-    CategoriaRepository categoriaRepository;
+    CategoriaRepositoryComJPA categoriaRepository;
 
     @BeforeEach
     public void setup() {
-        Optional<Categoria> category = categoriaRepository.findByNome("teste");
+        Optional<Categoria> category = categoriaRepository.encontrarCategoriaPeloNome("teste");
         if (!category.isPresent()) {
             Categoria categoryOnDb = new CategoriaBuilder().comNome("teste").build();
             categoriaRepository.save(categoryOnDb);
@@ -33,9 +32,9 @@ public class CategoriaRepositoryTest {
     }
 
     @Test
-    public void shouldReturnCategoriaByName() {
+    void shouldReturnCategoriaByName() {
         String categoryName = "teste";
-        Optional<Categoria> category = categoriaRepository.findByNome(categoryName);
+        Optional<Categoria> category = categoriaRepository.encontrarCategoriaPeloNome(categoryName);
 
         Assertions.assertNotNull(category);
         Assertions.assertEquals(category.get().getNome(), categoryName);

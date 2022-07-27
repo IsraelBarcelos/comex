@@ -1,12 +1,11 @@
-package br.com.alura.comex.infra.pedido;
+package br.com.alura.comex.comercial.infra.pedido;
 
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.cliente.ClienteRepositoryComJPA;
-import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.produto.ProdutoRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateClienteUtil;
 import br.com.alura.comex.utils.CreatePedidoUtil;
@@ -36,13 +35,13 @@ public class PedidoRepositoryTest {
     private ClienteRepositoryComJPA clienteRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepositoryComJPA usuarioRepository;
 
     @Autowired
     private ProdutoRepositoryComJPA produtoRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepositoryComJPA categoriaRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

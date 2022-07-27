@@ -2,7 +2,6 @@ package br.com.alura.comex.shared.dominio;
 
 import javax.persistence.Embeddable;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,18 +10,14 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-@AllArgsConstructor
 public class Cpf {
 
     private String numeroCpf;
 
     private String regexCpf = "([0-9]{2}\\.]?[0-9]{3}[\\.]?[0-9]{3}[\\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\\.]?[0-9]{3}[\\.]?[0-9]{3}[-]?[0-9]{2})";
 
-    private boolean numeroTemTamanhoValido = numeroCpf.length() == 11;
-    private boolean numeroEstaNoPadraoCorreto = numeroCpf.matches(regexCpf);
-
     public Cpf(String numeroCpf) {
-        if (numeroCpf == null || !numeroTemTamanhoValido || !numeroEstaNoPadraoCorreto) {
+        if (numeroCpf == null || numeroCpf.length() != 11 || !(numeroCpf.matches(regexCpf))) {
             throw new IllegalArgumentException("CPF inválido");
         }
         this.numeroCpf = numeroCpf;

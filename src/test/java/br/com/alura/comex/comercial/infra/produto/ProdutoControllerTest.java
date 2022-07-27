@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.produto;
+package br.com.alura.comex.comercial.infra.produto;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -18,10 +18,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.comercial.dominio.produto.Produto;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
-import br.com.alura.comex.comercial.infra.produto.ProdutoRepositoryComJPA;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateProdutoUtil;
 import br.com.alura.comex.utils.CreateSessionUtil;
@@ -41,10 +40,10 @@ public class ProdutoControllerTest {
     private ProdutoRepositoryComJPA produtoRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepositoryComJPA usuarioRepository;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepositoryComJPA categoriaRepository;
 
     @Autowired
     PasswordEncoder passwordEncoder;
@@ -95,7 +94,8 @@ public class ProdutoControllerTest {
         URI uri = new URI("/api/produtos");
         String json = new JSONObject()
                 .put("nome", "testeProdutoBanco" + GenerateRandomNumber.generateRandomNumber())
-                .put("categoriaId", categoriaRepository.findByNome(CreateCategoriaUtil.nome).get().getId())
+                .put("categoriaId",
+                        categoriaRepository.encontrarCategoriaPeloNome(CreateCategoriaUtil.nome).get().getId())
                 .put("precoUnitario", BigDecimal.valueOf(564.00))
                 .put("quantidadeEstoque", 5)
                 .put("descricao", "uma descricao")

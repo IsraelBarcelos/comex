@@ -12,14 +12,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import br.com.alura.comex.comercial.dominio.usuario.Usuario;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 
 public class JwtTokenFilter extends OncePerRequestFilter {
 
     private TokenService tokenService;
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepositoryComJPA usuarioRepository;
 
-    public JwtTokenFilter(TokenService tokenService, UsuarioRepository usuarioRepository) {
+    public JwtTokenFilter(TokenService tokenService, UsuarioRepositoryComJPA usuarioRepository) {
         this.tokenService = tokenService;
         this.usuarioRepository = usuarioRepository;
     }

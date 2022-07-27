@@ -1,4 +1,4 @@
-package br.com.alura.comex.infra.categoria;
+package br.com.alura.comex.comercial.infra.categoria;
 
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,9 +14,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 import br.com.alura.comex.utils.CreateCategoriaUtil;
 import br.com.alura.comex.utils.CreateSessionUtil;
 import br.com.alura.comex.utils.CreateUserUtil;
@@ -28,16 +27,16 @@ import java.util.Optional;
 @SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles("test")
-public class CategoriaControllerTest {
+class CategoriaControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private CategoriaRepositoryComJPA categoriaRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioRepositoryComJPA usuarioRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -54,7 +53,7 @@ public class CategoriaControllerTest {
     }
 
     @Test
-    public void shouldDeleteACategoria() throws Exception {
+    void shouldDeleteACategoria() throws Exception {
 
         Categoria categoria = getCategoriaFromDatabase();
 
@@ -67,7 +66,7 @@ public class CategoriaControllerTest {
     }
 
     @Test
-    public void shouldNotDeleteACategoria() throws Exception {
+    void shouldNotDeleteACategoria() throws Exception {
         Categoria categoria = getCategoriaFromDatabase();
 
         URI uri = new URI("/api/categorias/" + categoria.getId());
@@ -79,17 +78,17 @@ public class CategoriaControllerTest {
 
     private Categoria getCategoriaFromDatabase() throws Exception {
 
-        Optional<Categoria> categoria = categoriaRepository.findByNome(CreateCategoriaUtil.nome);
+        Optional<Categoria> categoria = categoriaRepository.encontrarCategoriaPeloNome(CreateCategoriaUtil.nome);
         if (!categoria.isPresent()) {
             CreateCategoriaUtil.createCategoria(categoriaRepository);
-            return categoriaRepository.findByNome(CreateCategoriaUtil.nome).get();
+            return categoriaRepository.encontrarCategoriaPeloNome(CreateCategoriaUtil.nome).get();
         }
         return categoria.get();
 
     }
 
     @Test
-    public void shouldReturnAListOfCategoriesWith200Code() throws Exception {
+    void shouldReturnAListOfCategoriesWith200Code() throws Exception {
 
         getCategoriaFromDatabase();
 
@@ -104,7 +103,7 @@ public class CategoriaControllerTest {
     }
 
     @Test
-    public void shouldCreateACategoria() throws Exception {
+    void shouldCreateACategoria() throws Exception {
         URI uri = new URI("/api/categorias");
         String json = new JSONObject()
                 .put("nome", "testeCategoriaBanco" + GenerateRandomNumber.generateRandomNumber())

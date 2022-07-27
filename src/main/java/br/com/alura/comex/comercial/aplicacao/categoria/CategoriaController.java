@@ -3,7 +3,7 @@ package br.com.alura.comex.comercial.aplicacao.categoria;
 import br.com.alura.comex.comercial.aplicacao.pedido.PedidoPorCategoriaDto;
 import br.com.alura.comex.comercial.dominio.categoria.Categoria;
 import br.com.alura.comex.comercial.dominio.pedido.Pedido;
-import br.com.alura.comex.comercial.infra.categoria.CategoriaRepository;
+import br.com.alura.comex.comercial.infra.categoria.CategoriaRepositoryComJPA;
 import br.com.alura.comex.comercial.infra.pedido.PedidoRepositoryComJPA;
 import br.com.alura.comex.comercial.utils.IterableToArrayList;
 
@@ -37,7 +37,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class CategoriaController {
 
   @Autowired
-  private CategoriaRepository categoriaRepository;
+  private CategoriaRepositoryComJPA categoriaRepository;
 
   @Autowired
   private PedidoRepositoryComJPA pedidoRepository;
@@ -73,9 +73,8 @@ public class CategoriaController {
     List<Categoria> categorias = IterableToArrayList.execute(categoriaRepository.findAll());
 
     Map<String, List<Pedido>> pedidos = new HashMap<>();
-    categorias.stream().forEach(categoria -> {
-      pedidos.put(categoria.getNome(), pedidoRepository.findByItemPedidoProdutoCategoriaNome(categoria.getNome()));
-    });
+    categorias.stream().forEach(categoria -> pedidos.put(categoria.getNome(),
+        pedidoRepository.findByItemPedidoProdutoCategoriaNome(categoria.getNome())));
     return ResponseEntity.ok(PedidoPorCategoriaDto.converter(pedidos));
   }
 

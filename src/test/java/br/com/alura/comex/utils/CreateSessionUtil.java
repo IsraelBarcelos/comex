@@ -12,13 +12,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.jayway.jsonpath.JsonPath;
 
 import br.com.alura.comex.comercial.infra.usuario.PerfilRepository;
-import br.com.alura.comex.comercial.infra.usuario.UsuarioRepository;
+import br.com.alura.comex.comercial.infra.usuario.UsuarioRepositoryComJPA;
 
 public class CreateSessionUtil {
 
     public static String token;
 
-    public static void createSession(MockMvc mockMvc, UsuarioRepository usuarioRepository,
+    public static void createSession(MockMvc mockMvc, UsuarioRepositoryComJPA usuarioRepository,
             PasswordEncoder passwordEncoder, PerfilRepository perfilRepository) throws Exception {
 
         CreateUserUtil.createUser(usuarioRepository, passwordEncoder, perfilRepository);
